@@ -1,11 +1,226 @@
-<header>
-    <h1>Header</h1>
-</header>
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get A Quote</title>
 
+    <!--Form Styles-->
+    <style>
+        .required:after {
+            content:" *";
+            color: red;
+        }                  
+    </style>
+</head>
+
+<body>
+    <!--Header-->
+    <header>
+        <h1>Header Here!</h1>
+    </header>
+
+<!--Main Content-->
 <main>
-    <h2>Main</h2>
-</main>
+    <section id="quote">
+        <!--<div id="quote-photo">
+            <img src="" alt="">
+        </div>-->
+        <h2>Get A Quote</h2>
+        <!--Input fields for basic user information-->
+        <div class="form-container">
+            <form action="" method="POST" id="quote-form">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="full-name" class="required">Full Name</label>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="full_name" id="full-name" placeholder="Enter Full Name" class="text-input" required>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="email-address" class="required">Email Address</label>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <input type="email" name="email_adress" id="email-address" placeholder="Enter Email Address" class="text-input" required>
+                </div>
+                
+                <!--Options to select location-->
+                <div class="row">
+                    <div class="col-25">
+                        <label for="location" class="required">Location</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="location" name="location">
+                            <option>Select Location</option>
+                            <option value="Kent">Kent</option>
+                            <option value="berkshire">Berkshire</option>
+                            <option value="buckinghamshire">Buckinghamshire</option>
+                            <option value="hertfordshire">Hertfordshire</option>
+                        </select>
+                    </div>
+                </div>
 
+                <!--Options to select service-->
+                <div class="row">
+                    <div class="col-25">
+                        <label for="service" class="required">Service Required</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="service" name="service">
+                            <option>Select Service</option>
+                            <option value="window-cleaning">Window Cleaning</option>
+                            <option value="gutter-cleaning">Gutter Cleaning</option>
+                            <option value="pressure-washing">Pressure Washing</option>
+                            <option value="roof-cleaning">Roof Cleaning</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Radio buttons for property details-->
+                <div class="row">
+                    <div class="col-25 radio-button">
+                        <p class="required">Type of House</p>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <label for="semi">Semi-detached</label>
+                    <input type="radio" name="house" id="semi" value="semi" required checked>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="detached">Detached</label>
+                        <input type="radio" name="house" id="detached" value="detached" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="terraced">Terraced</label>
+                        <input type="radio" name="house" id="terraced" value="terraced" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="bungalow">Bungalow</label>
+                        <input type="radio" name="house" id="bungalow" value="bungalow" required>
+                    </div>
+                </div>
+                
+                <!--Radio buttons for number of bedrooms-->
+                <div class="row">
+                    <div class="col-25 radio-button">
+                        <p class="required">Number of Bedrooms</p>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <label for="one_bed">1 bedroom</label>
+                    <input type="radio" name="bedrooms" id="one_bed" value="one_bed" required checked>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="two_bed">2 bedrooms</label>
+                        <input type="radio" name="bedrooms" id="two_bed" value="two_bed" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="three_bed">3 bedrooms</label>
+                        <input type="radio" name="bedrooms" id="three_bed" value="three_bed" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="four_bed">4+ bedrooms</label>
+                        <input type="radio" name="bedrooms" id="four_bed" value="four_bed" required>
+                    </div>
+                </div>
+
+                <!--Checkbox for additional house details-->
+                <div class="row">
+                    <div class="col-75">
+                        <p class="required">Additional rooms (please select all that apply)</p>
+                        <label for="conservatory">Conservatory</label>
+                        <input type="checkbox" name="additional" id="conservatory" value="conservatory">
+                    </div>
+                </div>
+                <div class="row"></div>
+                    <div class="col-75">
+                        <label for="extension">Extension</label>
+                        <input type="checkbox" name="additional" id="extension" value="extension">
+                    </div>
+                </div>
+                
+                <!--Checkbox for other services required-->
+                <div class="row"></div>
+                    <div class="col-75">
+                        <p class="required">Other services required</p>
+                        <label for="block_paving">Block Paving</label>
+                        <input type="checkbox" name="other" id="block_paving" value="block_paving">
+                    </div>
+                </div>
+                <div class="row"></div>
+                    <div class="col-75">
+                        <label for="resanding">Re-sanding</label>
+                        <input type="checkbox" name="other" id="resanding" value="resanding">
+                    </div>
+                </div>
+                <div class="row"></div>
+                    <div class="col-75">
+                        <label for="instant_pressure">Instant Pressure Washing</label>
+                        <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
+                    </div>
+                </div>
+                <div class="row"></div>
+                    <div class="col-75">
+                        <label for="biocidal">Biocidal Treatment</label>
+                        <input type="checkbox" name="other" id="biocidal" value="biocidal">
+                    </div>
+                </div>
+                
+                <!--Radio for property accessibility-->
+                <div class="row">
+                    <div class="col-25 radio-button">
+                        <p class="required">Is property accessible WITHOUT going through the main house?</p>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="access" id="yes" value="yes" required checked>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="no">No</label>
+                        <input type="radio" name="access" id="no" value="no" required>
+                    </div>
+                </div>
+                <br>
+
+                <!--Option to enter message-->
+                <div class="row">
+                    <div class="col-25">
+                        <label for="message">Leave Us A Message</label>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Get Me My Quote!">
+                </div>
+                <!--Option to clear form-->
+                <input type="reset" value="Clear Form">
+            </form>
+        </div>
+    </section>
+</main>
+    
+<!--Footer-->
 <footer>
     <h3>Footer</h3>
 </footer>
+
+</body>
+
+</html>
