@@ -7,19 +7,63 @@
 
     <!--Form Styles-->
     <style>
+        /* Add red asterix to required fields */
         .required:after {
             content:" *";
             color: red;
-        }                  
+        }   
+        
+        /* Styles for form container */
+        .form-container {
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        /* Styles for fields*/
+        input[type=text], select, textarea, input[type=email] {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgb(18, 56, 71);
+        padding: 12px;
+        border-radius: 4px;
+        resize: vertical;
+        }
+
+        /* Styles for labels */
+        label {
+            display: inline-block;
+            padding: 5px 0px 5px 0px;
+        }
+
+        /* Styles for get quote button */
+        input[type=submit], input[type=reset] {
+            font-size: 16px;
+            letter-spacing: 1px;
+            padding: 4px;
+            cursor: pointer;
+            border-style: none;
+            float: left;
+        }
+
+        /* Style textarea */
+        textarea {height: 100px;}
+
+        /*Create distance between quote and clear buttons*/
+        input[type=reset] { 
+            margin-left: 20px; 
+            margin-bottom: 20px;
+        }
+
+        /* Style radio buttons and checkboxes */
+        input[type=radio], input[type=checkbox] {
+            float: left;
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <!--Header-->
-    <header>
-        <h1>Header Here!</h1>
-    </header>
-
 <!--Main Content-->
 <main>
     <section id="quote">
@@ -32,7 +76,7 @@
             <form action="" method="POST" id="quote-form">
                 <div class="row">
                     <div class="col-25">
-                        <label for="full-name" class="required">Full Name</label>
+                        <label for="full-name" class="required">Name</label>
                     </div>
                 </div>
                 <div class="col-75">
@@ -40,7 +84,7 @@
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="email-address" class="required">Email Address</label>
+                        <label for="email-address" class="required">Email</label>
                     </div>
                 </div>
                 <div class="col-75">
@@ -85,9 +129,11 @@
                         <p class="required">Type of House</p>
                     </div>
                 </div>
-                <div class="col-75">
-                    <label for="semi">Semi-detached</label>
-                    <input type="radio" name="house" id="semi" value="semi" required checked>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="terraced">Terraced</label>
+                        <input type="radio" name="house" id="terraced" value="terraced" required checked>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-75">
@@ -97,15 +143,13 @@
                 </div>
                 <div class="row">
                     <div class="col-75">
-                        <label for="terraced">Terraced</label>
-                        <input type="radio" name="house" id="terraced" value="terraced" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-75">
                         <label for="bungalow">Bungalow</label>
                         <input type="radio" name="house" id="bungalow" value="bungalow" required>
                     </div>
+                </div>
+                <div class="col-75">
+                    <label for="semi">Semi-detached</label>
+                    <input type="radio" name="house" id="semi" value="semi" required>
                 </div>
                 
                 <!--Radio buttons for number of bedrooms-->
@@ -141,41 +185,41 @@
                 <div class="row">
                     <div class="col-75">
                         <p class="required">Additional rooms (please select all that apply)</p>
-                        <label for="conservatory">Conservatory</label>
-                        <input type="checkbox" name="additional" id="conservatory" value="conservatory">
-                    </div>
-                </div>
-                <div class="row"></div>
-                    <div class="col-75">
                         <label for="extension">Extension</label>
                         <input type="checkbox" name="additional" id="extension" value="extension">
                     </div>
                 </div>
-                
-                <!--Checkbox for other services required-->
-                <div class="row"></div>
+                <div class="row">
                     <div class="col-75">
-                        <p class="required">Other services required</p>
-                        <label for="block_paving">Block Paving</label>
-                        <input type="checkbox" name="other" id="block_paving" value="block_paving">
+                        <label for="conservatory">Conservatory</label>
+                        <input type="checkbox" name="additional" id="conservatory" value="conservatory">
                     </div>
                 </div>
-                <div class="row"></div>
+                
+                <!--Checkbox for other services required-->
+                <div class="row">
                     <div class="col-75">
+                        <p class="required">Other services required</p>
                         <label for="resanding">Re-sanding</label>
                         <input type="checkbox" name="other" id="resanding" value="resanding">
                     </div>
                 </div>
-                <div class="row"></div>
+                <div class="row">
                     <div class="col-75">
-                        <label for="instant_pressure">Instant Pressure Washing</label>
-                        <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
+                        <label for="block_paving">Block Paving</label>
+                        <input type="checkbox" name="other" id="block_paving" value="block_paving">
                     </div>
                 </div>
-                <div class="row"></div>
+                <div class="row">
                     <div class="col-75">
                         <label for="biocidal">Biocidal Treatment</label>
                         <input type="checkbox" name="other" id="biocidal" value="biocidal">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="instant_pressure">Instant Pressure Washing</label>
+                        <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
                     </div>
                 </div>
                 
@@ -207,7 +251,7 @@
                     <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
                 </div>
                 <div class="row">
-                    <input type="submit" value="Get Me My Quote!">
+                    <input type="submit" value="Get Quote">
                 </div>
                 <!--Option to clear form-->
                 <input type="reset" value="Clear Form">
@@ -217,9 +261,7 @@
 </main>
     
 <!--Footer-->
-<footer>
-    <h3>Footer</h3>
-</footer>
+<footer></footer>
 
 </body>
 
