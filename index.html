@@ -127,6 +127,11 @@
             transition: all 0.5s ease-in-out;
         }
 
+        #display-modal {
+            margin-top: 10px;
+            background-color: #2087C0;
+        }
+
     </style>
 <head>
 
@@ -254,7 +259,7 @@
                 <!--Checkbox for additional house details-->
                 <div class="row">
                     <div class="col-75">
-                        <p class="required label-text">Additional rooms (please select all that apply)</p>
+                        <p class="required label-text">Additional rooms (select all that apply)</p>
                         <label for="extension">Extension
                             <input type="checkbox" name="additional" id="extension" value="extension">
                         </label>
@@ -338,7 +343,37 @@
             </form>
         </div>
     </section>
+
+    <section id="display" class="hidden">
+        <div id="quote-display" class="modal-content">
+            <div class="quote-accepted">
+                <p id="accepted" class="modal-text">Your instant quote is: </p>
+                <p id="rejected" class="modal-text">Unfortunately, we cannot clean if the only access to property is through the main building.</p>
+            </div>
+        </div>
+    </section>
 </main>
+
+<script>
+    // Wait for the DOM to finish loading before running the script
+    // Get relevant elements from the DOM and add event listeners to them
+    /*document.addEventListener("DOMContentLoaded", function() {
+        const getService = document.getElementById('service');
+        const getHouse = document.getElementById('house');
+        const getBedrooms = document.getElementsByTagName('bedrooms');
+        const getAdditional = document.getElementByTagName('additional');
+        const getOther = document.getElementByTagName('other');
+        const access = document.getElementByTagName('access');
+    })*/
+   let quoteValue = "";
+
+   function updateQuote() {
+    if (quoteValue ==="") {
+        
+    }
+   }
+   
+</script>
     
 <!--Footer-->
 <footer></footer>
