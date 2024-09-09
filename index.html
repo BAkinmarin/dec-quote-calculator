@@ -7,16 +7,56 @@
 
     <!--Form Styles-->
     <style>
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+        /* Override default browser styles */
+        * {
+            box-sizing: border-box;
+            padding: 0px;
+        }
+
+        /*Body styles */
+        body {
+            font-family: "Oswald", sans-serif;
+            font-size: 1rem;
+            margin-top: 2.5%;
+            min-height: 100vh;
+        }
+
         /* Add red asterix to required fields */
         .required:after {
             content:" *";
             color: red;
-        }   
-        
+        }
+
+        p.required.label-text {
+            margin-bottom: 0px;
+            margin-top: 10px;
+        }
+
+        p.form-msg {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
         /* Styles for form container */
         .form-container {
             width: 80%;
             margin-left: 10%;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-style: bold;
+            margin-bottom: 0px;
+        }
+
+        .form-msg {
+            text-align: center;
+            font-style: italic;
+            margin-top: 0px;
         }
 
         /* Styles for fields*/
@@ -24,20 +64,26 @@
         width: 100%;
         box-sizing: border-box;
         border: 1px solid rgb(18, 56, 71);
-        padding: 12px;
+        padding: 10px;
         border-radius: 4px;
         resize: vertical;
+        cursor: pointer;
         }
 
         /* Styles for labels */
         label {
             display: inline-block;
-            padding: 5px 0px 5px 0px;
+        }
+
+        .label-text {
+            font-size: 1.5rem;
+            text-align: left;
+            margin-top: 10px;
         }
 
         /* Styles for get quote button */
         input[type=submit], input[type=reset] {
-            font-size: 16px;
+            font-size: 1rem;
             letter-spacing: 1px;
             padding: 4px;
             cursor: pointer;
@@ -59,24 +105,25 @@
             float: left;
             width: 20px;
             height: 20px;
+            cursor: pointer;
         }
+
     </style>
-</head>
+<head>
 
 <body>
 <!--Main Content-->
 <main>
     <section id="quote">
-        <!--<div id="quote-photo">
-            <img src="" alt="">
-        </div>-->
         <h2>Get A Quote</h2>
+        <p class="form-msg">Fancy an instant quote? Just fill in this form!</p>
+        
         <!--Input fields for basic user information-->
         <div class="form-container">
             <form action="" method="POST" id="quote-form">
                 <div class="row">
                     <div class="col-25">
-                        <label for="full-name" class="required">Name</label>
+                        <label for="full-name" class="required label-text">Name</label>
                     </div>
                 </div>
                 <div class="col-75">
@@ -84,7 +131,7 @@
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="email-address" class="required">Email</label>
+                        <label for="email-address" class="required label-text">Email</label>
                     </div>
                 </div>
                 <div class="col-75">
@@ -94,7 +141,7 @@
                 <!--Options to select location-->
                 <div class="row">
                     <div class="col-25">
-                        <label for="location" class="required">Location</label>
+                        <label for="location" class="required label-text">Location</label>
                     </div>
                     <div class="col-75">
                         <select id="location" name="location">
@@ -110,7 +157,7 @@
                 <!--Options to select service-->
                 <div class="row">
                     <div class="col-25">
-                        <label for="service" class="required">Service Required</label>
+                        <label for="service" class="required label-text">Service Required</label>
                     </div>
                     <div class="col-75">
                         <select id="service" name="service">
@@ -126,7 +173,7 @@
                 <!--Radio buttons for property details-->
                 <div class="row">
                     <div class="col-25 radio-button">
-                        <p class="required">Type of House</p>
+                        <p class="required label-text">Type of House</p>
                     </div>
                 </div>
                 <div class="row">
@@ -147,20 +194,24 @@
                         <input type="radio" name="house" id="bungalow" value="bungalow" required>
                     </div>
                 </div>
-                <div class="col-75">
-                    <label for="semi">Semi-detached</label>
-                    <input type="radio" name="house" id="semi" value="semi" required>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="semi">Semi-detached</label>
+                        <input type="radio" name="house" id="semi" value="semi" required>
+                    </div>
                 </div>
                 
                 <!--Radio buttons for number of bedrooms-->
                 <div class="row">
                     <div class="col-25 radio-button">
-                        <p class="required">Number of Bedrooms</p>
+                        <p class="required label-text">Number of Bedrooms</p>
                     </div>
                 </div>
-                <div class="col-75">
-                    <label for="one_bed">1 bedroom</label>
-                    <input type="radio" name="bedrooms" id="one_bed" value="one_bed" required checked>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="one_bed">1 bedroom</label>
+                        <input type="radio" name="bedrooms" id="one_bed" value="one_bed" required checked>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-75">
@@ -184,54 +235,62 @@
                 <!--Checkbox for additional house details-->
                 <div class="row">
                     <div class="col-75">
-                        <p class="required">Additional rooms (please select all that apply)</p>
-                        <label for="extension">Extension</label>
-                        <input type="checkbox" name="additional" id="extension" value="extension">
+                        <p class="required label-text">Additional rooms (please select all that apply)</p>
+                        <label for="extension">Extension
+                            <input type="checkbox" name="additional" id="extension" value="extension">
+                        </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-75">
-                        <label for="conservatory">Conservatory</label>
-                        <input type="checkbox" name="additional" id="conservatory" value="conservatory">
+                        <label for="conservatory">Conservatory
+                            <input type="checkbox" name="additional" id="conservatory" value="conservatory">
+                        </label>                        
                     </div>
                 </div>
                 
                 <!--Checkbox for other services required-->
                 <div class="row">
                     <div class="col-75">
-                        <p class="required">Other services required</p>
-                        <label for="resanding">Re-sanding</label>
-                        <input type="checkbox" name="other" id="resanding" value="resanding">
+                        <p class="required label-text">Other services required</p>
+                        <label for="resanding">Re-sanding
+                            <input type="checkbox" name="other" id="resanding" value="resanding">
+                        </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-75">
-                        <label for="block_paving">Block Paving</label>
-                        <input type="checkbox" name="other" id="block_paving" value="block_paving">
+                        <label for="block_paving">Block Paving
+                            <input type="checkbox" name="other" id="block_paving" value="block_paving">
+                        </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-75">
-                        <label for="biocidal">Biocidal Treatment</label>
-                        <input type="checkbox" name="other" id="biocidal" value="biocidal">
+                        <label for="biocidal">Biocidal Treatment
+                            <input type="checkbox" name="other" id="biocidal" value="biocidal">
+                        </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-75">
-                        <label for="instant_pressure">Instant Pressure Washing</label>
-                        <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
+                        <label for="instant_pressure">Instant Pressure Washing
+                            <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
+                        </label>
                     </div>
                 </div>
                 
                 <!--Radio for property accessibility-->
                 <div class="row">
                     <div class="col-25 radio-button">
-                        <p class="required">Is property accessible WITHOUT going through the main house?</p>
+                        <p class="required label-text">Is property accessible WITHOUT going through the main house?</p>
                     </div>
                 </div>
-                <div class="col-75">
-                    <label for="yes">Yes</label>
-                    <input type="radio" name="access" id="yes" value="yes" required checked>
+                <div class="row">
+                    <div class="col-75">
+                        <label for="yes">Yes</label>
+                        <input type="radio" name="access" id="yes" value="yes" required checked>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-75">
@@ -239,20 +298,22 @@
                         <input type="radio" name="access" id="no" value="no" required>
                     </div>
                 </div>
-                <br>
 
                 <!--Option to enter message-->
                 <div class="row">
                     <div class="col-25">
-                        <label for="message">Leave Us A Message</label>
+                        <label for="message" class="label-text">Leave Us A Message</label>
                     </div>
                 </div>
-                <div class="col-75">
-                    <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
+                <div class="row">
+                    <div class="col-75">
+                        <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
+                    </div>
                 </div>
                 <div class="row">
                     <input type="submit" value="Get Quote">
                 </div>
+
                 <!--Option to clear form-->
                 <input type="reset" value="Clear Form">
             </form>
