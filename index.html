@@ -162,11 +162,15 @@
             <form action="/action_page.php" method="post" id="quote-form" name="quoteForm">
                 <div>
                     <label for="full-name" class="required label-text">Name</label>
-                    <input type="text" name="full_name" id="full-name" placeholder="Enter Full Name" class="text-input" required>
+                    <input type="text" name="full_name" id="full-name" placeholder="Full Name" class="text-input" required>
                 </div>
-                <div class="row">
+                <div>
                     <label for="email-address" class="required label-text">Email</label>
-                    <input type="email" name="email_adress" id="email-address" placeholder="Enter Email Address" class="text-input" required>
+                    <input type="email" name="email_address" id="email-address" placeholder="Email Address" class="text-input" required>
+                </div>
+                <div>
+                    <label for="phone-number" class="required label-text">Phone</label>
+                    <input type="text" name="phone_number" id="phone-number" placeholder="Mobile Number" class="text-input" pattern="[0-9]+" required>
                 </div>
                 
                 <!--Options to select location-->
@@ -184,7 +188,7 @@
                 <!--Options to select service-->
                 <div>
                     <label for="services" class="required label-text">Service Required</label>
-                    <select id="services" name="service">
+                    <select id="service" onchange="getQuote()">
                         <option>Select Service</option>
                         <option value="window">Window Cleaning</option>
                         <option value="gutter">Gutter Cleaning</option>
@@ -291,7 +295,7 @@
 
                 <!--Option to enter message-->
                 <div>
-                    <label for="message">Leave Us A Message</label>
+                    <p class="label-text">Leave Us A Message</p>
                 </div>
                 <div class="row">
                     <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
@@ -300,6 +304,7 @@
                     <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
                     <button type="reset" data-type="reset" id="clear-button">Clear Form</button>
                 </div>
+                <br>
 
                 <!--Display quote-->
                 <div id="quote-modal" class="accepted">
@@ -314,7 +319,17 @@
     </section>
 </main>
 
-<script></script>
+<script>
+    // Wait for DOM to load before running script
+    document.addEventListener("DOMContentLoaded", function() {
+        var x = document.getElementsById("services").value;
+        
+        // 'For Loop' to loop through services
+        for (let service of services) {
+            x.addEventListener
+        }
+    })
+</script>
     
 <!--Footer-->
 <footer></footer>
