@@ -186,14 +186,14 @@
                 </div>
 
                 <!--Options to select service-->
-                <div>
+                <div id="serviceOptions">
                     <label for="services" class="required label-text">Service Required</label>
-                    <select id="service" onchange="getQuote()">
+                    <select id="services">
                         <option>Select Service</option>
-                        <option value="window">Window Cleaning</option>
-                        <option value="gutter">Gutter Cleaning</option>
-                        <option value="pressure">Pressure Washing</option>
-                        <option value="roof">Roof Cleaning</option>
+                        <option value="£18">Window Cleaning</option>
+                        <option value="£19">Gutter Cleaning</option>
+                        <option value="£200">Pressure Washing</option>
+                        <option value="£11">Roof Cleaning</option>
                     </select>
                 </div>
 
@@ -211,11 +211,11 @@
                 </div>
                 <div class="house-radio">
                     <label for="bungalow">Bungalow</label>
-                    <input type="radio" name="house" id="bungalow" value="£4" required>
+                    <input type="radio" name="house" id="bungalow" value="£2" required>
                 </div>
                 <div class="house-radio">
                     <label for="semi">Semi-detached</label>
-                    <input type="radio" name="house" id="semi" value="£2" required>
+                    <input type="radio" name="house" id="semi" value="£4" required>
                 </div>
                 
                 <!--Radio buttons for number of bedrooms-->
@@ -224,15 +224,15 @@
                 </div>
                 <div class="bed-radio">
                     <label for="one_bed">1 bedroom</label>
-                    <input type="radio" name="bedrooms" id="one_bed" value="£18" value1="£22" required checked>
+                    <input type="radio" name="bedrooms" id="one_bed" value="£22" required checked>
                 </div>
                 <div class="bed-radio">
                     <label for="two_bed">2 bedrooms</label>
-                    <input type="radio" name="bedrooms" id="two_bed" value="£19" value1="£24" required>
+                    <input type="radio" name="bedrooms" id="two_bed" value="£24" required>
                 </div>
                 <div class="bed-radio">
                     <label for="three_bed">3 bedrooms</label>
-                    <input type="radio" name="bedrooms" id="three_bed" value="£26" value1="£34" required>
+                    <input type="radio" name="bedrooms" id="three_bed" value="£34" required>
                 </div>
                 <div class="bed-radio">
                     <label for="four_bed">4+ bedrooms</label>
@@ -241,15 +241,13 @@
 
                 <!--Checkbox for additional house details-->
                 <div>
-                    <p class="required label-text">Additional rooms (select all that apply)</p>
+                    <p class="required label-text">Additions (select all that apply)</p>
                 </div>
                 <div class="add-checkbox">
-                    <label for="extension">Extension</label>
-                    <input type="checkbox" name="additional" id="extension" value="£15">
+                    <input type="checkbox" name="additional" id="A1" value="£15">Extension<br>
                 </div>
                 <div class="add-checkbox">
-                    <label for="conservatory">Conservatory</label>
-                    <input type="checkbox" name="additional" id="conservatory" value="£15">
+                    <input type="checkbox" name="additional" id="A2" value="£15">Conservatory<br>
                 </div>
                 
                 <!--Checkbox for other services required-->
@@ -257,25 +255,21 @@
                     <p class="label-text">Other services required</p>
                 </div>
                 <div class="other-checkbox">
-                    <label for="resanding">Re-sanding</label>
-                    <input type="checkbox" name="other" id="resanding" value="resanding">
+                    <input type="checkbox" name="other" id="resanding" value="resanding">Resanding<br>
                 </div>
                 <div class="other-checkbox">
-                    <label for="block_paving">Block Paving</label>
-                    <input type="checkbox" name="other" id="block_paving" value="block_paving">
+                    <input type="checkbox" name="other" id="block_paving" value="block_paving">Block Paving<br>
                 </div>
                 <div class="other-checkbox">
-                    <label for="biocidal">Biocidal Treatment</label>
-                    <input type="checkbox" name="other" id="biocidal" value="biocidal">
+                    <input type="checkbox" name="other" id="biocidal" value="biocidal">Biocidal Treatment<br>
                 </div>
                 <div class="other-checkbox">
-                    <label for="instant_pressure">Instant Pressure Wash</label>
-                    <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
+                    <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">Instant Pressure Wash<br>
                 </div>
                 
                 <!--Radio for property accessibility-->
                 <div>
-                    <p class="required label-text">Does property have separate access?</p>
+                    <p class="required label-text">Is there separate access?</p>
                 </div>
                 <div class="access-radio">
                     <label for="yes">Yes</label>
@@ -297,22 +291,19 @@
                 <div>
                     <p class="label-text">Leave Us A Message</p>
                 </div>
-                <div class="row">
+                <div>
                     <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
                 </div>
-                <div class="row">
+                <div>
                     <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
                     <button type="reset" data-type="reset" id="clear-button">Clear Form</button>
                 </div>
-                <br>
 
                 <!--Display quote-->
-                <div id="quote-modal" class="accepted">
+                <div>
                     Your instant quote is: £<span id="quote-total">0</span> GBP
                     <br>
                     <input type="submit" value="Book Now">
-                    <!--<p class="quote-modal-text">Your instant quote is:</p>
-                    <span class="close-modal" id="closeModal">X</span>-->
                 </div>
             </form>
         </div>
@@ -322,13 +313,43 @@
 <script>
     // Wait for DOM to load before running script
     document.addEventListener("DOMContentLoaded", function() {
-        var x = document.getElementsById("services").value;
         
-        // 'For Loop' to loop through services
-        for (let service of services) {
-            x.addEventListener
+        // Add event listener to multiple checkboxes
+        var selections = {};
+        var checkboxElems = document.querySelectorAll("input[type='checkbox']");
+        var totalElem = document.getElementById("quote-total");
+
+        // Loop through checkboxes
+        for (var i = 0; i < checkboxElems.length; i++) {
+            checkboxElems[i].addEventListener("click", displayCheck);
         }
-    })
+
+        function displayCheck(e) {
+            if (e.target.checked) {
+                selections[e.target.id] = {
+                    name: e.target.name,
+                    value: e.target.value
+                };
+            }
+            else {
+                delete selections[e.target.id];
+            }
+
+            var result = [];
+            var total = 0;
+
+            for (var key in selections) {
+                //var listItem = "<li>" + selections[key].name + " " + selections[key].value + "</li>";
+                var listItem = " " + selections[key].value;
+
+                result.push(listItem);
+                total += parseInt(selections[key].value.substring(1));
+            }
+
+            totalElem.innerText = total;
+        }
+    });
+
 </script>
     
 <!--Footer-->
