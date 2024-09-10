@@ -52,6 +52,7 @@
             font-size: 3rem;
             font-style: bold;
             margin-bottom: 0px;
+            text-transform: uppercase;
         }
 
         .form-msg {
@@ -116,15 +117,20 @@
             font-weight: 700;
             padding: 5px;
             background-color: #2087C0;
-            border-radius: 20px;
+            border-radius: 1rem;
             color: #ffff;
             letter-spacing: 2px;
+            margin: 0px 5px;
         }
 
         #quote-button:hover,
         #clear-button:hover {
             transform: scale(1.15);
             transition: all 0.5s ease-in-out;
+        }
+
+        .hidden {
+            display: none;
         }
 
         #display-modal {
@@ -323,6 +329,13 @@
                     </div>
                 </div>
 
+                <!--Area to display feedback based on user selection for access-->
+                <div id="feedback">
+                    <p class="rejected hidden">Unfortunately, we cannot clean if the only access to property is 
+                        through the main building.
+                    </p>
+                </div>
+
                 <!--Option to enter message-->
                 <div class="row">
                     <div class="col-25">
@@ -335,21 +348,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <input type="submit" value="Get Quote" id="quote-button">
+                    <button onclick="getQuote()" type="submit" id="quote-button">Get Quote</button>
+                    <button onclick="clearForm()" type="reset" id="clear-button">Clear Form</button>
                 </div>
 
-                <!--Option to clear form-->
-                <input type="reset" value="Clear Form" id="clear-button">
+                <!--Display quote-->
+                <div class="row">
+                    <div id="quote-modal" class="accepted hidden">
+                        <p class="quote-modal-text">Your instant quote is:</p>
+                        <span class="close-modal" id="closeModal">X</span>
+                    </div>
+                </div>
             </form>
-        </div>
-    </section>
-
-    <section id="display" class="hidden">
-        <div id="quote-display" class="modal-content">
-            <div class="quote-accepted">
-                <p id="accepted" class="modal-text">Your instant quote is: </p>
-                <p id="rejected" class="modal-text">Unfortunately, we cannot clean if the only access to property is through the main building.</p>
-            </div>
         </div>
     </section>
 </main>
