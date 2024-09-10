@@ -203,7 +203,7 @@
                 </div>
                 <div class="house-radio">
                     <label for="terraced">Terraced</label>
-                    <input type="radio" name="house" id="terraced" value="£2" required checked>
+                    <input type="radio" name="house" id="terraced" value="£2" required>
                 </div>
                 <div class="house-radio">
                     <label for="detached">Detached</label>
@@ -224,7 +224,7 @@
                 </div>
                 <div class="bed-radio">
                     <label for="one_bed">1 bedroom</label>
-                    <input type="radio" name="bedrooms" id="one_bed" value="£22" required checked>
+                    <input type="radio" name="bedrooms" id="one_bed" value="£22" required>
                 </div>
                 <div class="bed-radio">
                     <label for="two_bed">2 bedrooms</label>
@@ -244,10 +244,10 @@
                     <p class="required label-text">Additions (select all that apply)</p>
                 </div>
                 <div class="add-checkbox">
-                    <input type="checkbox" name="additional" id="A1" value="£15">Extension<br>
+                    <input type="checkbox" name="additional" id="extension" value="£15">Extension<br>
                 </div>
                 <div class="add-checkbox">
-                    <input type="checkbox" name="additional" id="A2" value="£15">Conservatory<br>
+                    <input type="checkbox" name="additional" id="conservatory" value="£15">Conservatory<br>
                 </div>
                 
                 <!--Checkbox for other services required-->
@@ -273,7 +273,7 @@
                 </div>
                 <div class="access-radio">
                     <label for="yes">Yes</label>
-                    <input type="radio" name="access" id="yes" value="yes" required checked>
+                    <input type="radio" name="access" id="yes" value="yes" required>
                 </div>
                 <div class="access-radio">
                     <label for="no">No</label>
@@ -314,32 +314,46 @@
     // Wait for DOM to load before running script
     document.addEventListener("DOMContentLoaded", function() {
         
-        // Add event listener to multiple checkboxes
+        // Add event listener to multiple checkboxes and radio buttons
         var selections = {};
         var checkboxElems = document.querySelectorAll("input[type='checkbox']");
         var totalElem = document.getElementById("quote-total");
+
+        var radios = {};
+        var radioElems = document.querySelectorAll("input[type='radio']");
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
             checkboxElems[i].addEventListener("click", displayCheck);
         }
 
+        // Loop through radio buttons
+        for (var i = 0; i < radioElems.length; i++) {
+            radioElems[i].addEventListener("click", displayCheck);
+        }
+
+        // Adds up values of checkboxes in array
         function displayCheck(e) {
             if (e.target.checked) {
                 selections[e.target.id] = {
                     name: e.target.name,
                     value: e.target.value
                 };
+
+                radios[e.target.id] = {
+                    name: e.target.name,
+                    value: e.target.value
+                };
             }
             else {
                 delete selections[e.target.id];
+                delete radios[e.target.id];
             }
 
             var result = [];
             var total = 0;
 
             for (var key in selections) {
-                //var listItem = "<li>" + selections[key].name + " " + selections[key].value + "</li>";
                 var listItem = " " + selections[key].value;
 
                 result.push(listItem);
