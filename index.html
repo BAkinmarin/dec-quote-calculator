@@ -76,10 +76,15 @@
             display: inline-block;
         }
 
-        .label-text {
+        label.required.label-text {
+            font-size: 1.25rem;
+        }
+
+        p.label-text {
             font-size: 1.25rem;
             text-align: left;
             margin-top: 10px;
+            margin-bottom: 0px;
         }
 
         /* Styles for get quote button */
@@ -109,6 +114,10 @@
             cursor: pointer;
         }
 
+        .other-checkbox, .add-checkbox {
+            display: inline-block;
+        }
+
         /* Styles for Get Quote and Clear Form buttons */
         #quote-button, #clear-button {
             font-family: "Oswald", sans-serif;
@@ -120,6 +129,7 @@
             color: #ffff;
             letter-spacing: 2px;
             margin: 0px 5px;
+            cursor: pointer;
         }
 
         #quote-button:hover,
@@ -149,183 +159,127 @@
         
         <!--Input fields for basic user information-->
         <div class="form-container">
-            <form id="quote-form" name="quoteForm">
-                <div class="row">
-                    <div class="col-25">
-                        <label for="full-name" class="required label-text">Name</label>
-                    </div>
-                </div>
-                <div class="col-75">
+            <form action="/action_page.php" method="post" id="quote-form" name="quoteForm">
+                <div>
+                    <label for="full-name" class="required label-text">Name</label>
                     <input type="text" name="full_name" id="full-name" placeholder="Enter Full Name" class="text-input" required>
                 </div>
                 <div class="row">
-                    <div class="col-25">
-                        <label for="email-address" class="required label-text">Email</label>
-                    </div>
-                </div>
-                <div class="col-75">
+                    <label for="email-address" class="required label-text">Email</label>
                     <input type="email" name="email_adress" id="email-address" placeholder="Enter Email Address" class="text-input" required>
                 </div>
                 
                 <!--Options to select location-->
-                <div class="row">
-                    <div class="col-25">
-                        <label for="location" class="required label-text">Location</label>
-                    </div>
-                    <div class="col-75">
-                        <select id="location" name="location">
-                            <option>Select Location</option>
-                            <option value="Kent">Kent</option>
-                            <option value="berkshire">Berkshire</option>
-                            <option value="buckinghamshire">Buckinghamshire</option>
-                            <option value="hertfordshire">Hertfordshire</option>
-                        </select>
-                    </div>
+                <div>
+                    <label for="location" class="required label-text">Location</label>
+                    <select id="location" name="location">
+                        <option>Select Location</option>
+                        <option value="Kent">Kent</option>
+                        <option value="berkshire">Berkshire</option>
+                        <option value="buckinghamshire">Buckinghamshire</option>
+                        <option value="hertfordshire">Hertfordshire</option>
+                    </select>
                 </div>
 
                 <!--Options to select service-->
-                <div class="row">
-                    <div class="col-25">
-                        <label for="service" class="required label-text">Service Required</label>
-                    </div>
-                    <div class="col-75">
-                        <select id="services" name="service">
-                            <option>Select Service</option>
-                            <option value="window-cleaning" data-type="window">Window Cleaning</option>
-                            <option value="gutter-cleaning" data-type="gutter">Gutter Cleaning</option>
-                            <option value="pressure-washing" data-type="pressure">Pressure Washing</option>
-                            <option value="roof-cleaning" data-type="roof">Roof Cleaning</option>
-                        </select>
-                    </div>
+                <div>
+                    <label for="services" class="required label-text">Service Required</label>
+                    <select id="services" name="service">
+                        <option>Select Service</option>
+                        <option value="window">Window Cleaning</option>
+                        <option value="gutter">Gutter Cleaning</option>
+                        <option value="pressure">Pressure Washing</option>
+                        <option value="roof">Roof Cleaning</option>
+                    </select>
                 </div>
 
                 <!--Radio buttons for property details-->
-                <div class="row">
-                    <div class="col-25 radio-button">
-                        <p class="required label-text">Type of House</p>
-                    </div>
+                <div>
+                    <p class="required label-text">Type of House</p>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="terraced">Terraced</label>
-                        <input type="radio" name="house" id="terraced" value="£2" required checked>
-                    </div>
+                <div class="house-radio">
+                    <label for="terraced">Terraced</label>
+                    <input type="radio" name="house" id="terraced" value="£2" required checked>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="detached">Detached</label>
-                        <input type="radio" name="house" id="detached" value="£4" required>
-                    </div>
+                <div class="house-radio">
+                    <label for="detached">Detached</label>
+                    <input type="radio" name="house" id="detached" value="£4" required>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="bungalow">Bungalow</label>
-                        <input type="radio" name="house" id="bungalow" value="£4" required>
-                    </div>
+                <div class="house-radio">
+                    <label for="bungalow">Bungalow</label>
+                    <input type="radio" name="house" id="bungalow" value="£4" required>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="semi">Semi-detached</label>
-                        <input type="radio" name="house" id="semi" value="£2" required>
-                    </div>
+                <div class="house-radio">
+                    <label for="semi">Semi-detached</label>
+                    <input type="radio" name="house" id="semi" value="£2" required>
                 </div>
                 
                 <!--Radio buttons for number of bedrooms-->
-                <div class="row">
-                    <div class="col-25 radio-button">
-                        <p class="required label-text">Number of Bedrooms</p>
-                    </div>
+                <div>
+                    <p class="required label-text">Number of Bedrooms</p>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="one_bed">1 bedroom</label>
-                        <input type="radio" name="bedrooms" id="one_bed" value="£18" value1="£22" required checked>
-                    </div>
+                <div class="bed-radio">
+                    <label for="one_bed">1 bedroom</label>
+                    <input type="radio" name="bedrooms" id="one_bed" value="£18" value1="£22" required checked>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="two_bed">2 bedrooms</label>
-                        <input type="radio" name="bedrooms" id="two_bed" value="£19" value1="£24" required>
-                    </div>
+                <div class="bed-radio">
+                    <label for="two_bed">2 bedrooms</label>
+                    <input type="radio" name="bedrooms" id="two_bed" value="£19" value1="£24" required>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="three_bed">3 bedrooms</label>
-                        <input type="radio" name="bedrooms" id="three_bed" value="£26" value1="£34" required>
-                    </div>
+                <div class="bed-radio">
+                    <label for="three_bed">3 bedrooms</label>
+                    <input type="radio" name="bedrooms" id="three_bed" value="£26" value1="£34" required>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="four_bed">4+ bedrooms</label>
-                        <input type="radio" name="bedrooms" id="four_bed" value="£40" required>
-                    </div>
+                <div class="bed-radio">
+                    <label for="four_bed">4+ bedrooms</label>
+                    <input type="radio" name="bedrooms" id="four_bed" value="£40" required>
                 </div>
 
                 <!--Checkbox for additional house details-->
-                <div class="row">
-                    <div class="col-75">
-                        <p class="required label-text">Additional rooms (select all that apply)</p>
-                        <label for="extension">Extension
-                            <input type="checkbox" name="additional" id="extension" value="£15">
-                        </label>
-                    </div>
+                <div>
+                    <p class="required label-text">Additional rooms (select all that apply)</p>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="conservatory">Conservatory
-                            <input type="checkbox" name="additional" id="conservatory" value="£15">
-                        </label>                        
-                    </div>
+                <div class="add-checkbox">
+                    <label for="extension">Extension</label>
+                    <input type="checkbox" name="additional" id="extension" value="£15">
+                </div>
+                <div class="add-checkbox">
+                    <label for="conservatory">Conservatory</label>
+                    <input type="checkbox" name="additional" id="conservatory" value="£15">
                 </div>
                 
                 <!--Checkbox for other services required-->
-                <div class="row">
-                    <div class="col-75">
-                        <p class="required label-text">Other services required</p>
-                        <label for="resanding">Re-sanding
-                            <input type="checkbox" name="other" id="resanding" value="resanding">
-                        </label>
-                    </div>
+                <div>
+                    <p class="label-text">Other services required</p>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="block_paving">Block Paving
-                            <input type="checkbox" name="other" id="block_paving" value="block_paving">
-                        </label>
-                    </div>
+                <div class="other-checkbox">
+                    <label for="resanding">Re-sanding</label>
+                    <input type="checkbox" name="other" id="resanding" value="resanding">
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="biocidal">Biocidal Treatment
-                            <input type="checkbox" name="other" id="biocidal" value="biocidal">
-                        </label>
-                    </div>
+                <div class="other-checkbox">
+                    <label for="block_paving">Block Paving</label>
+                    <input type="checkbox" name="other" id="block_paving" value="block_paving">
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="instant_pressure">Instant Pressure Washing
-                            <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
-                        </label>
-                    </div>
+                <div class="other-checkbox">
+                    <label for="biocidal">Biocidal Treatment</label>
+                    <input type="checkbox" name="other" id="biocidal" value="biocidal">
+                </div>
+                <div class="other-checkbox">
+                    <label for="instant_pressure">Instant Pressure Wash</label>
+                    <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">
                 </div>
                 
                 <!--Radio for property accessibility-->
-                <div class="row">
-                    <div class="col-25 radio-button">
-                        <p class="required label-text">Does property have separate access?</p>
-                    </div>
+                <div>
+                    <p class="required label-text">Does property have separate access?</p>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="yes">Yes</label>
-                        <input type="radio" name="access" id="yes" value="yes" required checked>
-                    </div>
+                <div class="access-radio">
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="access" id="yes" value="yes" required checked>
                 </div>
-                <div class="row">
-                    <div class="col-75">
-                        <label for="no">No</label>
-                        <input type="radio" name="access" id="no" value="no" required>
-                    </div>
+                <div class="access-radio">
+                    <label for="no">No</label>
+                    <input type="radio" name="access" id="no" value="no" required>
                 </div>
 
                 <!--Area to display feedback based on user selection for access-->
@@ -336,19 +290,15 @@
                 </div>
 
                 <!--Option to enter message-->
-                <div class="row">
-                    <div class="col-25">
-                        <label for="message" class="label-text">Leave Us A Message</label>
-                    </div>
+                <div>
+                    <label for="message">Leave Us A Message</label>
                 </div>
                 <div class="row">
-                    <div class="col-75">
-                        <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
-                    </div>
+                    <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
                 </div>
                 <div class="row">
-                    <button onclick="getQuote()" type="submit" data-type="submit" id="quote-button">Get Quote</button>
-                    <button onclick="clearForm()" type="reset" data-type="reset" id="clear-button">Clear Form</button>
+                    <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
+                    <button type="reset" data-type="reset" id="clear-button">Clear Form</button>
                 </div>
 
                 <!--Display quote-->
@@ -364,116 +314,7 @@
     </section>
 </main>
 
-<script>
-    // Wait for the DOM to finish loading before running the script
-    document.addEventListener("DOMContentLoaded", function() {
-
-        // Get dropdown elements from DOM and add event listeners
-        var services = document.getElementById("services").value;
-
-        // 'For Loop' to add event listeners to dropdowns
-        for (let service of services) {
-            service.addEventListener("click", function() {
-                if (this.getAttribute("data-type") === "submit") {
-                    getQuote();
-                } else {
-                    let quoteType = this.getAttribute("data-type");
-                    runQuote(quoteType);
-                }
-            })
-        }
-
-        // Get radio elements from the DOM and add event listeners to them
-        var selections = {};
-        var radios = document.forms["quoteForm"].elements["house"];
-        var radios = document.forms["quoteForm"].elements["bedrooms"];
-
-        // 'For Loop' to add event listeners to radios
-        for(var i = 0, max = radios.length; i < max; i++) {
-            radios[i].onclick = function() {
-                runQuote();
-            }
-        }
-
-        // Get checkbox elements from the DOM and add event listeners to them
-        var selections = {};
-        var checkboxes = document.querySelectorAll("input[type='checkbox']");
-
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener("click", getQuote);
-        }
-
-        function getQuote(e) {
-            if (e.target.checked) {
-                selections[e.target.id] = {
-                    name: e.target.name,
-                    value: e.target.value
-                };
-            }
-
-            else {
-                delete selections[e.target.id];
-            }
-        }
-
-        var result = [];
-        var total = 0;
-
-        for (var key in selections) {
-            var listItem = "<p>" + selections[key].value + "</p>";
-            result.push(listItem);
-            total+= parseInt(selections[key].value.substring(1));
-        }
-
-        totalQuote.innerHTML = total;
-        options.innerHTML = result.join("");
-
-        var checkboxes = document.forms["quoteForm"].elements["additional"];
-        var checkboxes = document.forms["quoteForm"].elements["other"];
-
-        // 'For Loop' to add event listeners to checkboxes
-        for (var i = 0, max = checkboxes.length; i < max; i++) {
-            checkboxes[i].onclick = function() {
-                runQuote();
-            }
-        }
-    })
-
-    /*function runQuote(quoteType) {
-
-        // Clear previous qupte each time new quote is submitted
-        document.getElementsById("quote-modal").value = "";
-
-        let base1 = 18;
-        let base2 = 22;
-        let houseChoice = [];
-        let additionalChoice = [];
-
-        if (quoteType === "window") {
-            displayWindowQuote(base1, base2);
-        } else if (quoteType ==="gutter") {
-            displayGutterQuote(base1, base2);
-        } else if (quoteType === "pressure") {
-            displayPressureQuote(base1, base2, semi);
-        } else if (quoteType === "roof") {
-            displayRoofQuote(base1, base2);
-        } else {
-            alert(`Unknown service type: ${quoteType}`);
-            throw `You must select a service: ${quoteType}. Aborting!`
-        }
-    }
-
-    // Window cleaning calculation
-    function displayWindowQuote() {
-        let houseType = parseInt(document.getElementByTagName("house").value);
-        let numBeds = parseInt(document.getElementsByTagName("bedrooms").value);
-
-        if (houseType === "terraced" && numBeds === "one-bed") {
-            return 
-        }
-    }*/
-   
-</script>
+<script></script>
     
 <!--Footer-->
 <footer></footer>
