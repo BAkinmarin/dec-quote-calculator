@@ -224,15 +224,15 @@
                 </div>
                 <div class="bed-radio">
                     <label for="one_bed">1 bedroom</label>
-                    <input type="radio" name="bedroom" id="one_bed" value="£22" required>
+                    <input type="radio" name="bedroom" id="one_bed" value="£18" required>
                 </div>
                 <div class="bed-radio">
                     <label for="two_bed">2 bedrooms</label>
-                    <input type="radio" name="bedroom" id="two_bed" value="£24" required>
+                    <input type="radio" name="bedroom" id="two_bed" value="£19" required>
                 </div>
                 <div class="bed-radio">
                     <label for="three_bed">3 bedrooms</label>
-                    <input type="radio" name="bedroom" id="three_bed" value="£34" required>
+                    <input type="radio" name="bedroom" id="three_bed" value="£26" required>
                 </div>
                 <div class="bed-radio">
                     <label for="four_bed">4+ bedrooms</label>
@@ -273,7 +273,7 @@
                 </div>
                 <div class="access-radio">
                     <label for="yes">Yes</label>
-                    <input type="radio" name="access" id="yes" value="yes" required>
+                    <input type="radio" name="access" id="yes" value="£0" required>
                 </div>
                 <div class="access-radio">
                     <label for="no">No</label>
@@ -301,7 +301,7 @@
 
                 <!--Display quote-->
                 <div>
-                    Your instant quote is: £<span id="quote-total">0</span> GBP
+                    Your quote is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
                     <br>
                     <input type="submit" value="Book Now">
                 </div>
@@ -314,10 +314,11 @@
     // Wait for DOM to load before running script
     document.addEventListener("DOMContentLoaded", function() {
         
-        // Add event listener to checkboxes
+        // Add event listener to checkboxes and create array to hold values of each checkbox
         var selections = {};
         var checkboxElems = document.querySelectorAll("input[type='checkbox']");
         var totalElem = document.getElementById("quote-total");
+        var totalElemMax = document.getElementById("quote-range");
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
@@ -325,8 +326,6 @@
         }
 
         // Add event listener to radio buttons
-        var houseRadios = document.querySelectorAll("input[name='house']");
-        var bedroomRadios = document.querySelectorAll("input[name='bedroom']");
         var radioElems = document.querySelectorAll("input[type='radio']");
 
         // Loop through radio buttons
@@ -367,7 +366,9 @@
                 total += parseInt(selections[key].value.substring(1));
             }
 
-            totalElem.innerText = total;
+            // Displays total fixed to 2 decimal places
+            totalElem.innerText = (total * 1.5).toFixed(2);
+            totalElemMax.innerText = ((total * 1.50) + 8).toFixed(2);
         }
 
         // Reset total quote when 'Clear Form' button is clicked
@@ -377,6 +378,7 @@
 
             // Reset totalElem.innerText
             totalElem.innerText = '0';
+            totalElemMax.innerText = '0';
         });
     });
 
