@@ -190,10 +190,10 @@
                     <label for="services" class="required label-text">Service Required</label>
                     <select id="services">
                         <option>Select Service</option>
-                        <option value="£18">Window Cleaning</option>
-                        <option value="£19">Gutter Cleaning</option>
-                        <option value="£200">Pressure Washing</option>
-                        <option value="£11">Roof Cleaning</option>
+                        <option value="window">Window Cleaning</option>
+                        <option value="gutter">Gutter Cleaning</option>
+                        <option value="pressure">Pressure Washing</option>
+                        <option value="roof">Roof Cleaning</option>
                     </select>
                 </div>
 
@@ -203,19 +203,19 @@
                 </div>
                 <div class="house-radio">
                     <label for="terraced">Terraced</label>
-                    <input type="radio" name="house" id="terraced" value="£2" required>
+                    <input type="radio" name="house" id="terraced" value="£2" required disabled>
                 </div>
                 <div class="house-radio">
                     <label for="detached">Detached</label>
-                    <input type="radio" name="house" id="detached" value="£4" required>
+                    <input type="radio" name="house" id="detached" value="£4" required disabled>
                 </div>
                 <div class="house-radio">
                     <label for="bungalow">Bungalow</label>
-                    <input type="radio" name="house" id="bungalow" value="£2" required>
+                    <input type="radio" name="house" id="bungalow" value="£2" required disabled>
                 </div>
                 <div class="house-radio">
                     <label for="semi">Semi-detached</label>
-                    <input type="radio" name="house" id="semi" value="£4" required>
+                    <input type="radio" name="house" id="semi" value="£4" required disabled>
                 </div>
                 
                 <!--Radio buttons for number of bedrooms-->
@@ -224,19 +224,19 @@
                 </div>
                 <div class="bed-radio">
                     <label for="one_bed">1 bedroom</label>
-                    <input type="radio" name="bedroom" id="one_bed" value="£18" required>
+                    <input type="radio" name="bedroom" id="one_bed" value="£18" required disabled>
                 </div>
                 <div class="bed-radio">
                     <label for="two_bed">2 bedrooms</label>
-                    <input type="radio" name="bedroom" id="two_bed" value="£19" required>
+                    <input type="radio" name="bedroom" id="two_bed" value="£19" required disabled>
                 </div>
                 <div class="bed-radio">
                     <label for="three_bed">3 bedrooms</label>
-                    <input type="radio" name="bedroom" id="three_bed" value="£26" required>
+                    <input type="radio" name="bedroom" id="three_bed" value="£26" required disabled>
                 </div>
                 <div class="bed-radio">
                     <label for="four_bed">4+ bedrooms</label>
-                    <input type="radio" name="bedroom" id="four_bed" value="£40" required>
+                    <input type="radio" name="bedroom" id="four_bed" value="£40" required disabled>
                 </div>
 
                 <!--Checkbox for additional house details-->
@@ -244,10 +244,10 @@
                     <p class="required label-text">Additions (select all that apply)</p>
                 </div>
                 <div class="add-checkbox">
-                    <input type="checkbox" name="additional" id="extension" value="£15">Extension<br>
+                    <input type="checkbox" name="additional" id="extension" value="£15" disabled>Extension<br>
                 </div>
                 <div class="add-checkbox">
-                    <input type="checkbox" name="additional" id="conservatory" value="£15">Conservatory<br>
+                    <input type="checkbox" name="additional" id="conservatory" value="£15" disabled>Conservatory<br>
                 </div>
                 
                 <!--Checkbox for other services required-->
@@ -255,16 +255,16 @@
                     <p class="label-text">Other services required</p>
                 </div>
                 <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="resanding" value="resanding">Resanding<br>
+                    <input type="checkbox" name="other" id="resanding" value="resanding" disabled>Resanding<br>
                 </div>
                 <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="block_paving" value="block_paving">Block Paving<br>
+                    <input type="checkbox" name="other" id="block_paving" value="block_paving" disabled>Block Paving<br>
                 </div>
                 <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="biocidal" value="biocidal">Biocidal Treatment<br>
+                    <input type="checkbox" name="other" id="biocidal" value="biocidal" disabled>Biocidal Treatment<br>
                 </div>
                 <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">Instant Pressure Wash<br>
+                    <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure" disabled>Instant Pressure Wash<br>
                 </div>
                 
                 <!--Radio for property accessibility-->
@@ -273,11 +273,11 @@
                 </div>
                 <div class="access-radio">
                     <label for="yes">Yes</label>
-                    <input type="radio" name="access" id="yes" value="£0" required>
+                    <input type="radio" name="access" id="yes" value="£0" required disabled>
                 </div>
                 <div class="access-radio">
                     <label for="no">No</label>
-                    <input type="radio" name="access" id="no" value="no" required>
+                    <input type="radio" name="access" id="no" value="no" required disabled>
                 </div>
 
                 <!--Area to display feedback based on user selection for access-->
@@ -292,7 +292,7 @@
                     <p class="label-text">Leave Us A Message</p>
                 </div>
                 <div>
-                    <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
+                    <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..." disabled></textarea>
                 </div>
                 <div>
                     <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
@@ -380,6 +380,31 @@
             totalElem.innerText = '0';
             totalElemMax.innerText = '0';
         });
+
+        // Only trigger displayCheck function if Window Cleaning service is selected
+        var menu = document.getElementById("services");
+        menu.addEventListener("change", generateData);
+
+        function generateData(event) {
+
+            // Loop through radio buttons to enable with selection
+            var radios = document.getElementsByName("house");
+            for (var i = 0; i < radios.length; i++) {
+                radios[i].disabled = false;
+            }
+
+            if (menu.value === 'window') {
+                document.getElementsByName("house")[i].disabled=false;
+                displayCheck();
+            } else if (menu.value === 'gutter') {
+                document.getElementsByName("house")[0].disabled=false;
+            } else if (menu.value === 'pressure') {
+                document.getElementsByName("house")[0].disabled=false;
+            } else if (menu.value === 'roof') {
+                document.getElementsByName("house")[0].disabled=false;
+            }
+        };
+
     });
 
 </script>
