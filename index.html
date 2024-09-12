@@ -322,7 +322,7 @@
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
-            checkboxElems[i].addEventListener("click", displayCheck);
+            checkboxElems[i].addEventListener("click", displayWindowQuote);
         }
 
         // Add event listener to radio buttons
@@ -330,11 +330,11 @@
 
         // Loop through radio buttons
         for (var i = 0; i < radioElems.length; i++) {
-            radioElems[i].addEventListener("click", displayCheck);
+            radioElems[i].addEventListener("click", displayWindowQuote);
         }
 
         // Add up values of checkboxes and radio buttons in selections array
-        function displayCheck(e) {
+        function displayWindowQuote(e) {
             if (e.target.checked) {
                 selections[e.target.id] = {
                     name: e.target.name,
@@ -381,21 +381,21 @@
             totalElemMax.innerText = '0';
         });
 
-        // Only trigger displayCheck function if Window Cleaning service is selected
+        // Only trigger displayWindowQuote function if Window Cleaning service is selected
         var menu = document.getElementById("services");
         menu.addEventListener("change", generateData);
 
         function generateData(event) {
 
             // Loop through radio buttons to enable with selection
-            var radios = document.getElementsByName("house");
-            for (var i = 0; i < radios.length; i++) {
-                radios[i].disabled = false;
-            }
 
             if (menu.value === 'window') {
-                document.getElementsByName("house")[i].disabled=false;
-                displayCheck();
+                // Loop through form to enable all fields with selection
+                var radios = document.querySelectorAll("input[type='radio']");
+                for (var i = 0; i < radios.length; i++) {
+                    radios[i].disabled = false;
+                }
+                displayWindowQuote();
             } else if (menu.value === 'gutter') {
                 document.getElementsByName("house")[0].disabled=false;
             } else if (menu.value === 'pressure') {
