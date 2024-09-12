@@ -224,19 +224,19 @@
                 </div>
                 <div class="bed-radio">
                     <label for="one_bed">1 bedroom</label>
-                    <input type="radio" name="bedrooms" id="one_bed" value="£22" required>
+                    <input type="radio" name="bedroom" id="one_bed" value="£22" required>
                 </div>
                 <div class="bed-radio">
                     <label for="two_bed">2 bedrooms</label>
-                    <input type="radio" name="bedrooms" id="two_bed" value="£24" required>
+                    <input type="radio" name="bedroom" id="two_bed" value="£24" required>
                 </div>
                 <div class="bed-radio">
                     <label for="three_bed">3 bedrooms</label>
-                    <input type="radio" name="bedrooms" id="three_bed" value="£34" required>
+                    <input type="radio" name="bedroom" id="three_bed" value="£34" required>
                 </div>
                 <div class="bed-radio">
                     <label for="four_bed">4+ bedrooms</label>
-                    <input type="radio" name="bedrooms" id="four_bed" value="£40" required>
+                    <input type="radio" name="bedroom" id="four_bed" value="£40" required>
                 </div>
 
                 <!--Checkbox for additional house details-->
@@ -314,18 +314,20 @@
     // Wait for DOM to load before running script
     document.addEventListener("DOMContentLoaded", function() {
         
-        // Add event listener to multiple checkboxes and radio buttons
+        // Add event listener to checkboxes
         var selections = {};
         var checkboxElems = document.querySelectorAll("input[type='checkbox']");
         var totalElem = document.getElementById("quote-total");
-
-        var radios = {};
-        var radioElems = document.querySelectorAll("input[type='radio']");
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
             checkboxElems[i].addEventListener("click", displayCheck);
         }
+
+        // Add event listener to radio buttons
+        var houseRadios = document.querySelectorAll("input[name='house']");
+        var bedroomRadios = document.querySelectorAll("input[name='bedroom']");
+        var radioElems = document.querySelectorAll("input[type='radio']");
 
         // Loop through radio buttons
         for (var i = 0; i < radioElems.length; i++) {
@@ -339,22 +341,27 @@
                     name: e.target.name,
                     value: e.target.value
                 };
-
-                radios[e.target.id] = {
-                    name: e.target.name,
-                    value: e.target.value
-                };
             }
             else {
-                delete selections[e.target.id];
-                delete radios[e.target.id];
+                delete selections[e.target.id]
+            }
+
+            // Handle radio buttons: unchecks other radio buttons with the same name
+            if (e.target.type === 'radio') {
+                const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`);
+
+                radioButtons.forEach((radioButton) => {
+                    if (radioButton !== e.target) {
+                        delete selections[radioButton.id];
+                    }
+                });
             }
 
             var result = [];
             var total = 0;
 
             for (var key in selections) {
-                var listItem = " " + selections[key].value;
+                var listItem = selections[key].value;
 
                 result.push(listItem);
                 total += parseInt(selections[key].value.substring(1));
