@@ -334,7 +334,7 @@
             radioElems[i].addEventListener("click", displayCheck);
         }
 
-        // Adds up values of checkboxes in array
+        // Add up values of checkboxes and radio buttons in selections array
         function displayCheck(e) {
             if (e.target.checked) {
                 selections[e.target.id] = {
@@ -369,6 +369,15 @@
 
             totalElem.innerText = total;
         }
+
+        // Reset total quote when 'Clear Form' button is clicked
+        document.getElementById('clear-button').addEventListener("click", function() {
+            // Clear the selections object
+            selections = {};
+
+            // Reset totalElem.innerText
+            totalElem.innerText = '0';
+        });
     });
 
 </script>
