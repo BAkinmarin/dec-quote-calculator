@@ -119,13 +119,16 @@
         }
 
         /* Styles for Get Quote and Clear Form buttons */
-        #quote-button, #clear-button {
+        #quote-button, 
+        #clear-button,
+        #book-button {
             font-family: "Oswald", sans-serif;
             font-size: 20px;
             font-weight: 700;
             padding: 5px;
             background-color: #2087C0;
             border-radius: 1rem;
+            border-color: #0000;
             color: #ffff;
             letter-spacing: 2px;
             margin: 0px 5px;
@@ -133,7 +136,8 @@
         }
 
         #quote-button:hover,
-        #clear-button:hover {
+        #clear-button:hover,
+        #book-button:hover {
             transform: scale(1.15);
             transition: all 0.5s ease-in-out;
         }
@@ -142,9 +146,64 @@
             display: none;
         }
 
-        #display-modal {
-            margin-top: 10px;
+        /* Styles for modal to display quote */
+        .modal-content {
+            /*display: none;*/
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .quote-modal-div {
+            margin: auto;
+            padding: 1rem;
+            border: 3px ridge;
+            /*display: none;*/
+            justify-content: start;
+            flex-direction: column;
+            text-align: center;
             background-color: #2087C0;
+            color: #ffff;
+        }
+
+        .modal-text {
+            font-size: 1.25rem;
+            padding: 0.3rem;
+            font-weight: bold;
+            font-family: "Oswald", sans-serif;
+        }
+
+        /* Style for Close Modal button */
+        #closeModal {
+            color: #ffff;
+            border-radius: 1rem;
+            border-style: groove;
+            border-color: #ffff;
+            text-transform: capitalize;
+            font-family: "Oswald", sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 5px;
+            letter-spacing: 2px;
+            margin: 0px 5px;
+            cursor: pointer;
+        }
+
+        #closeModal:hover,
+        #closeModal:focus {
+            color: aqua;
+            text-decoration: none;
+            cursor: pointer;
+            background-color: blue;
+        }
+
+        /* Style for rejected quote */
+        .rejected {
+            color: #ff0000;
+            font-size: 1.25rem;
         }
 
     </style>
@@ -282,8 +341,8 @@
 
                 <!--Area to display feedback based on user selection for access-->
                 <div id="feedback">
-                    <p class="rejected hidden">Unfortunately, we cannot clean if the only access to property is 
-                        through the main building.
+                    <p class="rejected">Unfortunately, we cannot clean if the only access to property is 
+                        through the main building!
                     </p>
                 </div>
 
@@ -297,13 +356,18 @@
                 <div>
                     <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
                     <button type="reset" data-type="reset" id="clear-button">Clear Form</button>
+                    <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                 </div>
 
-                <!--Display quote-->
-                <div>
-                    Your quote is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
-                    <br>
-                    <input type="submit" value="Book Now">
+                <!--Quote Modal-->
+                <div class="quote-modal-div">
+                    <!--Content-->
+                    <div class="modal-content" id="modal-display">
+                        <p class="modal-text" id="accepted">
+                            Your quote is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                        </p>
+                        <!--<span class="close-modal" id="closeModal">Book Now!</span>-->
+                    </div>
                 </div>
             </form>
         </div>
@@ -390,11 +454,18 @@
             // Loop through radio buttons to enable with selection
 
             if (menu.value === 'window') {
-                // Loop through form to enable all fields with selection
+                // Loop through form to enable relevant fields with selection
                 var radios = document.querySelectorAll("input[type='radio']");
+                var checkboxes = document.querySelectorAll("input[type='checkbox']");
+
                 for (var i = 0; i < radios.length; i++) {
                     radios[i].disabled = false;
                 }
+
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].disabled = false;
+                }
+
                 displayWindowQuote();
             } else if (menu.value === 'gutter') {
                 document.getElementsByName("house")[0].disabled=false;
