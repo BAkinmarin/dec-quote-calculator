@@ -231,17 +231,13 @@
                     <label for="phone-number" class="required label-text">Phone</label>
                     <input type="text" name="phone_number" id="phone-number" placeholder="Mobile Number" class="text-input" pattern="[0-9]+" required>
                 </div>
-                
-                <!--Options to select location-->
+
+                <!--Text input for client address-->
                 <div>
-                    <label for="location" class="required label-text">Location</label>
-                    <select id="location" name="location">
-                        <option>Select Location</option>
-                        <option value="Kent">Kent</option>
-                        <option value="berkshire">Berkshire</option>
-                        <option value="buckinghamshire">Buckinghamshire</option>
-                        <option value="hertfordshire">Hertfordshire</option>
-                    </select>
+                    <p class="label-text required">Address</p>
+                </div>
+                <div>
+                    <textarea id="location" name="location" placeholder="Please enter your full address and postcode"></textarea>
                 </div>
 
                 <!--Options to select service-->
