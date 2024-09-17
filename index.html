@@ -114,7 +114,8 @@
             cursor: pointer;
         }
 
-        .other-checkbox, .add-checkbox {
+        .other-checkbox, .add-checkbox,
+        .house-radio, .bed-radio, .access-radio {
             display: inline-block;
         }
 
@@ -176,9 +177,9 @@
             font-family: "Oswald", sans-serif;
         }
 
-        /* Style for Close Modal button */
-        #closeModal {
-            color: #ffff;
+        /* Style for Contact button */
+        #contact-button {
+            color: #2087C0;
             border-radius: 1rem;
             border-style: groove;
             border-color: #ffff;
@@ -192,8 +193,8 @@
             cursor: pointer;
         }
 
-        #closeModal:hover,
-        #closeModal:focus {
+        #contact-button:hover,
+        #contact-button:focus {
             color: aqua;
             text-decoration: none;
             cursor: pointer;
@@ -237,7 +238,7 @@
                     <p class="label-text required">Address</p>
                 </div>
                 <div>
-                    <textarea id="location" name="location" placeholder="Please enter your full address and postcode"></textarea>
+                    <textarea id="location" name="location" placeholder="Please enter your full address and postcode" required></textarea>
                 </div>
 
                 <!--Options to select service-->
@@ -246,7 +247,7 @@
                     <select id="services">
                         <option>Select Service</option>
                         <option value="window">Window Cleaning</option>
-                        <option value="gutter">Gutter Cleaning</option>
+                        <option value="gutter">Gutter Clearing</option>
                         <option value="pressure">Pressure Washing</option>
                         <option value="roof">Roof Cleaning</option>
                     </select>
@@ -271,6 +272,26 @@
                 <div class="house-radio">
                     <label for="semi">Semi-detached</label>
                     <input type="radio" name="house" id="semi" value="£4" required disabled>
+                </div>
+
+                <!--Radio for property accessibility-->
+                <div>
+                    <p class="required label-text">Is there separate access?</p>
+                </div>
+                <div class="access-radio">
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="access" id="yes" value="£0" required disabled>
+                </div>
+                <div class="access-radio">
+                    <label for="no">No</label>
+                    <input type="radio" name="access" id="no" value="no" required disabled>
+                </div>
+
+                <!--Area to display feedback based on user selection for access-->
+                <div id="feedback">
+                    <p class="rejected">Unfortunately, we cannot clean if the only access to property is 
+                        through the main building!
+                    </p>
                 </div>
                 
                 <!--Radio buttons for number of bedrooms-->
@@ -321,26 +342,6 @@
                 <div class="other-checkbox">
                     <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure" disabled>Instant Pressure Wash<br>
                 </div>
-                
-                <!--Radio for property accessibility-->
-                <div>
-                    <p class="required label-text">Is there separate access?</p>
-                </div>
-                <div class="access-radio">
-                    <label for="yes">Yes</label>
-                    <input type="radio" name="access" id="yes" value="£0" required disabled>
-                </div>
-                <div class="access-radio">
-                    <label for="no">No</label>
-                    <input type="radio" name="access" id="no" value="no" required disabled>
-                </div>
-
-                <!--Area to display feedback based on user selection for access-->
-                <div id="feedback">
-                    <p class="rejected">Unfortunately, we cannot clean if the only access to property is 
-                        through the main building!
-                    </p>
-                </div>
 
                 <!--Option to enter message-->
                 <div>
@@ -352,7 +353,6 @@
                 <div>
                     <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
                     <button type="reset" data-type="reset" id="clear-button">Clear Form</button>
-                    <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                 </div>
 
                 <!--Quote Modal-->
@@ -362,11 +362,31 @@
                         <p class="modal-text" id="accepted">
                             Your quote is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
                         </p>
-                        <!--<span class="close-modal" id="closeModal">Book Now!</span>-->
+                        <button type="submit" data-type="submit" id="contact-button">Get In Touch!</button>
                     </div>
                 </div>
             </form>
         </div>
+    </section>
+
+    <!--Display quote for window cleaning-->
+    <section id="window-display">
+
+    </section>
+
+    <!--Display quote for gutter clearing-->
+    <section id="gutter-display">
+
+    </section>
+
+    <!--Display quote for pressure cleaning-->
+    <section id="pressure-display">
+
+    </section>
+
+    <!--Display quote for roof cleaning-->
+    <section id="roof-display">
+
     </section>
 </main>
 
