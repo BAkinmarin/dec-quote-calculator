@@ -69,6 +69,7 @@
         padding: 10px;
         border-radius: 4px;
         resize: vertical;
+        font-family: "Oswald", sans-serif;
         }
 
         /* Styles for labels */
@@ -98,7 +99,7 @@
         }
 
         /* Style textareas */
-        .address-area {height: 40px;}
+        .address-area {height: 80px;}
 
         .message-area {height: 100px;}
 
@@ -117,7 +118,8 @@
         }
 
         .other-checkbox, .add-checkbox,
-        .house-radio, .bed-radio, .access-radio {
+        .house-radio, .bed-radio, .access-radio,
+        .sides-radio {
             display: inline-block;
         }
 
@@ -242,7 +244,7 @@
                     <p class="label-text required">Address</p>
                 </div>
                 <div>
-                    <textarea class="address-area" id="location" name="location" placeholder="Please enter your full address and postcode" required></textarea>
+                    <textarea class="address-area" id="location" name="location" placeholder="Property Address" required></textarea>
                 </div>
 
                 <!--Options to select service-->
@@ -325,6 +327,29 @@
                     </div>
                 </div>
 
+                <!--Radio buttons for number of sides-->
+                <div id="sides-input" class="hidden">
+                    <div>
+                        <p class="required label-text">Sides Requiring Cleaning</p>
+                    </div>
+                    <div class="sides-radio">
+                        <label for="one_side">1 side</label>
+                        <input type="radio" name="sides" id="one_side" value="£40" required>
+                    </div>
+                    <div class="sides-radio">
+                        <label for="two_sides">2 sides</label>
+                        <input type="radio" name="sides" id="two_sides" value="£70" required>
+                    </div>
+                    <div class="sides-radio">
+                        <label for="three_sides">3 sides</label>
+                        <input type="radio" name="sides" id="three_sides" value="£100" required>
+                    </div>
+                    <div class="sides-radio">
+                        <label for="four_sides">4+ sides</label>
+                        <input type="radio" name="sides" id="four_sides" value="£125" required>
+                    </div>
+                </div>
+
                 <!--Checkbox for additional house details-->
                 <div id="additions-input" class="hidden">
                     <div>
@@ -374,44 +399,44 @@
 
                 <!--Quote Modal-->
                 <!--Display quote for window cleaning-->
-                <div id="window-display" class="quote-modal-div">
+                <div id="window-display" class="quote-modal-div hidden">
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Window Cleaning is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                            Your quote for Window Cleaning is estimated at: £<span id="window-quote-total">0</span> - £<span id="window-quote-range">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
                 </div>
 
                 <!--Display quote for gutter clearing-->
-                <div id="gutter-display" class="quote-modal-div">
+                <div id="gutter-display" class="quote-modal-div hidden">
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Gutter Clearing is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                            Your quote for Gutter Clearing is estimated to start from: £<span id="gutter-quote-total">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
                 </div>
 
                 <!--Display quote for pressure washing-->
-                <div id="pressure-display" class="quote-modal-div">
+                <div id="pressure-display" class="quote-modal-div hidden">
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Pressure Washing is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                            Your quote for Pressure Washing is estimated at: £<span id="pressure-quote-total">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
                 </div>
 
                 <!--Display quote for roof cleaning-->
-                <div id="roof-display" class="quote-modal-div">
+                <div id="roof-display" class="quote-modal-div hidden">
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Roof Cleaning is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                            Your quote for Roof Cleaning is estimated at: £<span id="roof-quote-total">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
@@ -428,8 +453,13 @@
         // Add event listener to checkboxes and create array to hold values of each checkbox
         var selections = {};
         var checkboxElems = document.querySelectorAll("input[type='checkbox']");
-        var totalElem = document.getElementById("quote-total");
-        var totalElemMax = document.getElementById("quote-range");
+
+        // Elements to display various quotes
+        var windowTotalElem = document.getElementById("window-quote-total");
+        var WindowTotalElemMax = document.getElementById("window-quote-range");
+        var gutterTotalElem = document.getElementById("gutter-quote-total");
+        var pressureTotalElem = document.getElementById("pressure-quote-total");
+        var roofTotalElem = document.getElementById("roof-quote-total");
 
         // Retrieve global elements from DOM
         const rejectedElem = document.getElementById("rejected");
@@ -439,6 +469,13 @@
         var additionsInput = document.getElementById("additions-input");
         var otherServicesInput = document.getElementById("other-services-input");
         var messageInput = document.getElementById("message-input");
+        var sidesInput = document.getElementById("sides-input");
+
+        // Retrieve various modals for quote display
+        var windowDisplay = document.getElementById("window-display");
+        var gutterDisplay = document.getElementById("gutter-display");
+        var pressureDisplay = document.getElementById("pressure-display");
+        var roofDisplay = document.getElementById("roof-display");
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
@@ -466,21 +503,20 @@
 
             // Enable specific dropdowns and display form elements based on user selection
             if (menu.value === 'window') {
+                windowDisplay.style.display = 'block';
                 accessInput.style.display = 'block';
                 houseInput.style.display = 'block';
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
                 displayWindowQuote();
             } else if (menu.value === 'gutter') {
-                accessInput.style.display = 'none';
-                houseInput.style.display = 'none';
-                bedInput.style.display = 'block';
+                gutterDisplay.style.display = 'block';
+                sidesInput.style.display = 'block';
                 additionsInput.style.display = 'block';
-                otherServicesInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
-                document.getElementsByName("house")[0].disabled=false;
+                pressureDisplay.style.display = 'block';
             } else if (menu.value === 'roof') {
-                document.getElementsByName("house")[0].disabled=false;
+                roofDisplay.style.display = 'block';
             }
         };
 
@@ -504,7 +540,7 @@
                     if (radioButton !== e.target) {
                         delete selections[radioButton.id];
 
-                        // Disabled other radio button
+                        // Disable other radio buttons
                         radioButton.disabled = true;
                     }
                 });
@@ -513,6 +549,7 @@
                 if (e.target.name === 'access' && e.target.id === 'no') {
                     // Stop further processing and display relevant message to user
                     rejectedElem.style.display = 'block';
+                    windowDisplay.style.display = 'none';
                     houseInput.style.display = 'none';
                     bedInput.style.display = 'none';
                     additionsInput.style.display = 'none';
@@ -535,8 +572,17 @@
             }
 
             // Displays total fixed to 2 decimal places
-            totalElem.innerText = (total * 1.5).toFixed(2);
-            totalElemMax.innerText = ((total * 1.50) + 8).toFixed(2);
+            windowTotalElem.innerText = (total * 1.5).toFixed(2);
+            windowTotalElemMax.innerText = ((total * 1.50) + 8).toFixed(2);
+
+            // Target gutter display
+            gutterTotalElem.innerText = total.toFixed(2);
+
+            // Target pressure display
+            pressureTotalElem.innerText = total.toFixed(2);
+
+            // Target roof display
+            roofTotalElem.innerText = total.toFixed(2);
         }
 
         // Reset all fields and quotes when 'Clear Form' button is clicked
