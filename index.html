@@ -255,27 +255,6 @@
                     </select>
                 </div>
 
-                <!--Radio buttons for property details-->
-                <div>
-                    <p class="required label-text">Type of House</p>
-                </div>
-                <div class="house-radio">
-                    <label for="terraced">Terraced</label>
-                    <input type="radio" name="house" id="terraced" value="£2" required>
-                </div>
-                <div class="house-radio">
-                    <label for="detached">Detached</label>
-                    <input type="radio" name="house" id="detached" value="£4" required>
-                </div>
-                <div class="house-radio">
-                    <label for="bungalow">Bungalow</label>
-                    <input type="radio" name="house" id="bungalow" value="£2" required>
-                </div>
-                <div class="house-radio">
-                    <label for="semi">Semi-detached</label>
-                    <input type="radio" name="house" id="semi" value="£4" required>
-                </div>
-
                 <!--Radio for property accessibility-->
                 <div>
                     <p class="required label-text">Is there separate access?</p>
@@ -295,54 +274,83 @@
                         through the main building!
                     </p>
                 </div>
+
+                <!--Radio buttons for property details-->
+                <div id="house-input" class="hidden">
+                    <div>
+                        <p class="required label-text">Type of House</p>
+                    </div>
+                    <div class="house-radio">
+                        <label for="terraced">Terraced</label>
+                        <input type="radio" name="house" id="terraced" value="£2" required>
+                    </div>
+                    <div class="house-radio">
+                        <label for="detached">Detached</label>
+                        <input type="radio" name="house" id="detached" value="£4" required>
+                    </div>
+                    <div class="house-radio">
+                        <label for="bungalow">Bungalow</label>
+                        <input type="radio" name="house" id="bungalow" value="£2" required>
+                    </div>
+                    <div class="house-radio">
+                        <label for="semi">Semi-detached</label>
+                        <input type="radio" name="house" id="semi" value="£4" required>
+                    </div>
+                </div>
                 
                 <!--Radio buttons for number of bedrooms-->
-                <div>
-                    <p class="required label-text">Number of Bedrooms</p>
-                </div>
-                <div class="bed-radio">
-                    <label for="one_bed">1 bedroom</label>
-                    <input type="radio" name="bedroom" id="one_bed" value="£18" required disabled>
-                </div>
-                <div class="bed-radio">
-                    <label for="two_bed">2 bedrooms</label>
-                    <input type="radio" name="bedroom" id="two_bed" value="£19" required disabled>
-                </div>
-                <div class="bed-radio">
-                    <label for="three_bed">3 bedrooms</label>
-                    <input type="radio" name="bedroom" id="three_bed" value="£26" required disabled>
-                </div>
-                <div class="bed-radio">
-                    <label for="four_bed">4+ bedrooms</label>
-                    <input type="radio" name="bedroom" id="four_bed" value="£40" required disabled>
+                <div id="bed-input" class="hidden">
+                    <div>
+                        <p class="required label-text">Number of Bedrooms</p>
+                    </div>
+                    <div class="bed-radio">
+                        <label for="one_bed">1 bedroom</label>
+                        <input type="radio" name="bedroom" id="one_bed" value="£18" required>
+                    </div>
+                    <div class="bed-radio">
+                        <label for="two_bed">2 bedrooms</label>
+                        <input type="radio" name="bedroom" id="two_bed" value="£19" required>
+                    </div>
+                    <div class="bed-radio">
+                        <label for="three_bed">3 bedrooms</label>
+                        <input type="radio" name="bedroom" id="three_bed" value="£26" required>
+                    </div>
+                    <div class="bed-radio">
+                        <label for="four_bed">4+ bedrooms</label>
+                        <input type="radio" name="bedroom" id="four_bed" value="£40" required>
+                    </div>
                 </div>
 
                 <!--Checkbox for additional house details-->
-                <div>
-                    <p class="required label-text">Additions (select all that apply)</p>
-                </div>
-                <div class="add-checkbox">
-                    <input type="checkbox" name="additional" id="extension" value="£15" disabled>Extension<br>
-                </div>
-                <div class="add-checkbox">
-                    <input type="checkbox" name="additional" id="conservatory" value="£15" disabled>Conservatory<br>
+                <div id="additions-input" class="hidden">
+                    <div>
+                        <p class="required label-text">Additions (select all that apply)</p>
+                    </div>
+                    <div class="add-checkbox">
+                        <input type="checkbox" name="additional" id="extension" value="£15">Extension<br>
+                    </div>
+                    <div class="add-checkbox">
+                        <input type="checkbox" name="additional" id="conservatory" value="£15">Conservatory<br>
+                    </div>
                 </div>
                 
                 <!--Checkbox for other services required-->
-                <div>
-                    <p class="label-text">Other services required</p>
-                </div>
-                <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="resanding" value="resanding" disabled>Resanding<br>
-                </div>
-                <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="block_paving" value="block_paving" disabled>Block Paving<br>
-                </div>
-                <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="biocidal" value="biocidal" disabled>Biocidal Treatment<br>
-                </div>
-                <div class="other-checkbox">
-                    <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure" disabled>Instant Pressure Wash<br>
+                <div id="other-services-input" class="hidden">
+                    <div>
+                        <p class="label-text">Other services required</p>
+                    </div>
+                    <div class="other-checkbox">
+                        <input type="checkbox" name="other" id="resanding" value="resanding">Resanding<br>
+                    </div>
+                    <div class="other-checkbox">
+                        <input type="checkbox" name="other" id="block_paving" value="block_paving">Block Paving<br>
+                    </div>
+                    <div class="other-checkbox">
+                        <input type="checkbox" name="other" id="biocidal" value="biocidal">Biocidal Treatment<br>
+                    </div>
+                    <div class="other-checkbox">
+                        <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">Instant Pressure Wash<br>
+                    </div>
                 </div>
 
                 <!--Option to enter message-->
@@ -402,8 +410,12 @@
         var totalElem = document.getElementById("quote-total");
         var totalElemMax = document.getElementById("quote-range");
 
-        // Make rejected feedback message accessible in various functions
-        const rejectedElem = document.getElementById('rejected');
+        // Retrieve global elements from DOM
+        const rejectedElem = document.getElementById("rejected");
+        var houseInput = document.getElementById("house-input");
+        var bedInput = document.getElementById("bed-input");
+        var additionsInput = document.getElementById("additions-input");
+        var otherServicesInput = document.getElementById("other-services-input");
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
@@ -417,6 +429,28 @@
         for (var i = 0; i < radioElems.length; i++) {
             radioElems[i].addEventListener("click", displayWindowQuote);
         }
+
+        // Only trigger displayWindowQuote function if Window Cleaning service is selected
+        var menu = document.getElementById("services");
+        menu.addEventListener("change", generateData);
+
+        function generateData(event) {
+
+            // Display form elements based on user selection
+
+            if (menu.value === 'window') {
+                houseInput.style.display = 'block';
+                bedInput.style.display = 'block';
+                additionsInput.style.display = 'block';
+                displayWindowQuote();
+            } else if (menu.value === 'gutter') {
+                document.getElementsByName("house")[0].disabled=false;
+            } else if (menu.value === 'pressure') {
+                document.getElementsByName("house")[0].disabled=false;
+            } else if (menu.value === 'roof') {
+                document.getElementsByName("house")[0].disabled=false;
+            }
+        };
 
         // Add up values of checkboxes in selections array
         function displayWindowQuote(e) {
@@ -442,9 +476,11 @@
 
                 // Check if the radio button group name is 'access' and if the value is 'no'
                 if (e.target.name === 'access' && e.target.value === 'no') {
-
                     // Stop further processing and display relevant message to user
                     rejectedElem.style.display = 'block';
+                    houseInput.style.display = 'none';
+                    bedInput.style.display = 'none';
+                    additionsInput.style.display = 'none';
                 } else {
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
@@ -472,26 +508,17 @@
         });
 
         // Only trigger displayWindowQuote function if Window Cleaning service is selected
-        var menu = document.getElementById("services");
+        /*var menu = document.getElementById("services");
         menu.addEventListener("change", generateData);
 
         function generateData(event) {
 
-            // Loop through radio buttons to enable with selection
+            // Display form elements based on user selection
 
             if (menu.value === 'window') {
-                // Loop through form to enable relevant fields with selection
-                var radios = document.querySelectorAll("input[type='radio']");
-                var checkboxes = document.querySelectorAll("input[type='checkbox']");
-
-                for (var i = 0; i < radios.length; i++) {
-                    radios[i].disabled = false;
-                }
-
-                for (var i = 0; i < checkboxes.length; i++) {
-                    checkboxes[i].disabled = false;
-                }
-
+                houseInput.style.display = 'block';
+                bedInput.style.display = 'block';
+                additionsInput.style.display = 'block';
                 displayWindowQuote();
             } else if (menu.value === 'gutter') {
                 document.getElementsByName("house")[0].disabled=false;
@@ -500,7 +527,7 @@
             } else if (menu.value === 'roof') {
                 document.getElementsByName("house")[0].disabled=false;
             }
-        };
+        };*/
 
     });
 
