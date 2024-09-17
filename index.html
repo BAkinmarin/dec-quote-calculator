@@ -97,8 +97,10 @@
             float: left;
         }
 
-        /* Style textarea */
-        textarea {height: 100px;}
+        /* Style textareas */
+        .address-area {height: 40px;}
+
+        .message-area {height: 100px;}
 
         /*Create distance between quote and clear buttons*/
         input[type=reset] { 
@@ -238,7 +240,7 @@
                     <p class="label-text required">Address</p>
                 </div>
                 <div>
-                    <textarea id="location" name="location" placeholder="Please enter your full address and postcode" required></textarea>
+                    <textarea class="address-area" id="location" name="location" placeholder="Please enter your full address and postcode" required></textarea>
                 </div>
 
                 <!--Options to select service-->
@@ -348,7 +350,7 @@
                     <p class="label-text">Leave Us A Message</p>
                 </div>
                 <div>
-                    <textarea id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..." disabled></textarea>
+                    <textarea class="message-area" id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..." disabled></textarea>
                 </div>
                 <div>
                     <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
@@ -446,7 +448,7 @@
                 } else {
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
-                };
+                }
             }
 
             var result = [];
@@ -464,17 +466,9 @@
             totalElemMax.innerText = ((total * 1.50) + 8).toFixed(2);
         }
 
-        // Reset total quote when 'Clear Form' button is clicked
+        // Reset all fields and quotes when 'Clear Form' button is clicked
         document.getElementById('clear-button').addEventListener("click", function() {
-            // Clear the selections object
-            selections = {};
-
-            // Reset totalElem.innerText
-            totalElem.innerText = '0';
-            totalElemMax.innerText = '0';
-
-            // Check rejected message display is hidden
-            rejectedElem.style.display = 'none';
+            location.reload();
         });
 
         // Only trigger displayWindowQuote function if Window Cleaning service is selected
