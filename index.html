@@ -458,8 +458,13 @@
         menu.addEventListener("change", generateData);
 
         function generateData(event) {
+            // Disable all dropdown options
+            var dropdowns = document.querySelectorAll("select");
+            dropdowns.forEach(dropdown => {
+                dropdown.disabled = true;
+            });
 
-            // Display form elements based on user selection
+            // Enable specific dropdowns and display form elements based on user selection
             if (menu.value === 'window') {
                 accessInput.style.display = 'block';
                 houseInput.style.display = 'block';
