@@ -123,8 +123,7 @@
 
         /* Styles for Get Quote and Clear Form buttons */
         #quote-button, 
-        #clear-button,
-        #book-button {
+        #clear-button {
             font-family: "Oswald", sans-serif;
             font-size: 20px;
             font-weight: 700;
@@ -139,10 +138,13 @@
         }
 
         #quote-button:hover,
-        #clear-button:hover,
-        #book-button:hover {
-            transform: scale(1.15);
+        #clear-button:hover {
+            transform: scale(1.05);
             transition: all 0.5s ease-in-out;
+            color: aqua;
+            text-decoration: none;
+            cursor: pointer;
+            background-color: blue;
         }
 
         .hidden {
@@ -180,11 +182,11 @@
         }
 
         /* Style for Contact button */
-        #contact-button {
+        #book-button {
             color: #2087C0;
             border-radius: 1rem;
             border-style: groove;
-            border-color: #ffff;
+            border-color: #2087C0;
             text-transform: capitalize;
             font-family: "Oswald", sans-serif;
             font-size: 20px;
@@ -195,8 +197,8 @@
             cursor: pointer;
         }
 
-        #contact-button:hover,
-        #contact-button:focus {
+        #book-button:hover,
+        #book-button:focus {
             color: aqua;
             text-decoration: none;
             cursor: pointer;
@@ -261,17 +263,17 @@
                 </div>
                 <div class="access-radio">
                     <label for="yes">Yes</label>
-                    <input type="radio" name="access" id="yes" value="yes" required>
+                    <input type="radio" name="access" id="yes" value="£0" required>
                 </div>
                 <div class="access-radio">
                     <label for="no">No</label>
-                    <input type="radio" name="access" id="no" value="no" required>
+                    <input type="radio" name="access" id="no" value="£0" required>
                 </div>
 
                 <!--Area to display feedback based on user selection for access-->
                 <div id="feedback">
-                    <p id="rejected" class="hidden">Unfortunately, we cannot clean if the only access to property is 
-                        through the main building!
+                    <p id="rejected" class="hidden">Unfortunately, we cannot clean if the only access is 
+                        through the main building.
                     </p>
                 </div>
 
@@ -354,49 +356,66 @@
                 </div>
 
                 <!--Option to enter message-->
-                <div>
-                    <p class="label-text">Leave Us A Message</p>
+                <div id="message-input">
+                    <div>
+                        <p class="label-text">Leave Us A Message</p>
+                    </div>
+                    <div>
+                        <textarea class="message-area" id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..." disabled></textarea>
+                    </div>
                 </div>
-                <div>
-                    <textarea class="message-area" id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..." disabled></textarea>
-                </div>
+
                 <div>
                     <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
                     <button type="reset" data-type="reset" id="clear-button">Clear Form</button>
                 </div>
 
                 <!--Quote Modal-->
-                <div class="quote-modal-div">
+                <!--Display quote for window cleaning-->
+                <div id="window-display" class="quote-modal-div">
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                            Your quote for Window Cleaning is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
                         </p>
-                        <button type="submit" data-type="submit" id="contact-button">Get In Touch!</button>
+                        <button type="submit" data-type="submit" id="book-button">Book Now!</button>
+                    </div>
+                </div>
+
+                <!--Display quote for gutter clearing-->
+                <div id="gutter-display" class="quote-modal-div">
+                    <!--Content-->
+                    <div class="modal-content" id="modal-display">
+                        <p class="modal-text" id="accepted">
+                            Your quote for Gutter Clearing is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                        </p>
+                        <button type="submit" data-type="submit" id="book-button">Book Now!</button>
+                    </div>
+                </div>
+
+                <!--Display quote for pressure washing-->
+                <div id="pressure-display" class="quote-modal-div">
+                    <!--Content-->
+                    <div class="modal-content" id="modal-display">
+                        <p class="modal-text" id="accepted">
+                            Your quote for Pressure Washing is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                        </p>
+                        <button type="submit" data-type="submit" id="book-button">Book Now!</button>
+                    </div>
+                </div>
+
+                <!--Display quote for roof cleaning-->
+                <div id="roof-display" class="quote-modal-div">
+                    <!--Content-->
+                    <div class="modal-content" id="modal-display">
+                        <p class="modal-text" id="accepted">
+                            Your quote for Roof Cleaning is estimated at: £<span id="quote-total">0</span> - £<span id="quote-range">0</span> depending on property size.
+                        </p>
+                        <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
                 </div>
             </form>
         </div>
-    </section>
-
-    <!--Display quote for window cleaning-->
-    <section id="window-display">
-
-    </section>
-
-    <!--Display quote for gutter clearing-->
-    <section id="gutter-display">
-
-    </section>
-
-    <!--Display quote for pressure cleaning-->
-    <section id="pressure-display">
-
-    </section>
-
-    <!--Display quote for roof cleaning-->
-    <section id="roof-display">
-
     </section>
 </main>
 
@@ -416,6 +435,7 @@
         var bedInput = document.getElementById("bed-input");
         var additionsInput = document.getElementById("additions-input");
         var otherServicesInput = document.getElementById("other-services-input");
+        var messageInput = document.getElementById("message-input");
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
@@ -475,15 +495,20 @@
                 });
 
                 // Check if the radio button group name is 'access' and if the value is 'no'
-                if (e.target.name === 'access' && e.target.value === 'no') {
+                if (e.target.name === 'access' && e.target.id === 'no') {
                     // Stop further processing and display relevant message to user
                     rejectedElem.style.display = 'block';
                     houseInput.style.display = 'none';
                     bedInput.style.display = 'none';
                     additionsInput.style.display = 'none';
+                    messageInput.style.display = 'none';
                 } else {
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
+                    houseInput.style.display = 'block';
+                    bedInput.style.display = 'block';
+                    additionsInput.style.display = 'block';
+                    messageInput.style.display = 'block';
                 }
             }
 
