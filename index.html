@@ -202,7 +202,7 @@
         }
 
         /* Style for rejected quote */
-        .rejected {
+        #rejected {
             color: #ff0000;
             font-size: 1.25rem;
         }
@@ -259,19 +259,19 @@
                 </div>
                 <div class="house-radio">
                     <label for="terraced">Terraced</label>
-                    <input type="radio" name="house" id="terraced" value="£2" required disabled>
+                    <input type="radio" name="house" id="terraced" value="£2" required>
                 </div>
                 <div class="house-radio">
                     <label for="detached">Detached</label>
-                    <input type="radio" name="house" id="detached" value="£4" required disabled>
+                    <input type="radio" name="house" id="detached" value="£4" required>
                 </div>
                 <div class="house-radio">
                     <label for="bungalow">Bungalow</label>
-                    <input type="radio" name="house" id="bungalow" value="£2" required disabled>
+                    <input type="radio" name="house" id="bungalow" value="£2" required>
                 </div>
                 <div class="house-radio">
                     <label for="semi">Semi-detached</label>
-                    <input type="radio" name="house" id="semi" value="£4" required disabled>
+                    <input type="radio" name="house" id="semi" value="£4" required>
                 </div>
 
                 <!--Radio for property accessibility-->
@@ -280,16 +280,16 @@
                 </div>
                 <div class="access-radio">
                     <label for="yes">Yes</label>
-                    <input type="radio" name="access" id="yes" value="£0" required disabled>
+                    <input type="radio" name="access" id="yes" value="yes" required>
                 </div>
                 <div class="access-radio">
                     <label for="no">No</label>
-                    <input type="radio" name="access" id="no" value="no" required disabled>
+                    <input type="radio" name="access" id="no" value="no" required>
                 </div>
 
                 <!--Area to display feedback based on user selection for access-->
                 <div id="feedback">
-                    <p class="rejected">Unfortunately, we cannot clean if the only access to property is 
+                    <p id="rejected" class="hidden">Unfortunately, we cannot clean if the only access to property is 
                         through the main building!
                     </p>
                 </div>
@@ -400,6 +400,9 @@
         var totalElem = document.getElementById("quote-total");
         var totalElemMax = document.getElementById("quote-range");
 
+        // Make rejected feedback message accessible in various functions
+        const rejectedElem = document.getElementById('rejected');
+
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
             checkboxElems[i].addEventListener("click", displayWindowQuote);
@@ -413,7 +416,7 @@
             radioElems[i].addEventListener("click", displayWindowQuote);
         }
 
-        // Add up values of checkboxes and radio buttons in selections array
+        // Add up values of checkboxes in selections array
         function displayWindowQuote(e) {
             if (e.target.checked) {
                 selections[e.target.id] = {
@@ -434,6 +437,16 @@
                         delete selections[radioButton.id];
                     }
                 });
+
+                // Check if the radio button group name is 'access' and if the value is 'no'
+                if (e.target.name === 'access' && e.target.value === 'no') {
+
+                    // Stop further processing and display relevant message to user
+                    rejectedElem.style.display = 'block';
+                } else {
+                    // Hide relevant message
+                    rejectedElem.style.display = 'none';
+                };
             }
 
             var result = [];
@@ -459,6 +472,9 @@
             // Reset totalElem.innerText
             totalElem.innerText = '0';
             totalElemMax.innerText = '0';
+
+            // Check rejected message display is hidden
+            rejectedElem.style.display = 'none';
         });
 
         // Only trigger displayWindowQuote function if Window Cleaning service is selected
