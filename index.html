@@ -353,7 +353,7 @@
                 <!--Checkbox for additional house details-->
                 <div id="additions-input" class="hidden">
                     <div>
-                        <p class="required label-text">Additions (select all that apply)</p>
+                        <p class="label-text">Additions (select all that apply)</p>
                     </div>
                     <div class="add-checkbox">
                         <input type="checkbox" name="additional" id="extension" value="£15">Extension<br>
@@ -388,7 +388,7 @@
                         <p class="label-text">Leave Us A Message</p>
                     </div>
                     <div>
-                        <textarea class="message-area" id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..." disabled></textarea>
+                        <textarea class="message-area" id="message" name="message" placeholder="Please enter any information here that you think we need to know such as, when is a good time to call or if you prefer to be texted or emailed etc..."></textarea>
                     </div>
                 </div>
 
@@ -456,7 +456,7 @@
 
         // Elements to display various quotes
         var windowTotalElem = document.getElementById("window-quote-total");
-        var WindowTotalElemMax = document.getElementById("window-quote-range");
+        var windowTotalElemMax = document.getElementById("window-quote-range");
         var gutterTotalElem = document.getElementById("gutter-quote-total");
         var pressureTotalElem = document.getElementById("pressure-quote-total");
         var roofTotalElem = document.getElementById("roof-quote-total");
@@ -503,20 +503,19 @@
 
             // Enable specific dropdowns and display form elements based on user selection
             if (menu.value === 'window') {
-                windowDisplay.style.display = 'block';
                 accessInput.style.display = 'block';
                 houseInput.style.display = 'block';
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
                 displayWindowQuote();
             } else if (menu.value === 'gutter') {
-                gutterDisplay.style.display = 'block';
+                accessInput.style.display = 'block';
                 sidesInput.style.display = 'block';
                 additionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
-                pressureDisplay.style.display = 'block';
+                accessInput.style.display = 'block';
             } else if (menu.value === 'roof') {
-                roofDisplay.style.display = 'block';
+                accessInput.style.display = 'block';
             }
         };
 
@@ -536,6 +535,9 @@
             if (e.target.type === 'radio') {
                 const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`);
 
+                // Retrieve 'Get Quote' button from DOM
+                const quoteButton = document.getElementById("quote-button");
+
                 radioButtons.forEach((radioButton) => {
                     if (radioButton !== e.target) {
                         delete selections[radioButton.id];
@@ -549,12 +551,17 @@
                 if (e.target.name === 'access' && e.target.id === 'no') {
                     // Stop further processing and display relevant message to user
                     rejectedElem.style.display = 'block';
-                    windowDisplay.style.display = 'none';
                     houseInput.style.display = 'none';
                     bedInput.style.display = 'none';
                     additionsInput.style.display = 'none';
                     messageInput.style.display = 'none';
                     otherServicesInput.style.display = 'none';
+                    sidesInput.style.display = 'none';
+                    windowDisplay.style.display = 'none';
+                    gutterDisplay.style.display = 'none';
+                    pressureDisplay.style.display = 'none';
+                    roofDisplay.style.display = 'none';
+                    quoteButton.style.display = 'none';
                 } else {
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
@@ -588,6 +595,23 @@
         // Reset all fields and quotes when 'Clear Form' button is clicked
         document.getElementById('clear-button').addEventListener("click", function() {
             location.reload();
+        });
+
+        // Display relevant quote when 'Get Quote' button is clicked
+        document.getElementById('quote-button').addEventListener("click", function() {
+            if (menu.value === 'window') {
+                windowDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (menu.value === 'gutter') {
+                gutterDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (menu.value === 'pressure') {
+                pressureDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (menu.value === 'roof') {
+                roofDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            }
         });
     });
 
