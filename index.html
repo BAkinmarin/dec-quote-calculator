@@ -393,7 +393,7 @@
                 </div>
 
                 <div>
-                    <button type="submit" data-type="submit" id="quote-button">Get Quote</button>
+                    <button type="submit" data-type="button" id="quote-button">Get Quote</button>
                     <button type="reset" data-type="reset" id="clear-button">Start Over</button>
                 </div>
 
@@ -454,6 +454,9 @@
         var selections = {};
         var checkboxElems = document.querySelectorAll("input[type='checkbox']");
 
+        // Global variable to return state of input fields
+        const quoteButton = document.getElementById("quote-button");
+
         // Elements to display various quotes
         var windowTotalElem = document.getElementById("window-quote-total");
         var windowTotalElemMax = document.getElementById("window-quote-range");
@@ -507,7 +510,6 @@
                 houseInput.style.display = 'block';
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
-                displayWindowQuote();
             } else if (menu.value === 'gutter') {
                 accessInput.style.display = 'block';
                 sidesInput.style.display = 'block';
@@ -536,7 +538,7 @@
                 const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`);
 
                 // Retrieve 'Get Quote' button from DOM
-                const quoteButton = document.getElementById("quote-button");
+                //const quoteButton = document.getElementById("quote-button");
 
                 radioButtons.forEach((radioButton) => {
                     if (radioButton !== e.target) {
@@ -599,12 +601,12 @@
 
         // Function to validate form input when 'Get Quote' button is clicked
         (function validate() {
-            const formInputs = document.querySelectorAll('form > input');
-            const quoteButton = document.getElementById('quote-button');
+            const formInputs = document.querySelectorAll('form > input[required]');
+            //const quoteButton = document.getElementById('quote-button');
 
             formInputs.forEach(input => {
                 input.addEventListener('keyup', () => {
-                    let empty = false;
+                    var empty = false;
 
                     formInputs.forEach(input => {
                         if (input.value === '') {
@@ -618,22 +620,28 @@
                         quoteButton.removeAttribute('disabled');
                     }
                 });
+
+                return validate();
+                console.log(validate());
             });
         })();
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
-            validate();
             if (menu.value === 'window') {
+                //validate();
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'gutter') {
+                //validate();
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'pressure') {
+                //validate();
                 pressureDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'roof') {
+                //validate();
                 roofDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             }
