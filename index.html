@@ -597,8 +597,33 @@
             location.reload();
         });
 
+        // Function to validate form input when 'Get Quote' button is clicked
+        (function validate() {
+            const formInputs = document.querySelectorAll('form > input');
+            const quoteButton = document.getElementById('quote-button');
+
+            formInputs.forEach(input => {
+                input.addEventListener('keyup', () => {
+                    let empty = false;
+
+                    formInputs.forEach(input => {
+                        if (input.value === '') {
+                            empty = true;
+                        }
+                    });
+
+                    if (empty) {
+                        quoteButton.setAttribute('disabled', 'disabled');
+                    } else {
+                        quoteButton.removeAttribute('disabled');
+                    }
+                });
+            });
+        })();
+
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
+            validate();
             if (menu.value === 'window') {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
