@@ -225,7 +225,7 @@
         
         <!--Input fields for basic user information-->
         <div class="form-container">
-            <form action="/action_page.php" method="post" id="quote-form" name="quoteForm">
+            <form action="mailto:bolakinmarin@yahoo.co.uk" method="POST" id="quote-form" name="quoteForm" enctype="multipart/form-data">
                 <div>
                     <label for="full-name" class="required label-text">Name</label>
                     <input type="text" name="full_name" id="full-name" placeholder="Full Name" class="text-input" required>
@@ -334,19 +334,19 @@
                     </div>
                     <div class="sides-radio">
                         <label for="one_side">1 side</label>
-                        <input type="radio" name="sides" id="one_side" value="£40" required>
+                        <input type="radio" name="sides" id="one_side" value="£40">
                     </div>
                     <div class="sides-radio">
                         <label for="two_sides">2 sides</label>
-                        <input type="radio" name="sides" id="two_sides" value="£70" required>
+                        <input type="radio" name="sides" id="two_sides" value="£70">
                     </div>
                     <div class="sides-radio">
                         <label for="three_sides">3 sides</label>
-                        <input type="radio" name="sides" id="three_sides" value="£100" required>
+                        <input type="radio" name="sides" id="three_sides" value="£100">
                     </div>
                     <div class="sides-radio">
                         <label for="four_sides">4+ sides</label>
-                        <input type="radio" name="sides" id="four_sides" value="£125" required>
+                        <input type="radio" name="sides" id="four_sides" value="£125">
                     </div>
                 </div>
 
@@ -600,7 +600,7 @@
         });
 
         // Function to validate form input when 'Get Quote' button is clicked
-        (function validate() {
+        /*(function validate() {
             const formInputs = document.querySelectorAll('form > input[required]');
             //const quoteButton = document.getElementById('quote-button');
 
@@ -620,31 +620,73 @@
                         quoteButton.removeAttribute('disabled');
                     }
                 });
-
-                return validate();
-                console.log(validate());
             });
-        })();
+        })();*/
+
+        // Function to validate form input when 'Get Quote' button is clicked
+        function validate() {
+           const formInputs = document.querySelectorAll('form > input[required]');
+           //const quoteButton = document.getElementById('quote-button');
+
+           formInputs.forEach(input => {
+               input.addEventListener('keyup', () => {
+                   var empty = false;
+
+                   formInputs.forEach(input => {
+                       if (input.value === '') {
+                           empty = true;
+                       }
+                   });
+
+                   if (empty) {
+                       quoteButton.setAttribute('disabled', 'disabled');
+                       windowDisplay.style.display = 'none';
+                       gutterDisplay.style.display = 'none';
+                       pressureDisplay.style.display = 'none';
+                       roofDisplay.style.display = 'none';
+                    } else {
+                       quoteButton.removeAttribute('disabled');
+                    }
+               });
+           });
+        };
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
-            if (menu.value === 'window') {
-                //validate();
+            if (validate()) {
+                if (menu.value === 'window') {
+                windowDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+                } else if (menu.value === 'gutter') {
+                gutterDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+                } else if (menu.value === 'pressure') {
+                pressureDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+                } else if (menu.value === 'roof') {
+                roofDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+                }
+            } else {
+                windowDisplay.style.display = 'none';
+                gutterDisplay.style.display = 'none';
+                pressureDisplay.style.display = 'none';
+                roofDisplay.style.display = 'none';
+            }
+
+            /*if (menu.value === 'window') {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'gutter') {
-                //validate();
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'pressure') {
-                //validate();
                 pressureDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'roof') {
-                //validate();
                 roofDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            }
+            }*/
         });
     });
 
