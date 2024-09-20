@@ -225,7 +225,7 @@
         
         <!--Input fields for basic user information-->
         <div class="form-container">
-            <form action="" method="POST" id="quote-form" name="quoteForm">
+            <form action="" method="" id="quote-form" name="quoteForm">
                 <div>
                     <label for="full-name" class="required label-text">Name</label>
                     <input type="text" name="full_name" id="full-name" placeholder="Full Name" class="text-input" required>
@@ -244,7 +244,7 @@
                     <p class="label-text required">Address</p>
                 </div>
                 <div>
-                    <textarea class="address-area" id="location" name="location" placeholder="Property Address" required></textarea>
+                    <textarea class="address-area" name="house_address" id="house-address" placeholder="Property Address" required></textarea>
                 </div>
 
                 <!--Options to select service-->
@@ -482,7 +482,7 @@
 
         // Loop through checkboxes
         for (var i = 0; i < checkboxElems.length; i++) {
-            checkboxElems[i].addEventListener("click", displayWindowQuote);
+            checkboxElems[i].addEventListener("click", displayQuote);
         }
 
         // Add event listener to radio buttons
@@ -490,10 +490,10 @@
 
         // Loop through radio buttons
         for (var i = 0; i < radioElems.length; i++) {
-            radioElems[i].addEventListener("click", displayWindowQuote);
+            radioElems[i].addEventListener("click", displayQuote);
         }
 
-        // Only trigger displayWindowQuote function if Window Cleaning service is selected
+        // Only trigger displayQuote function if Window Cleaning service is selected
         var menu = document.getElementById("services");
         menu.addEventListener("change", generateData);
 
@@ -522,7 +522,7 @@
         };
 
         // Add up values of checkboxes in selections array
-        function displayWindowQuote(e) {
+        function displayQuote(e) {
             if (e.target.checked) {
                 selections[e.target.id] = {
                     name: e.target.name,
@@ -600,33 +600,8 @@
         });
 
         // Function to validate form input when 'Get Quote' button is clicked
-        /*(function validate() {
-            const formInputs = document.querySelectorAll('form > input[required]');
-            //const quoteButton = document.getElementById('quote-button');
-
-            formInputs.forEach(input => {
-                input.addEventListener('keyup', () => {
-                    var empty = false;
-
-                    formInputs.forEach(input => {
-                        if (input.value === '') {
-                            empty = true;
-                        }
-                    });
-
-                    if (empty) {
-                        quoteButton.setAttribute('disabled', 'disabled');
-                    } else {
-                        quoteButton.removeAttribute('disabled');
-                    }
-                });
-            });
-        })();*/
-
-        // Function to validate form input when 'Get Quote' button is clicked
         function validate() {
            const formInputs = document.querySelectorAll('form > input[required]');
-           //const quoteButton = document.getElementById('quote-button');
 
            formInputs.forEach(input => {
                input.addEventListener('keyup', () => {
@@ -639,42 +614,19 @@
                    });
 
                    if (empty) {
-                       quoteButton.setAttribute('disabled', 'disabled');
-                       windowDisplay.style.display = 'none';
-                       gutterDisplay.style.display = 'none';
-                       pressureDisplay.style.display = 'none';
-                       roofDisplay.style.display = 'none';
-                    } else {
-                       quoteButton.removeAttribute('disabled');
-                    }
+                    alert('Please complete all required fields');
+                    quoteButton.setAttribute('disabled', 'disabled');
+                   } else {
+                    quoteButton.removeAttribute('disabled');
+                   }
                });
            });
         };
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
-            if (validate()) {
-                if (menu.value === 'window') {
-                windowDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-                } else if (menu.value === 'gutter') {
-                gutterDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-                } else if (menu.value === 'pressure') {
-                pressureDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-                } else if (menu.value === 'roof') {
-                roofDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-                }
-            } else {
-                windowDisplay.style.display = 'none';
-                gutterDisplay.style.display = 'none';
-                pressureDisplay.style.display = 'none';
-                roofDisplay.style.display = 'none';
-            }
-
-            /*if (menu.value === 'window') {
+            if (menu.value === 'window' && validate()) {
+                event.preventDefault();
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'gutter') {
@@ -686,7 +638,7 @@
             } else if (menu.value === 'roof') {
                 roofDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            }*/
+            }
         });
     });
 
