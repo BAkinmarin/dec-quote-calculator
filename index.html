@@ -521,21 +521,17 @@
             var addressMsg = document.getElementById("addressFeedback");
             
             // Check that all fields have been filled
-            if (fullName == "") {
+            if (fullName === "") {
                 nameMsg.innerHTML = "Please enter full name";
-                quoteButton.setAttribute('disabled', 'disabled');
                 return false;
-            } else if (emailAddress == "") {
+            } else if (emailAddress === "") {
                 emailMsg.innerHTML = "Please enter email address";
-                quoteButton.setAttribute('disabled', 'disabled');
                 return false;
-            } else if (phoneNumber == "") {
+            } else if (phoneNumber === "") {
                 phoneMsg.innerHTML = "Please enter phone number";
-                quoteButton.setAttribute('disabled', 'disabled');
                 return false;
-            } else if (houseAddress == "") {
-                addressMsg.innerHTML == "Please enter full address";
-                quoteButton.setAttribute('disabled', 'disabled');
+            } else if (houseAddress === "") {
+                addressMsg.innerHTML = "Please enter full address";
                 return false;
             }
             // Reset feedback fields if all fields are filled
@@ -543,7 +539,6 @@
             emailMsg.innerHTML = "";
             phoneMsg.innerHTML = "";
             addressMsg.innerHTML = "";
-            quoteButton.removeAttribute('disabled');
             return true;
         }
 
@@ -559,48 +554,22 @@
                 dropdown.disabled = true;
             });
 
-            validate();
-
             // Enable specific dropdowns and display form elements based on user selection
-            if (menu.value === 'window' && validate()) {
+            if (menu.value === 'window') {
                 //accessInput.style.display = 'block';
                 houseInput.style.display = 'block';
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
-            } else if (menu.value === 'gutter' && validate()) {
+            } else if (menu.value === 'gutter') {
                 //accessInput.style.display = 'block';
                 sidesInput.style.display = 'block';
                 additionsInput.style.display = 'block';
-            } else if (menu.value === 'pressure' &&  validate()) {
+            } else if (menu.value === 'pressure') {
                 //accessInput.style.display = 'block';
-            } else if (menu.value === 'roof' && validate()) {
+            } else if (menu.value === 'roof') {
                 //accessInput.style.display = 'block';
             }
         }
-
-        // Function to validate form input when 'Get Quote' button is clicked
-        /*function validate() {
-           const formInputs = document.querySelectorAll('form > input[required]');
-
-           formInputs.forEach(input => {
-               input.addEventListener('keyup', () => {
-                   var empty = false;
-
-                   formInputs.forEach(input => {
-                       if (input.value === '') {
-                           empty = true;
-                       }
-                   });
-
-                   if (empty) {
-                    quoteButton.setAttribute('disabled', 'disabled');
-                   } else {
-                    quoteButton.removeAttribute('disabled');
-                    //serviceArea.style.display = 'block';
-                   }
-               });
-           });
-        };*/
 
         // Add up values of checkboxes in selections array
         function displayQuote(e) {
@@ -680,18 +649,20 @@
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
-            if (menu.value === 'window') {
+            if (menu.value === 'window' && validate()) {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (menu.value === 'gutter') {
+            } else if (menu.value === 'gutter' && validate()) {
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (menu.value === 'pressure') {
+            } else if (menu.value === 'pressure' && validate()) {
                 pressureDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (menu.value === 'roof') {
+            } else if (menu.value === 'roof' && validate()) {
                 roofDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
+            } else if (!validate()) {
+                alert("You must complete all required fields to view your estimate.")
             }
         });
     });
