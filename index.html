@@ -79,6 +79,7 @@
 
         label.required.label-text {
             font-size: 1.25rem;
+            margin-top: 10px;
         }
 
         p.label-text {
@@ -213,6 +214,13 @@
             font-size: 1.25rem;
         }
 
+        /* Style for user incomplete fields */
+        #nameFeedback, #emailFeedback,
+        #phoneFeedback, #addressFeedback {
+            color: #ff0000;
+            font-size: 1rem;
+        }
+
     </style>
 <head>
 
@@ -232,17 +240,17 @@
                 <div>
                     <label for="full-name" class="required label-text">Name</label>
                     <input type="text" name="full_name" id="full-name" placeholder="Full Name" class="text-input">
-                    <small id="userMessage"></small>
+                    <small id="nameFeedback"></small>
                 </div>
                 <div>
                     <label for="email-address" class="required label-text">Email</label>
                     <input type="email" name="email_address" id="email-address" placeholder="Email Address" class="text-input">
-                    <small id="userMessage"></small>
+                    <small id="emailFeedback"></small>
                 </div>
                 <div>
                     <label for="phone-number" class="required label-text">Phone</label>
                     <input type="text" name="phone_number" id="phone-number" placeholder="Mobile Number" class="text-input" pattern="[0-9]+">
-                    <small id="userMessage"></small>
+                    <small id="phoneFeedback"></small>
                 </div>
 
                 <!--Text input for client address-->
@@ -251,23 +259,11 @@
                 </div>
                 <div>
                     <textarea class="address-area" name="house_address" id="house-address" placeholder="Property Address"></textarea>
-                    <small></small>
-                </div>
-
-                <!--Options to select service-->
-                <div id="serviceOptions">
-                    <label for="services" class="required label-text">Service Required</label>
-                    <select id="services">
-                        <option>Select Service</option>
-                        <option value="window">Window Cleaning</option>
-                        <option value="gutter">Gutter Clearing</option>
-                        <option value="pressure">Pressure Washing</option>
-                        <option value="roof">Roof Cleaning</option>
-                    </select>
+                    <small id="addressFeedback"></small>
                 </div>
 
                 <!--Radio for property accessibility-->
-                <div id="access-input" class="hidden">
+                <div id="access-input">
                     <div>
                         <p class="required label-text">Is there separate access?</p>
                     </div>
@@ -286,6 +282,18 @@
                     <p id="rejected" class="hidden">Unfortunately, we cannot clean if the only access is 
                         through the main building.
                     </p>
+                </div>
+
+                <!--Options to select service-->
+                <div id="serviceOptions">
+                    <label for="services" class="required label-text">Service Required</label>
+                    <select id="services">
+                        <option>Select Service</option>
+                        <option value="window">Window Cleaning</option>
+                        <option value="gutter">Gutter Clearing</option>
+                        <option value="pressure">Pressure Washing</option>
+                        <option value="roof">Roof Cleaning</option>
+                    </select>
                 </div>
 
                 <!--Radio buttons for property details-->
@@ -496,20 +504,82 @@
         var radioElems = document.querySelectorAll("input[type='radio']");
 
         // Loop through radio buttons
-        for (var i = 0; i < radioElems.length; i++) {
-            radioElems[i].addEventListener("click", displayQuote);
+        for (var a = 0; a < radioElems.length; a++) {
+            radioElems[a].addEventListener("click", displayQuote);
         }
 
-        // Only trigger displayQuote function if a Cleaning service is selected
+        // This function checks user has entered their details before displaying estimate
+        function validate() {
+            // Retrieve form elements
+            var fullName = document.forms["quote-form"]["full-name"].value;
+            var emailAddress = document.forms["quote-form"]["email-address"].value;
+            var phoneNumber = document.forms["quote-form"]["phone-number"].value;
+            var houseAddress = document.forms["quote-form"]["house-address"].value;
+            var nameMsg = document.getElementById("nameFeedback");
+            var emailMsg = document.getElementById("emailFeedback");
+            var phoneMsg = document.getElementById("phoneFeedback");
+            var addressMsg = document.getElementById("addressFeedback");
+            
+            // Check that all fields have been filled
+            if (fullName == "") {
+                nameMsg.innerHTML = "Please enter full name";
+                quoteButton.setAttribute('disabled', 'disabled');
+                return false;
+            } else if (emailAddress == "") {
+                emailMsg.innerHTML = "Please enter email address";
+                quoteButton.setAttribute('disabled', 'disabled');
+                return false;
+            } else if (phoneNumber == "") {
+                phoneMsg.innerHTML = "Please enter phone number";
+                quoteButton.setAttribute('disabled', 'disabled');
+                return false;
+            } else if (houseAddress == "") {
+                addressMsg.innerHTML == "Please enter full address";
+                quoteButton.setAttribute('disabled', 'disabled');
+                return false;
+            }
+            // Reset feedback fields if all fields are filled
+            nameMsg.innerHTML = "";
+            emailMsg.innerHTML = "";
+            phoneMsg.innerHTML = "";
+            addressMsg.innerHTML = "";
+            quoteButton.removeAttribute('disabled');
+            return true;
+        }
+
+        // Display form fields based on user service selection
         var menu = document.getElementById("services");
         var serviceArea = document.getElementById("serviceOptions");
         menu.addEventListener("change", generateData);
 
-        // Hide dropdown options until user information is entered
-        serviceArea.style.display = 'none';
+        function generateData(event) {
+            // Disable all dropdown options
+            var dropdowns = document.querySelectorAll("select");
+            dropdowns.forEach(dropdown => {
+                dropdown.disabled = true;
+            });
+
+            validate();
+
+            // Enable specific dropdowns and display form elements based on user selection
+            if (menu.value === 'window' && validate()) {
+                //accessInput.style.display = 'block';
+                houseInput.style.display = 'block';
+                bedInput.style.display = 'block';
+                additionsInput.style.display = 'block';
+            } else if (menu.value === 'gutter' && validate()) {
+                //accessInput.style.display = 'block';
+                sidesInput.style.display = 'block';
+                additionsInput.style.display = 'block';
+            } else if (menu.value === 'pressure' &&  validate()) {
+                //accessInput.style.display = 'block';
+            } else if (menu.value === 'roof' && validate()) {
+                //accessInput.style.display = 'block';
+            }
+        }
 
         // Function to validate form input when 'Get Quote' button is clicked
-        function validate() {
+        /*function validate() {
            const formInputs = document.querySelectorAll('form > input[required]');
 
            formInputs.forEach(input => {
@@ -526,35 +596,11 @@
                     quoteButton.setAttribute('disabled', 'disabled');
                    } else {
                     quoteButton.removeAttribute('disabled');
+                    //serviceArea.style.display = 'block';
                    }
-                   serviceArea.style.display = 'block';
                });
            });
-        };
-
-        function generateData(event) {
-            // Disable all dropdown options
-            var dropdowns = document.querySelectorAll("select");
-            dropdowns.forEach(dropdown => {
-                dropdown.disabled = true;
-            });
-
-            // Enable specific dropdowns and display form elements based on user selection
-            if (menu.value === 'window') {
-                accessInput.style.display = 'block';
-                houseInput.style.display = 'block';
-                bedInput.style.display = 'block';
-                additionsInput.style.display = 'block';
-            } else if (menu.value === 'gutter') {
-                accessInput.style.display = 'block';
-                sidesInput.style.display = 'block';
-                additionsInput.style.display = 'block';
-            } else if (menu.value === 'pressure') {
-                accessInput.style.display = 'block';
-            } else if (menu.value === 'roof') {
-                accessInput.style.display = 'block';
-            }
-        };
+        };*/
 
         // Add up values of checkboxes in selections array
         function displayQuote(e) {
@@ -565,15 +611,12 @@
                 };
             }
             else {
-                delete selections[e.target.id]
+                delete selections[e.target.id];
             }
 
             // Handle radio buttons: unchecks other radio buttons with the same name
             if (e.target.type === 'radio') {
-                const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`);
-
-                // Retrieve 'Get Quote' button from DOM
-                //const quoteButton = document.getElementById("quote-button");
+                const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`); 
 
                 radioButtons.forEach((radioButton) => {
                     if (radioButton !== e.target) {
@@ -599,6 +642,7 @@
                     pressureDisplay.style.display = 'none';
                     roofDisplay.style.display = 'none';
                     quoteButton.style.display = 'none';
+                    serviceArea.style.display = 'none';
                 } else {
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
