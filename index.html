@@ -217,7 +217,7 @@
         /* Style for user incomplete fields */
         #nameFeedback, #emailFeedback,
         #phoneFeedback, #addressFeedback,
-        #accessFeedback {
+        #accessFeedback, #houseFeedback {
             color: #ff0000;
             font-size: 1rem;
         }
@@ -320,6 +320,7 @@
                         <input type="radio" name="house" id="semi" value="£4">
                     </div>
                 </div>
+                <small id="houseFeedback"></small>
                 
                 <!--Radio buttons for number of bedrooms-->
                 <div id="bed-input" class="hidden">
@@ -347,7 +348,7 @@
                 <!--Radio buttons for number of sides-->
                 <div id="sides-input" class="hidden">
                     <div>
-                        <p class="required label-text">Sides Requiring Cleaning</p>
+                        <p class="required label-text">Sides Requiring Clearing</p>
                     </div>
                     <div class="sides-radio">
                         <label for="one_side">1 side</label>
@@ -420,7 +421,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Window Cleaning is estimated at: £<span id="window-quote-total">0</span> - £<span id="window-quote-range">0</span> depending on property size.
+                            Your estimate for Window Cleaning is: £<span id="window-quote-total">0</span> - £<span id="window-quote-range">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
@@ -431,7 +432,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Gutter Clearing is estimated to start from: £<span id="gutter-quote-total">0</span> depending on property size.
+                            Your estimate for Gutter Clearing is from: £<span id="gutter-quote-total">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
@@ -442,7 +443,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Pressure Washing is estimated at: £<span id="pressure-quote-total">0</span> depending on property size.
+                            Your estimate for Pressure Washing is from: £<span id="pressure-quote-total">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
@@ -453,7 +454,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your quote for Roof Cleaning is estimated at: £<span id="roof-quote-total">0</span> depending on property size.
+                            Your estimate for Roof Cleaning is from: £<span id="roof-quote-total">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Book Now!</button>
                     </div>
@@ -664,6 +665,7 @@
                 emailMsg.innerHTML = "";
                 phoneMsg.innerHTML = "";
                 addressMsg.innerHTML = "";
+                accessMsg.innerHTML = "";
             } else if (menu.value === 'gutter' && validate()) {
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
