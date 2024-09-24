@@ -216,7 +216,8 @@
 
         /* Style for user incomplete fields */
         #nameFeedback, #emailFeedback,
-        #phoneFeedback, #addressFeedback {
+        #phoneFeedback, #addressFeedback,
+        #accessFeedback {
             color: #ff0000;
             font-size: 1rem;
         }
@@ -276,6 +277,7 @@
                         <input type="radio" name="access" id="no" value="£0">
                     </div>
                 </div>
+                <small id="accessFeedback"></small>
 
                 <!--Area to display feedback based on user selection for access-->
                 <div id="feedback">
@@ -515,10 +517,12 @@
             var emailAddress = document.forms["quote-form"]["email-address"].value;
             var phoneNumber = document.forms["quote-form"]["phone-number"].value;
             var houseAddress = document.forms["quote-form"]["house-address"].value;
+            var radioYes = document.forms["quote-form"]["yes"];
             var nameMsg = document.getElementById("nameFeedback");
             var emailMsg = document.getElementById("emailFeedback");
             var phoneMsg = document.getElementById("phoneFeedback");
             var addressMsg = document.getElementById("addressFeedback");
+            var accessMsg = document.getElementById("accessFeedback");
             
             // Check that all fields have been filled
             if (fullName === "") {
@@ -533,12 +537,16 @@
             } else if (houseAddress === "") {
                 addressMsg.innerHTML = "Please enter full address";
                 return false;
+            } else if (!radioYes.checked) {
+                accessMsg.innerHTML = "Please confirm if there is separate access";
+                return false;
             }
             // Reset feedback fields if all fields are filled
             nameMsg.innerHTML = "";
             emailMsg.innerHTML = "";
             phoneMsg.innerHTML = "";
             addressMsg.innerHTML = "";
+            accessMsg.innerHTML = "";
             return true;
         }
 
@@ -652,6 +660,10 @@
             if (menu.value === 'window' && validate()) {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
+                nameMsg.innerHTML = "";
+                emailMsg.innerHTML = "";
+                phoneMsg.innerHTML = "";
+                addressMsg.innerHTML = "";
             } else if (menu.value === 'gutter' && validate()) {
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
@@ -661,9 +673,8 @@
             } else if (menu.value === 'roof' && validate()) {
                 roofDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (!validate()) {
-                alert("You must complete all required fields to view your estimate.")
             }
+            return false;
         });
     });
 
