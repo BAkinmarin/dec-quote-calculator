@@ -368,8 +368,21 @@
                     </div>
                 </div>
 
-                <!--Checkbox for additional house details-->
+                <!--Checkbox for additional house details - applies to window cleaning-->
                 <div id="additions-input" class="hidden">
+                    <div>
+                        <p class="label-text">Additions (select all that apply)</p>
+                    </div>
+                    <div class="add-checkbox">
+                        <input type="checkbox" name="additional" id="extension" value="£5">Extension<br>
+                    </div>
+                    <div class="add-checkbox">
+                        <input type="checkbox" name="additional" id="conservatory" value="£5">Conservatory<br>
+                    </div>
+                </div>
+
+                <!--Checkbox for additional house details visible - applies to gutter clearing-->
+                <div id="gutter-additions-input" class="hidden">
                     <div>
                         <p class="label-text">Additions (select all that apply)</p>
                     </div>
@@ -488,6 +501,7 @@
         var houseInput = document.getElementById("house-input");
         var bedInput = document.getElementById("bed-input");
         var additionsInput = document.getElementById("additions-input");
+        var gutterAdditionsInput = document.getElementById("gutter-additions-input");
         var otherServicesInput = document.getElementById("other-services-input");
         var messageInput = document.getElementById("message-input");
         var sidesInput = document.getElementById("sides-input");
@@ -572,7 +586,8 @@
             } else if (menu.value === 'gutter') {
                 //accessInput.style.display = 'block';
                 sidesInput.style.display = 'block';
-                additionsInput.style.display = 'block';
+                //additionsInput.style.display = 'block';
+                gutterAdditionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
                 //accessInput.style.display = 'block';
             } else if (menu.value === 'roof') {
@@ -612,6 +627,7 @@
                     houseInput.style.display = 'none';
                     bedInput.style.display = 'none';
                     additionsInput.style.display = 'none';
+                    gutterAdditionsInput.style.display = 'none';
                     messageInput.style.display = 'none';
                     otherServicesInput.style.display = 'none';
                     sidesInput.style.display = 'none';
@@ -661,11 +677,6 @@
             if (menu.value === 'window' && validate()) {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-                nameMsg.innerHTML = "";
-                emailMsg.innerHTML = "";
-                phoneMsg.innerHTML = "";
-                addressMsg.innerHTML = "";
-                accessMsg.innerHTML = "";
             } else if (menu.value === 'gutter' && validate()) {
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
