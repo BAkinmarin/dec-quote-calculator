@@ -1,131 +1,385 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# The Cleaning Hack Calculator
 
-Welcome Bola Akinmarin,
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## A Python command line calculator
+This application is a Python-based calculator designed for The Cleaning Hack, a real business. It generates free cleaning estimates for potential clients.
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+Users are required to enter their full name, mobile number, and email address, which are validated before they can proceed to input details needed for the estimate, such as the number of bedrooms, bathrooms, living spaces and, any other rooms.
 
-## Gitpod Reminders
+These details are also validated before being uploaded to a Google Worksheet, which the business owner uses to initiate follow-up actions with the client.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+#### Designed and Developed by Bola Akinmarin
 
-`python3 -m http.server`
 
-A blue button should appear to click: _Make Public_,
+## [Live Site]()
 
-Another blue button should appear to click: _Open Browser_.
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+## [Repository]()
 
-A blue button should appear to click: _Make Public_,
+  
+# Table of Contents
 
-Another blue button should appear to click: _Open Browser_.
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+ 1. [ Project Planning ](#plan)
+ 2. [ Features ](#features)
+ 3. [ Future Features ](#left)  
+ 4. [ Technology used ](#tech) 
+ 5. [ Testing ](#testing)  
+ 6. [ Bugs ](#bugs)  
+ 7. [ Deployment ](#deployment)
+ 8. [ Credits ](#credits)
+ 9. [ Content ](#content)  
+ 10. [ Acknowledgements ](#acknowledgements)
 
-To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+<a name="plan"></a>
+# Project Planning
 
-### Connecting your Mongo database
+For my third portfolio project, I aimed to address a real need, hence the idea to create a cleaning estimate calculator for The Cleaning Hack, an active cleaning business.
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
+After discussing with the business owner and identifying a gap in their internal processes, particularly in automating cleaning estimates and lead tracking, I was confident in my decision.
 
-------
+### Strategy
 
-## Release History
+#### Business Owner
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+As the owner, I want to provide automated quotes to prospects.
 
-**June 18, 2024,** Add Mongo back into template
+As the owner, I want prospects to have transparency on pricing prior to booking.
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+As the owner, I want to save resources by automating a quote without going to the property.
 
-**May 28 2024:** Fix Mongo and Links installs
+As the owner, I want authorised staff to follow up efficiently with a readily available quote.
 
-**April 26 2024:** Update node version to 16
+As the owner, I want all quotes provided to be automatically saved to a secure file.
 
-**September 20 2023:** Update Python version to 3.9.17.
+### Structure
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+Using Lucid Chart, I created a flow diagram to help visualise the steps and logic needed to make the project design and execution as efficient as possible.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+See flow chart below for a visual of initial design and concept.
+![Lucid Flow Chart](assets/readme/tch-calculator-flowchart.png)
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+#### User Details
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+- Full Name
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+- Mobile Number
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+- Email Address
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+This information, once captured, feeds into the business owner's lead generation and management system.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+#### Property Details
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+- No. of Bedrooms
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+- No. of Bathrooms 
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+- No. of Living Areas i.e. Frontroom, Kitchen
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+- Other Rooms i.e. Conservatory, Utility
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+This information is valuable to the business owner as it helps predict the duration of a job so resources such as materials, equipment and labour can be allocated accordingly. 
 
-------
 
-## FAQ about the uptime script
+## Program Flow
 
-**Why have you added this script?**
+<a name="features"></a>
+# Features
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+When the user loads the program, they are presented with a welcome message and instructions on how to interact with the program.
 
-**How will this affect me?**
+Simultaneaously, the user will be prompted to enter their full name, mobile number and email address, which will be validated before they can proceed to the next step. See below:
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+![Welcome Page and Instructions](assets/readme/tch-calculator-welcome.png)
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+If validation fails at this stage, the user will see the corresponding error message(s) based on the specific issue. The following images illustrate attempts to submit an alphanumeric name, an incorrect mobile number (fewer than 11 digits), and an incorrect email format. See below:
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+![Invalid Name Message](assets/readme/tch-calculator-invalid-name.png)
 
-**So….?**
+![Invalid Mobile Message](assets/readme/tch-calculator-invalid-mobile.png)
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+![Invalid Email Message](assets/readme/tch-calculator-invalid-email.png)
 
-**Can I opt out?**
+![Name, Mobile and Email Invalid Message](assets/readme/tch-calculator-all-details-invalid.png)
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+If validation passes, the user will be prompted to provide the number of bedrooms, bathrooms, living areas / receptions and any other rooms. See below:
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+![No. of Bedrooms](assets/readme/tch-calculator-bedrooms-prompt.png)
 
-**Anything more?**
+![No. of Bathrooms](assets/readme/tch-calculator-bathrooms-prompt.png)
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+![No. of Living Areas](assets/readme/tch-calculator-living-areas-prompt.png)
 
----
+![Any Other Rooms](assets/readme/tch-calculator-other-rooms-prompt.png)
 
-Happy coding!
+If validation fails, the user will see an error message and then be prompted to re-enter information on number of bedrooms, bathrooms, living areas / receptions and any other rooms. See below:
+
+![Invalid Room Details](assets/readme/tch-calculator-invalid-rooms.png)
+
+If validation is successful, the user will see a summary of their entry along with a cleaning estimate.
+
+Additionally, the user will be asked to enter "Y" if they would like to obtain a new estimate or any other key to exit the program. See below:
+
+![Cleaning Estimate](assets/readme/tch-calculator-estimate.png)
+
+If the user requests a new estimate, they will be again be prompted to provide number of bedrooms, bathrooms, living areas / receptions and any other rooms. See below:
+
+![New Details](assets/readme/tch-calculator-new-room-details-prompt.png)
+
+If the user chooses to exit the program, they will see an exit message as shown below:
+
+![Exit Message](assets/readme/tch-calculator-exit-message.png)
+
+See below sample data successfully uploaded to worksheet.
+
+![Upload Successful](assets/readme/tch-calculator-sample-upload.png)
+
+
+<a name="left"></a>
+# Future Features
+
+- Functionality to prompt the user to re-enter only the specific data that fails validation.
+
+- Functionality to accept only UK numbers as valid.
+
+
+<a name="tech"></a>
+# Technology Used
+
+### Python
+Used to create the application.
+
+### Heroku
+Used to deploy and host the terminal application.
+
+### Github
+Used to store the code.
+
+### Gitpod
+IDE used for creating the application.
+
+### Git
+Used for version control.
+
+### Google Sheets
+Used to securely store user contact and property details.
+
+
+<a name="testing"></a>
+# Testing
+
+### Testing Phase
+
+#### Manual Testing
+
+| Test | Result |
+|--|--|
+|On run program, the welcome message and instructions appear|Pass|
+|After instructions, user is prompted for their full name|Pass|
+|Once name is input user is prompted for mobile number|Pass|
+|Once mobile number is input, user is prompted for email address|Pass|
+|Feedback message shows with further instructions on how to enter property details|Pass|
+|After instructions, user is prompted for no. of bedrooms|Pass|
+|Once no. of bedrooms is input, user is prompted for no. of bathrooms|Pass|
+|Once no. of bathrooms is input, user is prompted for no. of livingrooms|Pass|
+|Once no. of livingrooms is input, user is prompted for other rooms|Pass|
+|Once no. of other rooms is input, feedback message is displayed with estimate|Pass|
+|User is then asked if they want to obtain another quote or exit program|Pass|
+|If user selects obtain another quote, user is again prompted to enter new property details|Pass|
+|Once new property details have been entered, user is provided with new estimate|Pass|
+|If user selects exit program, user is shown exit message and program ends|Pass|
+
+#### User testing
+
+The following tests are on error handling throughout the project.
+If the error handling works as expected it will be marked as pass.
+If the error handling does not work as expected it will be marked as fail.
+
+Enter Name
+- Error Msg1: Invalid Name: Must not be blank!
+- Error Msg2: Invalid Name: Min 2 characters and letters only!
+- Error Msg3: Invalid Name: {part} not accepted!
+
+| Test | Result |
+|--|--|
+|User tried to enter a name of less than two characters|Pass|
+|User tried to enter a hyphenated name|Fail|
+|User tried to enter an empty string|Pass|
+|User tried to enter a name with a space in it|Pass|
+|User tried to enter an alphanumeric name|Pass|
+
+Enter Mobile Number
+- Error Msg: Invalid Number: Must be 11 digits. Please try again.
+
+| Test | Result |
+|--|--|
+|User tried to enter a number less than 11 digits|Pass|
+|User tried to enter a letter|Pass|
+|User tried to enter an empty selection|Pass|
+|User tried to enter a symbol|Pass|
+|User tried to enter a special character|Pass|
+
+Enter Email Address
+- Error Msg: Various messages predefined in the 'email_validator' package import.
+
+| Test | Result |
+|--|--|
+|User tried to enter email without @ symbol|Pass|
+|User tried to enter email without domain|Pass|
+|User tried to enter an empty string|Pass|
+|User tried to enter email without preceeding name before @ symbol|Pass|
+|User tried to enter a special character|Pass|
+
+Enter Property Details
+Error Msg: Invalid Data: You entered 'x'. Enter only numbers OR "0" if not applicable.
+
+| Test | Result |
+|--|--|
+|User tried to enter a letter|Pass|
+|User tried to enter an empty string|Pass|
+|User tried to enter a special character|Pass|
+|User tried to enter a mix of letters and numbers|Pass|
+
+
+### Pep8 Checker tool
+
+I used the Pep8 checker tool to validate my python code to ensure it was free from errors as shown here:
+
+![Pep8](assets/testing/tch-calculator-pep8-checker.png)
+
+To maintain a line length of 79 characters, I had to extensively recode and restructure the program.
+
+<a name="bugs"></a>
+# Bugs
+
+### Solved Bugs
+
+Feedback Message - Details Accepted
+
+- Unable to get sequence of notification messages in email validation function working. Feedback displayed when email is invalid but not when all details have been entered correctly. 
+
+  - Fixed this by moving the feedback message from update_worksheet to get_user_details.
+
+Validation - User Name Field
+
+- Unable to get validation to stop users entering numbers in name field.
+
+  - Fixed this by switching from try and except statements to if and print statements.
+
+- Unable to get validation to accept spaces in name field.
+
+  - Fixed this by adjusting to request user inputs their full name, as preferred by The Cleaning Hack owner.
+
+Validation - Property Details
+
+- Unable to handle exceptions for special characters or alphabets in number of rooms fields.
+
+  - Fixed this by adopting Code Institute's Love Sandwiches data validation code using try and except statements to convert string input to integers.
+
+### Unsolved Bugs
+
+Validation - User Name Field
+
+- Unable to get name validation code to allow hyphenated names.
+
+
+<a name="deployment"></a>
+# Deployment
+
+To deploy the project to Heroku, I followed the steps outlined below:
+
+1. Prepare run.py file by adding a new line character ("\n") at the end of the text inside all input methods.
+
+2. Create list of requirements necessary for program to run on heroku by typing "pip3 freeze > requirements.txt" into the command line.
+
+3. Navigate to heroku.com and log in.
+
+4. Click "New" to create a new App.
+
+5. Assign name to application, choose region and Click 'Create New App'.
+
+6. On the next page click on the 'Settings' tab to adjust settings.
+
+7. Click on the 'Config Vars' button.
+
+8. Supply a 'KEY' of "CREDS" and 'Value' of contents of creds.json file. Then click the 'Add' button.
+
+9. Supply a 'KEY' of "PORT" and 'Value' of "8000". Then click the 'Add' button.
+
+10. Add buildpacks to install future dependencies needed outside of the requirements file.
+
+11. Select 'Python' then 'Node.js' and click 'Save' - **Make sure they are in this order.**
+
+12. Navigate to the deploy section and choose deployment method. 
+
+13. To connect with github select 'Github' and confirm.
+
+14. Search for repository, select it and click 'Connect'.
+
+15. To deploy, choose one of the following options: 
+
+- Automatic deploys - meaning Heroku will rebuild the app everytime a new change is pushed.
+  - For this option, choose the branch to deploy and click 'Enable automatic deploys'. 
+  - This can be changed to manual deployment at a later stage.
+
+- Manual deployment - which deploys current state of branch.
+
+16. Click 'Deploy branch'.
+
+17. Click 'Open App' to launch application.
+
+<a name="credits"></a>
+# Credits
+
+Multiple resources used to better understand the logic and flow of functions and capabilities of Python.
+
+### [Stack Overflow](https://stackoverflow.com/questions/8022530/how-to-check-for-valid-email-address)
+Useful for learning how to validate email addresses and led to the import of an email_validator package.
+
+### [PyPi](https://pypi.org/project/email-validator/)
+A robust email address syntax validation library installed for use in this project.
+
+### [PyPi](https://pypi.org/project/colorama/)
+Useful for adding ANSI escape character sequences to add color to terminal text.
+
+### [Medium](https://medium.com/hacktive-devs/gspread-automate-google-sheet-with-python-dc1fa7c65c21)
+Useful guide by Sogo Ogundowole on GSpread: Automate Google Sheet with Python. Helped broaden my understanding of GSpread methods and applications.
+
+### [Finxter](https://blog.finxter.com/how-to-print-italic-text-in-python/)
+Useful guide for adding styles to text in terminal.
+
+### [Stack Overflow](https://stackoverflow.com/questions/23294658/asking-the-user-for-input-until-they-give-a-valid-response)
+Useful for resolving name validation issues encountered when using try and except statements. Provided better understanding of various methods of name input validation using if-else statements.
+
+
+<a name="content"></a>
+# Content and Resources
+
+### w3 schools
+Used to reference Python Structure and play around with code ideas prior to including them in my project.
+
+### Code Institute
+Project created in line with course content and within project 3 scope.
+
+### Stack Overflow
+Used to review my own code to ensure simplicity where possible, and to navigate complexity where unavoidable.
+
+### Medium
+Online publishing platform with distraction-free access to insightful articles by other Software Developers on specific topics.
+
+
+<a name="acknowlegements"></a>
+# Acknowledgements
+
+### Alan Bushell
+My mentor who provided me with great feedback and guidance at the inception of this project, helping to keep at the forefront the requirements for a successful project.
+
+### Code Community
+Other software developers who gave feedback on their experience whilst interacting with The Cleaning Hack Calculator.
+
+### Family
+Special thanks to my family for supporting with user testing and providing feedback on flow and experience.
