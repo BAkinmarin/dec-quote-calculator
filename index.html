@@ -84,7 +84,8 @@
             margin-top: 10px;
         }
 
-        p.label-text {
+        p.label-text, 
+        .label-text {
             font-size: 1.25rem;
             text-align: left;
             margin-top: 10px;
@@ -261,7 +262,7 @@
                 </div>
                 <div>
                     <label for="email-address" class="required label-text">Email</label>
-                    <input type="email" name="email_address" id="email-address" placeholder="Email Address" class="text-input" pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/">
+                    <input type="email" name="email_address" id="email-address" placeholder="Email Address" class="text-input">
                     <small id="emailFeedback"></small>
                 </div>
                 <div>
@@ -303,7 +304,7 @@
                 </div>
 
                 <!--Options to select service-->
-                <div id="serviceOptions">
+                <div id="serviceOptions" class="hidden">
                     <label for="services" class="required label-text">Service Required</label>
                     <select id="services">
                         <option>Select Service</option>
@@ -413,9 +414,9 @@
                 <!--Input field for pressure washing-->
                 <div id="pressure-input" class="hidden">
                     <div>
-                        <label for="pressure-sqm" class="required label-text">Total Size (Square Meters)</label>
+                        <label for="pressure-sqm" class="label-text">Total Size (Square Meters)</label>
                         <br>
-                        <input type="number" name="pressure" id="pressure-sqm" placeholder="Enter size of area in square meters" class="text-input">
+                        <input type="number" name="pressure" id="pressure-sqm" placeholder="Enter approximate size of area in square meters (optional)" class="text-input">
                     </div>
                 </div>
                 
@@ -435,9 +436,9 @@
                 <!--Input field for roof cleaning-->
                 <div id="roof-input" class="hidden">
                     <div>
-                        <label for="roof-sqm" class="required label-text">Total Size (Square Meters)</label>
+                        <label for="roof-sqm" class="label-text">Total Size (Square Meters)</label>
                         <br>
-                        <input type="number" name="roof" id="roof-sqm" placeholder="Enter size of area in square meters" class="text-input">
+                        <input type="number" name="roof" id="roof-sqm" placeholder="Enter approximate size of area in square meters (optional)" class="text-input">
                     </div>
                 </div>
 
@@ -698,6 +699,7 @@
                 } else {
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
+                    serviceArea.style.display = 'block';
                 }
             }
 
