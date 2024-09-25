@@ -389,20 +389,19 @@
                         <p class="label-text">Additions (select all that apply)</p>
                     </div>
                     <div class="add-checkbox">
-                        <input type="checkbox" name="additional" id="extension" value="£15">Extension<br>
+                        <input type="checkbox" name="additional-gutter" id="gutter-extension" value="£15">Extension<br>
                     </div>
                     <div class="add-checkbox">
-                        <input type="checkbox" name="additional" id="conservatory" value="£15">Conservatory<br>
+                        <input type="checkbox" name="additional-gutter" id="gutter-conservatory" value="£15">Conservatory<br>
                     </div>
                 </div>
 
                 <!--Input field for pressure washing-->
                 <div id="pressure-input" class="hidden">
                     <div>
-                        <label for="phone-number" class="required label-text">Total Size (Square Meters)</label>
+                        <label for="pressure-sqm" class="required label-text">Total Size (Square Meters)</label>
                         <br>
-                        <input type="number" name="pressure" id="pressure-sqm" placeholder="Enter total size of area in square meters" class="text-input" pattern="[0-9]+">
-                        <small id="phoneFeedback"></small>
+                        <input type="number" name="pressure" id="pressure-sqm" placeholder="Enter total size of area in square meters" class="text-input">
                     </div>
                 </div>
                 
@@ -412,10 +411,10 @@
                         <p class="required label-text">Services Required</p>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="pressure" id="resanding" value="resanding">No Block Paving<br>
+                        <input type="checkbox" name="pressure" id="no-resanding" value="£4">Block Paving (No Resanding)<br>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="pressure" id="block_paving" value="block_paving">Block Paving + Resanding<br>
+                        <input type="checkbox" name="pressure" id="yes-resanding" value="£1">Block Paving (With Resanding)<br>
                     </div>
                 </div>
 
@@ -523,6 +522,8 @@
         var additionsInput = document.getElementById("additions-input");
         var gutterAdditionsInput = document.getElementById("gutter-additions-input");
         var pressureServicesInput = document.getElementById("pressure-services-input");
+        var sizeInputPressure = document.getElementById("pressure-sqm").value;
+        //var sizeInputPressure = document.forms["quote-form"]["pressure-sqm"].value;
         var pressureSizeInput = document.getElementById("pressure-input");
         var roofServicesInput = document.getElementById("roof-services-input");
         var messageInput = document.getElementById("message-input");
@@ -686,7 +687,8 @@
             gutterTotalElem.innerText = total.toFixed(2);
 
             // Target pressure display
-            pressureTotalElem.innerText = total.toFixed(2);
+            //pressureTotalElem.innerText = total.toFixed(2);
+            //pressureTotalElem.innerText = 200 + (sizeInputPressure.innerText * total).toFixed(2);
 
             // Target roof display
             roofTotalElem.innerText = total.toFixed(2);
