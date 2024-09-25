@@ -401,7 +401,7 @@
                     <div>
                         <label for="pressure-sqm" class="required label-text">Total Size (Square Meters)</label>
                         <br>
-                        <input type="number" name="pressure" id="pressure-sqm" placeholder="Enter total size of area in square meters" class="text-input">
+                        <input type="number" name="pressure" id="pressure-sqm" placeholder="Enter size of area in square meters" class="text-input">
                     </div>
                 </div>
                 
@@ -418,18 +418,26 @@
                     </div>
                 </div>
 
+                <!--Input field for roof cleaning-->
+                <div id="roof-input" class="hidden">
+                    <div>
+                        <label for="roof-sqm" class="required label-text">Total Size (Square Meters)</label>
+                        <br>
+                        <input type="number" name="roof" id="roof-sqm" placeholder="Enter size of area in square meters" class="text-input">
+                    </div>
+                </div>
+
                 <!--Checkbox for other services required - visible only for roof cleaning-->
                 <div id="roof-services-input" class="hidden">
                     <div>
                         <p class="required label-text">Services Required</p>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="roof" id="instant_pressure" value="instant_pressure">Instant Pressure Wash<br>
+                        <input type="checkbox" name="roof" id="instant" value="£2">Instant Result (Pressure Wash)<br>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="roof" id="biocidal" value="biocidal">Biocidal Treatment<br>
+                        <input type="checkbox" name="roof" id="biocidal" value="£2">Moss Removal (With Biocidal Treatment)<br>
                     </div>
-                    
                 </div>
 
                 <!--Option to enter message-->
@@ -486,7 +494,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your estimate for Roof Cleaning is from: £<span id="roof-quote-total">0</span> depending on property size.
+                            Your estimate for Roof Cleaning is from: £<span id="roof-quote-total">0</span> - £<span id="roof-quote-range">0</span> depending on property size.
                         </p>
                         <button type="submit" data-type="submit" id="book-button">Request Call Back</button>
                     </div>
@@ -513,6 +521,7 @@
         var gutterTotalElem = document.getElementById("gutter-quote-total");
         var pressureTotalElem = document.getElementById("pressure-quote-total");
         var roofTotalElem = document.getElementById("roof-quote-total");
+        var roofTotalElemMax = document.getElementById("roof-quote-range");
 
         // Retrieve global elements from DOM
         const rejectedElem = document.getElementById("rejected");
@@ -526,6 +535,7 @@
         var pressureServicesInput = document.getElementById("pressure-services-input");
         var pressureInput = document.getElementById("pressure-input");
         var roofServicesInput = document.getElementById("roof-services-input");
+        var roofInput = document.getElementById("roof-input");
 
         // Retrieve various modals for quote display
         var windowDisplay = document.getElementById("window-display");
@@ -615,7 +625,8 @@
                 pressureInput.style.display = 'block';
                 pressureServicesInput.style.display = 'block';
             } else if (menu.value === 'roof') {
-                //accessInput.style.display = 'block';
+                roofInput.style.display = 'block';
+                roofServicesInput.style.display = 'block';
             }
         }
 
@@ -672,7 +683,9 @@
             var result = [];
             var total = 0;
 
+            // Retrieve user input for size
             var size = document.forms["quote-form"]["pressure-sqm"].value;
+            var roofSize = document.forms["quote-form"]["roof-sqm"].value;
 
             for (var key in selections) {
                 var listItem = selections[key].value;
@@ -692,7 +705,8 @@
             pressureTotalElem.innerText = ((size * total) + 200).toFixed(2);
 
             // Target roof display
-            roofTotalElem.innerText = total.toFixed(2);
+            roofTotalElem.innerText = ((roofSize * 11) + (roofSize * total)).toFixed(2);
+            roofTotalElemMax.innerText = ((roofSize * 15) + (roofSize * total)).toFixed(2);
         }
 
         // Reset all fields and quotes when 'Clear Form' button is clicked
