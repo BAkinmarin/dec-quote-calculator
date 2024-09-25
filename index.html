@@ -247,7 +247,7 @@
                 </div>
                 <div>
                     <label for="email-address" class="required label-text">Email</label>
-                    <input type="email" name="email_address" id="email-address" placeholder="Email Address" class="text-input">
+                    <input type="email" name="email_address" id="email-address" placeholder="Email Address" class="text-input" pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/">
                     <small id="emailFeedback"></small>
                 </div>
                 <div>
@@ -561,7 +561,7 @@
          * before displaying the estimate to the user. This helps with lead generation.
         */
         function validate() {
-            // Retrieve form elements from DOM
+            // Retrieve values of form elements from DOM
             var fullName = document.forms["quote-form"]["full-name"].value;
             var emailAddress = document.forms["quote-form"]["email-address"].value;
             var phoneNumber = document.forms["quote-form"]["phone-number"].value;
@@ -694,7 +694,8 @@
                 total += parseInt(selections[key].value.substring(1));
             }
 
-            // Displays total fixed to 2 decimal places
+            // The following calculates and displays estimates in relevant elements, fixed to 2 decimal places
+            // Target window display
             windowTotalElem.innerText = (total * 1.5).toFixed(2);
             windowTotalElemMax.innerText = ((total * 1.50) + 8).toFixed(2);
 
