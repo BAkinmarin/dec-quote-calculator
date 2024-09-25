@@ -414,7 +414,7 @@
                         <input type="checkbox" name="pressure" id="no-resanding" value="£4">Block Paving (No Resanding)<br>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="pressure" id="yes-resanding" value="£1">Block Paving (With Resanding)<br>
+                        <input type="checkbox" name="pressure" id="yes-resanding" value="£2">Block Paving (With Resanding)<br>
                     </div>
                 </div>
 
@@ -521,13 +521,11 @@
         var bedInput = document.getElementById("bed-input");
         var additionsInput = document.getElementById("additions-input");
         var gutterAdditionsInput = document.getElementById("gutter-additions-input");
-        var pressureServicesInput = document.getElementById("pressure-services-input");
-        var sizeInputPressure = document.getElementById("pressure-sqm").value;
-        //var sizeInputPressure = document.forms["quote-form"]["pressure-sqm"].value;
-        var pressureSizeInput = document.getElementById("pressure-input");
-        var roofServicesInput = document.getElementById("roof-services-input");
         var messageInput = document.getElementById("message-input");
         var sidesInput = document.getElementById("sides-input");
+        var pressureServicesInput = document.getElementById("pressure-services-input");
+        var pressureInput = document.getElementById("pressure-input");
+        var roofServicesInput = document.getElementById("roof-services-input");
 
         // Retrieve various modals for quote display
         var windowDisplay = document.getElementById("window-display");
@@ -613,7 +611,7 @@
                 gutterAdditionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
                 //accessInput.style.display = 'block';
-                pressureSizeInput.style.display = 'block';
+                pressureInput.style.display = 'block';
                 pressureServicesInput.style.display = 'block';
             } else if (menu.value === 'roof') {
                 //accessInput.style.display = 'block';
@@ -672,6 +670,8 @@
             var result = [];
             var total = 0;
 
+            var size = document.forms["quote-form"]["pressure-sqm"].value;
+
             for (var key in selections) {
                 var listItem = selections[key].value;
 
@@ -687,8 +687,7 @@
             gutterTotalElem.innerText = total.toFixed(2);
 
             // Target pressure display
-            //pressureTotalElem.innerText = total.toFixed(2);
-            //pressureTotalElem.innerText = 200 + (sizeInputPressure.innerText * total).toFixed(2);
+            pressureTotalElem.innerText = ((size * total) + 200).toFixed(2);
 
             // Target roof display
             roofTotalElem.innerText = total.toFixed(2);
