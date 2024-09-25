@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get A Quote</title>
+    <title>Get Estimate</title>
 
     <!--Form Styles-->
     <style>
@@ -158,7 +158,6 @@
 
         /* Styles for modal to display quote */
         .modal-content {
-            /*display: none;*/
             z-index: 1;
             left: 0;
             top: 0;
@@ -171,7 +170,6 @@
             margin: auto;
             padding: 1rem;
             border: 3px ridge;
-            /*display: none;*/
             justify-content: start;
             flex-direction: column;
             text-align: center;
@@ -184,6 +182,22 @@
             padding: 0.3rem;
             font-weight: bold;
             font-family: "Oswald", sans-serif;
+        }
+
+        .submit-text {
+            font-size: 1.25rem;
+            font-family: "Oswald", sans-serif;
+            font-style: italic;
+            color: darkblue;
+            font-weight: bold;
+        }
+
+        .submit-text-small {
+            font-size: 1rem;
+            font-family: "Oswald", sans-serif;
+            font-style: italic;
+            color: darkblue;
+            font-weight: bold;
         }
 
         /* Styles for Contact button */
@@ -234,8 +248,8 @@
         <a href="index.html"></a>
     </header>
     <section id="quote">
-        <h2>Get A Quote</h2>
-        <p class="form-msg">Fancy an instant quote? Just fill in this form!</p>
+        <h2>Get Estimate</h2>
+        <p class="form-msg">Fancy an instant estimate? Just fill in this form!</p>
         
         <!--Input fields for basic user information-->
         <div class="form-container">
@@ -463,6 +477,8 @@
                         <p class="modal-text" id="accepted">
                             Your estimate for Window Cleaning is: £<span id="window-quote-total">0</span> - £<span id="window-quote-range">0</span> depending on property size.
                         </p>
+                        <p class="submit-text">Click 'Submit Request' for a member of the team to contact you!</p>
+                        <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
                         <button type="submit" data-type="submit" id="book-button">Submit Request</button>
                     </div>
                 </div>
@@ -474,6 +490,8 @@
                         <p class="modal-text" id="accepted">
                             Your estimate for Gutter Clearing is from: £<span id="gutter-quote-total">0</span> depending on property size.
                         </p>
+                        <p class="submit-text">Click 'Submit Request' for a member of the team to contact you!</p>
+                        <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
                         <button type="submit" data-type="submit" id="book-button">Submit Request</button>
                     </div>
                 </div>
@@ -485,6 +503,8 @@
                         <p class="modal-text" id="accepted">
                             Your estimate for Pressure Washing is from: £<span id="pressure-quote-total">0</span> depending on property size.
                         </p>
+                        <p class="submit-text">Click 'Request Call Back' for a member of the team to contact you!</p>
+                        <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
                         <button type="submit" data-type="submit" id="book-button">Request Call Back</button>
                     </div>
                 </div>
@@ -496,6 +516,8 @@
                         <p class="modal-text" id="accepted">
                             Your estimate for Roof Cleaning is from: £<span id="roof-quote-total">0</span> - £<span id="roof-quote-range">0</span> depending on property size.
                         </p>
+                        <p class="submit-text">Click 'Request Call Back' for a member of the team to contact you!</p>
+                        <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
                         <button type="submit" data-type="submit" id="book-button">Request Call Back</button>
                     </div>
                 </div>
