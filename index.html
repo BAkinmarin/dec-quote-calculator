@@ -62,7 +62,8 @@
         }
 
         /* Styles for fields*/
-        input[type=text], select, textarea, input[type=email] {
+        input[type=text], select, textarea,
+        input[type=email], input[type=number] {
         width: 100%;
         box-sizing: border-box;
         border: 1px solid rgb(18, 56, 71);
@@ -70,6 +71,7 @@
         border-radius: 4px;
         resize: vertical;
         font-family: "Oswald", sans-serif;
+        font-size: 1.2rem;
         }
 
         /* Styles for labels */
@@ -393,24 +395,42 @@
                         <input type="checkbox" name="additional" id="conservatory" value="£15">Conservatory<br>
                     </div>
                 </div>
-                
-                <!--Checkbox for other services required-->
-                <div id="other-services-input" class="hidden">
+
+                <!--Input field for pressure washing-->
+                <div id="pressure-input" class="hidden">
                     <div>
-                        <p class="label-text">Other services required</p>
+                        <label for="phone-number" class="required label-text">Total Size (Square Meters)</label>
+                        <br>
+                        <input type="number" name="pressure" id="pressure-sqm" placeholder="Enter total size of area in square meters" class="text-input" pattern="[0-9]+">
+                        <small id="phoneFeedback"></small>
+                    </div>
+                </div>
+                
+                <!--Checkbox for other services required - visible only for pressure washing-->
+                <div id="pressure-services-input" class="hidden">
+                    <div>
+                        <p class="required label-text">Services Required</p>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="other" id="resanding" value="resanding">Resanding<br>
+                        <input type="checkbox" name="pressure" id="resanding" value="resanding">No Block Paving<br>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="other" id="block_paving" value="block_paving">Block Paving<br>
+                        <input type="checkbox" name="pressure" id="block_paving" value="block_paving">Block Paving + Resanding<br>
+                    </div>
+                </div>
+
+                <!--Checkbox for other services required - visible only for roof cleaning-->
+                <div id="roof-services-input" class="hidden">
+                    <div>
+                        <p class="required label-text">Services Required</p>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="other" id="biocidal" value="biocidal">Biocidal Treatment<br>
+                        <input type="checkbox" name="roof" id="instant_pressure" value="instant_pressure">Instant Pressure Wash<br>
                     </div>
                     <div class="other-checkbox">
-                        <input type="checkbox" name="other" id="instant_pressure" value="instant_pressure">Instant Pressure Wash<br>
+                        <input type="checkbox" name="roof" id="biocidal" value="biocidal">Biocidal Treatment<br>
                     </div>
+                    
                 </div>
 
                 <!--Option to enter message-->
@@ -502,7 +522,9 @@
         var bedInput = document.getElementById("bed-input");
         var additionsInput = document.getElementById("additions-input");
         var gutterAdditionsInput = document.getElementById("gutter-additions-input");
-        var otherServicesInput = document.getElementById("other-services-input");
+        var pressureServicesInput = document.getElementById("pressure-services-input");
+        var pressureSizeInput = document.getElementById("pressure-input");
+        var roofServicesInput = document.getElementById("roof-services-input");
         var messageInput = document.getElementById("message-input");
         var sidesInput = document.getElementById("sides-input");
 
@@ -590,6 +612,8 @@
                 gutterAdditionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
                 //accessInput.style.display = 'block';
+                pressureSizeInput.style.display = 'block';
+                pressureServicesInput.style.display = 'block';
             } else if (menu.value === 'roof') {
                 //accessInput.style.display = 'block';
             }
@@ -629,7 +653,8 @@
                     additionsInput.style.display = 'none';
                     gutterAdditionsInput.style.display = 'none';
                     messageInput.style.display = 'none';
-                    otherServicesInput.style.display = 'none';
+                    pressureServicesInput.style.display = 'none';
+                    roofServicesInput.style.display = 'none';
                     sidesInput.style.display = 'none';
                     windowDisplay.style.display = 'none';
                     gutterDisplay.style.display = 'none';
