@@ -1,7 +1,7 @@
-# The Cleaning Hack Calculator
+# Diamond Exterior Cleaning Estimate Calculator
 
 
-## A Python command line calculator
+## An Instant Estimate Form Website
 This application is a Python-based calculator designed for The Cleaning Hack, a real business. It generates free cleaning estimates for potential clients.
 
 Users are required to enter their full name, mobile number, and email address, which are validated before they can proceed to input details needed for the estimate, such as the number of bedrooms, bathrooms, living spaces and, any other rooms.
@@ -59,7 +59,7 @@ As the owner, I want all quotes provided to be automatically saved to a secure f
 Using Lucid Chart, I created a flow diagram to help visualise the steps and logic needed to make the project design and execution as efficient as possible.
 
 See flow chart below for a visual of initial design and concept.
-![Lucid Flow Chart](assets/readme/tch-calculator-flowchart.png)
+![Lucid Flow Chart]()
 
 #### User Details
 
@@ -94,49 +94,49 @@ When the user loads the program, they are presented with a welcome message and i
 
 Simultaneaously, the user will be prompted to enter their full name, mobile number and email address, which will be validated before they can proceed to the next step. See below:
 
-![Welcome Page and Instructions](assets/readme/tch-calculator-welcome.png)
+![Welcome Page and Instructions]()
 
 If validation fails at this stage, the user will see the corresponding error message(s) based on the specific issue. The following images illustrate attempts to submit an alphanumeric name, an incorrect mobile number (fewer than 11 digits), and an incorrect email format. See below:
 
-![Invalid Name Message](assets/readme/tch-calculator-invalid-name.png)
+![Invalid Name Message]()
 
-![Invalid Mobile Message](assets/readme/tch-calculator-invalid-mobile.png)
+![Invalid Mobile Message]()
 
-![Invalid Email Message](assets/readme/tch-calculator-invalid-email.png)
+![Invalid Email Message]()
 
-![Name, Mobile and Email Invalid Message](assets/readme/tch-calculator-all-details-invalid.png)
+![Name, Mobile and Email Invalid Message]()
 
 If validation passes, the user will be prompted to provide the number of bedrooms, bathrooms, living areas / receptions and any other rooms. See below:
 
-![No. of Bedrooms](assets/readme/tch-calculator-bedrooms-prompt.png)
+![No. of Bedrooms]()
 
-![No. of Bathrooms](assets/readme/tch-calculator-bathrooms-prompt.png)
+![No. of Bathrooms]()
 
-![No. of Living Areas](assets/readme/tch-calculator-living-areas-prompt.png)
+![No. of Living Areas]()
 
-![Any Other Rooms](assets/readme/tch-calculator-other-rooms-prompt.png)
+![Any Other Rooms]()
 
 If validation fails, the user will see an error message and then be prompted to re-enter information on number of bedrooms, bathrooms, living areas / receptions and any other rooms. See below:
 
-![Invalid Room Details](assets/readme/tch-calculator-invalid-rooms.png)
+![Invalid Room Details]()
 
 If validation is successful, the user will see a summary of their entry along with a cleaning estimate.
 
 Additionally, the user will be asked to enter "Y" if they would like to obtain a new estimate or any other key to exit the program. See below:
 
-![Cleaning Estimate](assets/readme/tch-calculator-estimate.png)
+![Cleaning Estimate]()
 
 If the user requests a new estimate, they will be again be prompted to provide number of bedrooms, bathrooms, living areas / receptions and any other rooms. See below:
 
-![New Details](assets/readme/tch-calculator-new-room-details-prompt.png)
+![New Details]()
 
 If the user chooses to exit the program, they will see an exit message as shown below:
 
-![Exit Message](assets/readme/tch-calculator-exit-message.png)
+![Exit Message]()
 
 See below sample data successfully uploaded to worksheet.
 
-![Upload Successful](assets/readme/tch-calculator-sample-upload.png)
+![Upload Successful]()
 
 
 <a name="left"></a>
@@ -249,7 +249,7 @@ Error Msg: Invalid Data: You entered 'x'. Enter only numbers OR "0" if not appli
 
 I used the Pep8 checker tool to validate my python code to ensure it was free from errors as shown here:
 
-![Pep8](assets/testing/tch-calculator-pep8-checker.png)
+![Pep8]()
 
 To maintain a line length of 79 characters, I had to extensively recode and restructure the program.
 
@@ -374,9 +374,6 @@ Online publishing platform with distraction-free access to insightful articles b
 
 <a name="acknowlegements"></a>
 # Acknowledgements
-
-### Alan Bushell
-My mentor who provided me with great feedback and guidance at the inception of this project, helping to keep at the forefront the requirements for a successful project.
 
 ### Code Community
 Other software developers who gave feedback on their experience whilst interacting with The Cleaning Hack Calculator.
