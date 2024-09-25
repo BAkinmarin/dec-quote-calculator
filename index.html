@@ -61,7 +61,7 @@
             margin-top: 0px;
         }
 
-        /* Styles for fields*/
+        /* Styles for input fields*/
         input[type=text], select, textarea,
         input[type=email], input[type=number] {
         width: 100%;
@@ -101,7 +101,7 @@
             float: left;
         }
 
-        /* Style textareas */
+        /* Styles for textareas */
         .address-area {height: 80px;}
 
         .message-area {height: 100px;}
@@ -112,7 +112,7 @@
             margin-bottom: 20px;
         }
 
-        /* Style radio buttons and checkboxes */
+        /* Styles for radio buttons and checkboxes */
         input[type=radio], input[type=checkbox] {
             float: left;
             width: 20px;
@@ -186,7 +186,7 @@
             font-family: "Oswald", sans-serif;
         }
 
-        /* Style for Contact button */
+        /* Styles for Contact button */
         #book-button {
             color: #2087C0;
             border-radius: 1rem;
@@ -210,13 +210,13 @@
             background-color: blue;
         }
 
-        /* Style for rejected quote */
+        /* Styles for rejected quote */
         #rejected {
             color: #ff0000;
             font-size: 1.25rem;
         }
 
-        /* Style for user incomplete fields */
+        /* Styles for user incomplete fields */
         #nameFeedback, #emailFeedback,
         #phoneFeedback, #addressFeedback,
         #accessFeedback, #houseFeedback {
@@ -546,9 +546,12 @@
             radioElems[a].addEventListener("click", displayQuote);
         }
 
-        // This function checks user has entered their details before displaying estimate
+        /**
+         * This function checks user input fields ensuring personal details have been provided
+         * before displaying the estimate to the user. This helps with lead generation.
+        */
         function validate() {
-            // Retrieve form elements
+            // Retrieve form elements from DOM
             var fullName = document.forms["quote-form"]["full-name"].value;
             var emailAddress = document.forms["quote-form"]["email-address"].value;
             var phoneNumber = document.forms["quote-form"]["phone-number"].value;
@@ -560,7 +563,7 @@
             var addressMsg = document.getElementById("addressFeedback");
             var accessMsg = document.getElementById("accessFeedback");
             
-            // Check that all fields have been filled
+            // Check that key fields have been filled and display appropriate messaging if empty
             if (fullName === "") {
                 nameMsg.innerHTML = "Please enter full name";
                 return false;
@@ -586,7 +589,9 @@
             return true;
         }
 
-        // Display form fields based on user service selection
+        /**
+         * This function displays the relevant form fields based on user service selection.
+        */
         var menu = document.getElementById("services");
         var serviceArea = document.getElementById("serviceOptions");
         menu.addEventListener("change", generateData);
@@ -600,17 +605,13 @@
 
             // Enable specific dropdowns and display form elements based on user selection
             if (menu.value === 'window') {
-                //accessInput.style.display = 'block';
                 houseInput.style.display = 'block';
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
             } else if (menu.value === 'gutter') {
-                //accessInput.style.display = 'block';
                 sidesInput.style.display = 'block';
-                //additionsInput.style.display = 'block';
                 gutterAdditionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
-                //accessInput.style.display = 'block';
                 pressureInput.style.display = 'block';
                 pressureServicesInput.style.display = 'block';
             } else if (menu.value === 'roof') {
