@@ -597,7 +597,7 @@
             var accessMsg = document.getElementById("accessFeedback");
             
             // Check that key fields have been filled and display appropriate messaging if empty
-            if (fullName === "") {
+            if (fullName === "" || fullName.length < 2) {
                 nameMsg.innerHTML = "Please enter full name";
                 return false;
             } else if (emailAddress === "") {
@@ -697,7 +697,7 @@
                     quoteButton.style.display = 'none';
                     serviceArea.style.display = 'none';
 
-                    // Disable form inputs
+                    // Disable form inputs - inspired by Tim Down
                     var form = document.getElementById("quote-form");
                     var elements = form.elements;
 
