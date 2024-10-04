@@ -594,20 +594,23 @@
             var emailMsg = document.getElementById("emailFeedback");
             var phoneMsg = document.getElementById("phoneFeedback");
             var addressMsg = document.getElementById("addressFeedback");
-            var accessMsg = document.getElementById("accessFeedback");
+            var accessMsg = document.getElementById("accessFeedback"); 
+
+            // Pattern for email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             
             // Check that key fields have been filled and display appropriate messaging if empty
             if (fullName === "" || fullName.length < 2) {
-                nameMsg.innerHTML = "Please enter full name";
+                nameMsg.innerHTML = "Please enter a valid name";
                 return false;
-            } else if (emailAddress === "") {
-                emailMsg.innerHTML = "Please enter email address";
+            } else if (emailAddress === "" || !emailPattern.test(emailAddress)) {
+                emailMsg.innerHTML = "Please enter a valid email address";
                 return false;
             } else if (phoneNumber === "") {
-                phoneMsg.innerHTML = "Please enter phone number";
+                phoneMsg.innerHTML = "Please enter a valid phone number";
                 return false;
             } else if (houseAddress === "") {
-                addressMsg.innerHTML = "Please enter full address";
+                addressMsg.innerHTML = "Please enter a valid UK address";
                 return false;
             } else if (!radioYes.checked) {
                 accessMsg.innerHTML = "Please confirm if there is separate access";
