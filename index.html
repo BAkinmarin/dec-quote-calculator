@@ -597,7 +597,8 @@
             var accessMsg = document.getElementById("accessFeedback"); 
 
             // Pattern for email validation
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const phonePattern = /^\+?[1-9]\d{1,14}$/;
             
             // Check that key fields have been filled and display appropriate messaging if empty
             if (fullName === "" || fullName.length < 2) {
@@ -606,7 +607,7 @@
             } else if (emailAddress === "" || !emailPattern.test(emailAddress)) {
                 emailMsg.innerHTML = "Please enter a valid email address";
                 return false;
-            } else if (phoneNumber === "") {
+            } else if (phoneNumber === "" || !phonePattern.test(phoneNumber)) {
                 phoneMsg.innerHTML = "Please enter a valid phone number";
                 return false;
             } else if (houseAddress === "") {
@@ -656,7 +657,7 @@
             }
         }
 
-        // Add up values of checkboxes in selections array
+        // This function adds up the values of checkboxes in the 'selections' array
         function displayQuote(e) {
             if (e.target.checked) {
                 selections[e.target.id] = {
@@ -700,7 +701,7 @@
                     quoteButton.style.display = 'none';
                     serviceArea.style.display = 'none';
 
-                    // Disable form inputs - inspired by Tim Down
+                    // Disable form fields - inspired by Tim Down
                     var form = document.getElementById("quote-form");
                     var elements = form.elements;
 
