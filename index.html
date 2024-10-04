@@ -696,10 +696,20 @@
                     roofDisplay.style.display = 'none';
                     quoteButton.style.display = 'none';
                     serviceArea.style.display = 'none';
+
+                    // Disable form inputs
+                    var form = document.getElementById("quote-form");
+                    var elements = form.elements;
+
+                    for (var x = 0, len = elements.length; x < len; x++){
+                        elements[x].readOnly = true;
+                    }
+
                 } else {
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
                     serviceArea.style.display = 'block';
+                    elements[f].readOnly = 'false';
                 }
             }
 
