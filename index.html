@@ -671,14 +671,12 @@
 
             // Handle radio buttons: unchecks other radio buttons with the same name
             if (e.target.type === 'radio') {
-                const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`); 
+                const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`);
+                const yesRadio = document.getElementById("yes");
 
                 radioButtons.forEach((radioButton) => {
                     if (radioButton !== e.target) {
                         delete selections[radioButton.id];
-
-                        // Disable other radio buttons
-                        radioButton.disabled = true;
                     }
                 });
 
@@ -701,6 +699,9 @@
                     quoteButton.style.display = 'none';
                     serviceArea.style.display = 'none';
 
+                    // Prevent user from immediately changing selection
+                    yesRadio.disabled = true;
+
                     // Disable form fields - inspired by Tim Down
                     var form = document.getElementById("quote-form");
                     var elements = form.elements;
@@ -713,7 +714,6 @@
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
                     serviceArea.style.display = 'block';
-                    elements[f].readOnly = 'false';
                 }
             }
 
