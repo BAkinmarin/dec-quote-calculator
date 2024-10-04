@@ -589,12 +589,11 @@
             var emailAddress = document.forms["quote-form"]["email-address"].value;
             var phoneNumber = document.forms["quote-form"]["phone-number"].value;
             var houseAddress = document.forms["quote-form"]["house-address"].value;
-            var radioYes = document.forms["quote-form"]["yes"];
             var nameMsg = document.getElementById("nameFeedback");
             var emailMsg = document.getElementById("emailFeedback");
             var phoneMsg = document.getElementById("phoneFeedback");
             var addressMsg = document.getElementById("addressFeedback");
-            var accessMsg = document.getElementById("accessFeedback"); 
+            var accessMsg = document.getElementById("accessFeedback");
 
             // Pattern for email validation
             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -613,16 +612,14 @@
             } else if (houseAddress === "") {
                 addressMsg.innerHTML = "Please enter a valid UK address";
                 return false;
-            } else if (!radioYes.checked) {
-                accessMsg.innerHTML = "Please confirm if there is separate access";
-                return false;
             }
+
             // Reset feedback fields if all fields are filled
             nameMsg.innerHTML = "";
             emailMsg.innerHTML = "";
             phoneMsg.innerHTML = "";
             addressMsg.innerHTML = "";
-            accessMsg.innerHTML = "";
+            //accessMsg.innerHTML = "";
             return true;
         }
 
@@ -714,6 +711,7 @@
                     // Hide relevant message
                     rejectedElem.style.display = 'none';
                     serviceArea.style.display = 'block';
+                    yesRadio.disabled = false;
                 }
             }
 
