@@ -234,7 +234,7 @@
         /* Styles for user incomplete fields */
         #nameFeedback, #emailFeedback,
         #phoneFeedback, #addressFeedback,
-        #accessFeedback, #houseFeedback {
+        #accessMsg, #houseMsg, #bedroomMsg, #sidesMsg {
             color: #ff0000;
             font-size: 1rem;
         }
@@ -294,7 +294,7 @@
                         <input type="radio" name="access" id="no" value="£0">
                     </div>
                 </div>
-                <small id="accessFeedback"></small>
+                <small id="accessMsg"></small>
 
                 <!--Area to display feedback based on user selection for access-->
                 <div id="feedback">
@@ -337,7 +337,7 @@
                         <input type="radio" name="house" id="semi" value="£4">
                     </div>
                 </div>
-                <small id="houseFeedback"></small>
+                <small id="houseMsg"></small>
                 
                 <!--Radio buttons for number of bedrooms-->
                 <div id="bed-input" class="hidden">
@@ -361,6 +361,7 @@
                         <input type="radio" name="bedroom" id="four_bed" value="£40">
                     </div>
                 </div>
+                <small id="bedroomMsg"></small>
 
                 <!--Radio buttons for number of sides-->
                 <div id="sides-input" class="hidden">
@@ -384,6 +385,7 @@
                         <input type="radio" name="sides" id="four_sides" value="£125">
                     </div>
                 </div>
+                <small id="sidesMsg"></small>
 
                 <!--Checkbox for additional house details - applies to window cleaning-->
                 <div id="additions-input" class="hidden">
@@ -584,42 +586,74 @@
          * before displaying the estimate to the user. This helps with lead generation.
         */
         function validate() {
-            // Retrieve values of form elements from DOM
+            // Validate user name input
             var fullName = document.forms["quote-form"]["full-name"].value;
-            var emailAddress = document.forms["quote-form"]["email-address"].value;
-            var phoneNumber = document.forms["quote-form"]["phone-number"].value;
-            var houseAddress = document.forms["quote-form"]["house-address"].value;
             var nameMsg = document.getElementById("nameFeedback");
-            var emailMsg = document.getElementById("emailFeedback");
-            var phoneMsg = document.getElementById("phoneFeedback");
-            var addressMsg = document.getElementById("addressFeedback");
-            var accessMsg = document.getElementById("accessFeedback");
-
-            // Pattern for email validation
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const phonePattern = /^\+?[1-9]\d{1,14}$/;
-            
-            // Check that key fields have been filled and display appropriate messaging if empty
             if (fullName === "" || fullName.length < 2) {
                 nameMsg.innerHTML = "Please enter a valid name";
                 return false;
-            } else if (emailAddress === "" || !emailPattern.test(emailAddress)) {
-                emailMsg.innerHTML = "Please enter a valid email address";
-                return false;
-            } else if (phoneNumber === "" || !phonePattern.test(phoneNumber)) {
-                phoneMsg.innerHTML = "Please enter a valid phone number";
-                return false;
-            } else if (houseAddress === "") {
-                addressMsg.innerHTML = "Please enter a valid UK address";
-                return false;
+            } else {
+                nameMsg.innerHTML = "";
             }
 
-            // Reset feedback fields if all fields are filled
-            nameMsg.innerHTML = "";
-            emailMsg.innerHTML = "";
-            phoneMsg.innerHTML = "";
-            addressMsg.innerHTML = "";
-            //accessMsg.innerHTML = "";
+            // Vaidate user email input
+            var emailAddress = document.forms["quote-form"]["email-address"].value;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            var emailMsg = document.getElementById("emailFeedback");
+            if (emailAddress === "" || !emailPattern.test(emailAddress)) {
+                emailMsg.innerHTML = "Please enter a valid email address";
+                return false;
+            } else {
+                emailMsg.innerHTML = "";
+            }
+
+            // Validate user phone input
+            var phoneNumber = document.forms["quote-form"]["phone-number"].value;
+            const phonePattern = /^\+?[1-9]\d{1,14}$/;
+            var phoneMsg = document.getElementById("phoneFeedback");
+            if (phoneNumber === "" || !phonePattern.test(phoneNumber)) {
+                phoneMsg.innerHTML = "Please enter a valid UK phone number";
+                return false;
+            } else {
+                phoneMsg.innerHTML = "";
+            }
+
+            // Validate user address input
+            var houseAddress = document.forms["quote-form"]["house-address"].value;
+            var addressMsg = document.getElementById("addressFeedback");
+            if (houseAddress === "") {
+                addressMsg.innerHTML = "Please enter a valid UK address";
+                return false;
+            } else {
+                addressMsg.innerHTML = "";
+            }
+
+            // Check at least one radio in each group is checked
+            var radioGroups = ['house', 'bedroom', 'sides'];
+            var radioGroupsChecked = {};
+
+            radioGroups.forEach (function(group) {
+                radioGroupsChecked[group] = false;
+            });
+
+            var radios = document.querySelectorAll("input[type='radio']");
+            radios.forEach(function(radio) {
+                var name = radio.name;
+                if (radioGroupsChecked.hasOwnProperty(name) && radio.checked) {
+                    radioGroupsChecked[name] = true;
+                }
+            });
+
+            for (var group in radioGroupsChecked) {
+                var errorMsg = document.getElementById(group + 'Msg');
+                if (!radioGroupsChecked[group]) {
+                    errorMsg.innerHTML = "Please select an option";
+                    return false;
+                } else {
+                    errorMsg.innerHTML = "";
+                }
+            }
+
             return true;
         }
 
@@ -753,6 +787,9 @@
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
+            // Validate before running
+
+            // Check menu options
             if (menu.value === 'window' && validate()) {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
