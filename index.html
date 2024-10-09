@@ -240,12 +240,6 @@
             font-size: 1rem;
         }
 
-        #missingMsg {
-            color: #ff0000;
-            font-size: 1.15rem;
-            text-align: center;
-        }
-
     </style>
 <head>
 
@@ -258,7 +252,6 @@
     <section id="quote">
         <h2>Get Estimate</h2>
         <p class="form-msg">Fancy an instant estimate? Just fill in this form!</p>
-        <div id="missingMsg"></div>
         
         <!--Input fields for basic user information-->
         <div class="form-container">
@@ -594,7 +587,7 @@
          * This function checks user input fields ensuring personal details have been provided
          * before displaying the estimate to the user. This helps with lead generation.
         */
-        function validate() {
+        /*function validate() {
             // Validate user name input
             var fullName = document.forms["quote-form"]["full-name"].value;
             var nameMsg = document.getElementById("nameFeedback");
@@ -641,6 +634,7 @@
             var radioGroups = ['access', 'house', 'bedroom', 'sides'];
             var radioGroupsChecked = {};
 
+            // Initialise group check status
             radioGroups.forEach (function(group) {
                 radioGroupsChecked[group] = false;
             });
@@ -662,9 +656,7 @@
                     errorMsg.innerHTML = "";
                 }
             }
-
-            //return true;
-        }
+        }*/
 
         /**
          * This function displays the relevant form fields based on user service selection.
@@ -796,33 +788,21 @@
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
-            // Run validate() before displaying relevant quotes
-            var missingInfoMsg = document.getElementById('missingMsg');
-
-            if (!validate()) {
-                missingInfoMsg.innerHTML = "Please complete all missing information!";
-                return false;
-            } else {
-                missingInfoMsg.innerHTML = "";
-            }
-
             // Check menu options
             if (menu.value === 'window') {
                 windowDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none';
+                quoteButton.style.display = 'none';
             } else if (menu.value === 'gutter') {
                 gutterDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none';
+                quoteButton.style.display = 'none';
             } else if (menu.value === 'pressure') {
                 pressureDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none';
+                quoteButton.style.display = 'none';
             } else if (menu.value === 'roof') {
                 roofDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none';
+                quoteButton.style.display = 'none';
             }
-
-            quoteButton.style.display = 'none';
-            return false;
+            //return false;
         });
     });
 
