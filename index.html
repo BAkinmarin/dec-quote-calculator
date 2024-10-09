@@ -240,6 +240,18 @@
             font-size: 1rem;
         }
 
+        .form-field.success input {
+            border-color: #1be71b;
+        }
+
+        .form.field.error input {
+            border-color: #ff0000;
+        }
+
+        .form-field small {
+            color: #ff0000;
+        }
+
     </style>
 <head>
 
@@ -256,29 +268,31 @@
         <!--Input fields for basic user information-->
         <div class="form-container">
             <form action="" method="" id="quote-form" name="quote_form">
-                <div>
-                    <label for="full-name" class="required label-text">Name</label>
-                    <input type="text" name="full_name" id="full-name" placeholder="Full Name" class="text-input">
+                <div class="form-field">
+                    <label for="fullname" class="required label-text">Name</label>
+                    <input type="text" name="fullname" id="fullname" placeholder="Full Name" class="text-input">
                     <small id="nameFeedback"></small>
+                    <small></small>
                 </div>
-                <div>
-                    <label for="email-address" class="required label-text">Email</label>
-                    <input type="email" name="email_address" id="email-address" placeholder="Email Address" class="text-input">
+                <div class="form-field">
+                    <label for="emailaddress" class="required label-text">Email</label>
+                    <input type="email" name="emailaddress" id="emailaddress" placeholder="Email Address" class="text-input">
                     <small id="emailFeedback"></small>
+                    <small></small>
                 </div>
-                <div>
-                    <label for="phone-number" class="required label-text">Phone</label>
-                    <input type="text" name="phone_number" id="phone-number" placeholder="Mobile Number" class="text-input" pattern="[0-9]+">
+                <div class="form-field">
+                    <label for="phonenumber" class="required label-text">Phone</label>
+                    <input type="text" name="phonenumber" id="phonenumber" placeholder="Mobile Number" class="text-input">
                     <small id="phoneFeedback"></small>
+                    <small></small>
                 </div>
 
                 <!--Text input for client address-->
-                <div>
-                    <p class="label-text required">Address</p>
-                </div>
-                <div>
-                    <textarea class="address-area" name="house_address" id="house-address" placeholder="Property Address"></textarea>
+                <div class="form-field">
+                    <label for="houseaddress" class="required label-text">Address</label>
+                    <input type="text" name="houseaddress" id="houseaddress" placeholder="Property Address" class="text-input">
                     <small id="addressFeedback"></small>
+                    <small></small>
                 </div>
 
                 <!--Radio for property accessibility-->
@@ -297,6 +311,7 @@
                 </div>
                 <small id="accessMsg"></small>
                 <small id="errorMsg"></small>
+                <small></small>
 
                 <!--Area to display feedback based on user selection for access-->
                 <div id="feedback">
@@ -340,6 +355,7 @@
                     </div>
                 </div>
                 <small id="houseMsg"></small>
+                <small></small>
                 
                 <!--Radio buttons for number of bedrooms-->
                 <div id="bed-input" class="hidden">
@@ -364,6 +380,7 @@
                     </div>
                 </div>
                 <small id="bedroomMsg"></small>
+                <small></small>
 
                 <!--Radio buttons for number of sides-->
                 <div id="sides-input" class="hidden">
@@ -388,6 +405,7 @@
                     </div>
                 </div>
                 <small id="sidesMsg"></small>
+                <small></small>
 
                 <!--Checkbox for additional house details - applies to window cleaning-->
                 <div id="additions-input" class="hidden">
@@ -589,7 +607,7 @@
         */
         /*function validate() {
             // Validate user name input
-            var fullName = document.forms["quote-form"]["full-name"].value;
+            var fullName = document.forms["quote-form"]["fullname"].value;
             var nameMsg = document.getElementById("nameFeedback");
             if (fullName === "" || fullName.length < 2) {
                 nameMsg.innerHTML = "Please enter a valid name";
@@ -599,7 +617,7 @@
             }
 
             // Vaidate user email input
-            var emailAddress = document.forms["quote-form"]["email-address"].value;
+            var emailAddress = document.forms["quote-form"]["emailaddress"].value;
             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             var emailMsg = document.getElementById("emailFeedback");
             if (emailAddress === "" || !emailPattern.test(emailAddress)) {
@@ -610,7 +628,7 @@
             }
 
             // Validate user phone input
-            var phoneNumber = document.forms["quote-form"]["phone-number"].value;
+            var phoneNumber = document.forms["quote-form"]["phonenumber"].value;
             const phonePattern = /^\+?[1-9]\d{1,14}$/;
             var phoneMsg = document.getElementById("phoneFeedback");
             if (phoneNumber === "" || !phonePattern.test(phoneNumber)) {
@@ -621,7 +639,7 @@
             }
 
             // Validate user address input
-            var houseAddress = document.forms["quote-form"]["house-address"].value;
+            var houseAddress = document.forms["quote-form"]["houseaddress"].value;
             var addressMsg = document.getElementById("addressFeedback");
             if (houseAddress === "") {
                 addressMsg.innerHTML = "Please enter a valid UK address";
@@ -657,6 +675,125 @@
                 }
             }
         }*/
+
+        // Client-side Valdiation - inspired by Tutorial on javascripttutorial.net
+        /*var fullName = document.forms["quote-form"]["fullname"].value;
+        var emailAddress = document.forms["quote-form"]["emailaddress"].value;
+        var phoneNumber = document.forms["quote-form"]["phonenumber"].value;
+        var houseAddress = document.forms["quote-form"]["houseaddress"].value;*/
+
+        const fullName = document.querySelector('#fullname');
+        const emailAddress = document.querySelector('#emailaddress');
+        const phoneNumber = document.querySelector('#phonenumber');
+        const houseAddress = document.querySelector('#houseaddress');
+        const form = document.querySelector('#quote-button');
+
+        // Validate user name input
+        const checkName = () => {
+            let valid = false;
+            const min = 3;
+
+            const fullname = fullName.value.trim();
+
+            if (!isRequired(fullname)) {
+                showError(fullName, 'Name cannot be blank');
+            } else if (!isBetween(fullname.length, min)) {
+                showError(fullName, `Name must be at least 3 characters long`)
+            } else {
+                showSuccess(fullName);
+                valid = true;
+            }
+            return valid;
+        }
+
+        // Validate user email input
+        const checkEmail = () => {
+            let valid = false;
+            const email = emailAddress.value.trim();
+
+            if (!isRequired(email)) {
+                showError(emailAddress, 'Email cannot be blank');
+            } else if (!isEmailValid(email)) {
+                showError(emailAddress, 'Please enter a valid email address');
+            } else {
+                showSuccess(emailAddress);
+                valid = true;
+            }
+            return valid;
+        }
+
+        // Validate user phone input
+        const checkPhone = () => {
+            let valid = false;
+            const min = 11;
+
+            const phone = phoneNumber.value.trim();
+
+            if (!isRequired(phone)) {
+                showError(phoneNumber, 'Phone cannot be blank');
+            } else if (!isBetween(phone.length, min)) {
+                showError(phoneNumber, `Please enter a valid UK number`);
+            } else if (!isPhoneValid(phone)) {
+                showError(phoneNumber, 'Please enter a valid UK number');
+            } else {
+                showSuccess(phoneNumber);
+                valid = true;
+            }
+            return valid;
+        }
+
+        // Validate user address input field
+        const checkAddress = () => {
+            let valid = false;
+            const address = houseAddress.value.trim();
+
+            if (!isRequired(address)) {
+                showError(houseAddress, 'Address cannot be blank');
+            } else {
+                showSuccess(houseAddress);
+                valid = true;
+            }
+            return valid;
+        }
+
+        // Check email using regular expression
+        const isEmailValid = (emailAddress) => {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(emailAddress);
+        };
+
+        // Check phone number is valid using regular expression
+        const isPhoneValid = (phoneNumber) => {
+            const re = /^\+?[1-9]\d{1,14}$/;
+            return re.test(phoneNumber);
+        };
+
+        // This function returns true if the input is empty
+        const isRequired = value => value === '' ? false : true;
+
+        // This function returns false if the length is less than min value
+        const isBetween = (length, min) => length < min ? false : true;
+
+        // This function shows error message if input fields are invalid
+        const showError = (input, message) => {
+            const formField = input.parentElement;
+            formField.classList.remove('success');
+            formField.classList.add('error');
+
+            // Display error message
+            const error = formField.querySelector('small');
+            error.textContent = message;
+        }
+
+        const showSuccess = (input, message) => {
+            const formField = input.parentElement;
+            formField.classList.remove('error');
+            formField.classList.add('success');
+
+            // Hide error message
+            const error = formField.querySelector('small');
+            error.textContent = '';
+        }
 
         /**
          * This function displays the relevant form fields based on user service selection.
@@ -788,8 +925,112 @@
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
+            // Validate relevant form fields
+            let isNameValid = checkName();
+            let isEmailValid = checkEmail();
+            let isPhoneValid = checkPhone();
+            let isAddressValid = checkAddress();
+
+            let isFormValid = isNameValid && isEmailValid && isPhoneValid && isAddressValid;
+
+            // Check at least one radio in each group is checked
+            var radioGroups = ['access', 'house', 'bedroom', 'sides'];
+            var radioGroupsChecked = {};
+            let radioChecked = false;
+
+            // Initialise group check status
+            radioGroups.forEach (function(group) {
+                radioGroupsChecked[group] = false;
+            });
+
+            var radios = document.querySelectorAll("input[type='radio']");
+            radios.forEach(function(radio) {
+                var name = radio.name;
+                if (radioGroupsChecked.hasOwnProperty(name) && radio.checked) {
+                    radioGroupsChecked[name] = true;
+                    radioChecked = true;
+                }
+            });
+
+            for (var group in radioGroupsChecked) {
+                var errorMsg = document.getElementById(group + 'Msg');
+                if (!radioGroupsChecked[group]) {
+                    errorMsg.innerHTML = "Please select an option";
+                    radioChecked = false;
+                } else {
+                    errorMsg.innerHTML = "";
+                }
+                return radioChecked;
+            }
+
+            if (isFormValid && radioChecked && menu.value === 'window') {
+                windowDisplay.style.display = 'block';
+                quoteButton.style.display = 'none'
+            } else if (isFormValid && radioChecked && menu.value === 'gutter') {
+                gutterDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (isFormValid && radioChecked && menu.value === 'pressure') {
+                pressureDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (isFormValid && radioChecked && menu.value === 'roof') {
+                roofDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            }
+
             // Check menu options
-            if (menu.value === 'window') {
+            /*if (menu.value === 'window') {
+                windowDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (menu.value === 'gutter') {
+                gutterDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (menu.value === 'pressure') {
+                pressureDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            } else if (menu.value === 'roof') {
+                roofDisplay.style.display = 'block';
+                quoteButton.style.display = 'none';
+            }*/
+            //return false;
+        });
+
+        // Provide instant feedback to user
+        const debounce = (fn, delay = 500) => {
+            let timeoutId;
+            return (...args) => {
+                // Clear previous timer
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                // Initialise new timer
+                timeoutId = setTimeout( () => {
+                    fn.apply(null, args)
+                }, delay);
+            };
+        };
+
+        // Pass input event handler to debounce() function
+        form.addEventListener('input', debounce(function (e) {
+            switch (e.target.id) {
+                case 'fullname':
+                    checkName();
+                    break;
+                case 'email':
+                    checkEmail();
+                    break;
+                case 'phone':
+                    checkPhone();
+                    break;
+                case 'address':
+                    checkAddress();
+                    break;
+            }
+        }));
+
+        // Display relevant quote when 'Get Quote' button is clicked
+        //document.getElementById('quote-button').addEventListener("click", function() {
+            // Check menu options
+            /*if (menu.value === 'window') {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             } else if (menu.value === 'gutter') {
@@ -803,7 +1044,7 @@
                 quoteButton.style.display = 'none';
             }
             //return false;
-        });
+        });*/
     });
 
 </script>
