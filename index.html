@@ -306,8 +306,6 @@
                     </div>
                 </div>
                 <small id="accessMsg"></small>
-                <small id="errorMsg"></small>
-                <small></small>
 
                 <!--Area to display feedback based on user selection for access-->
                 <div id="feedback">
@@ -335,7 +333,7 @@
                     </div>
                     <div class="house-radio">
                         <label for="terraced">Terraced</label>
-                        <input type="radio" name="house" id="terraced" value="£2">
+                        <input type="radio" name="house" id="terraced" value="£2" checked>
                     </div>
                     <div class="house-radio">
                         <label for="detached">Detached</label>
@@ -351,7 +349,6 @@
                     </div>
                 </div>
                 <small id="houseMsg"></small>
-                <small></small>
                 
                 <!--Radio buttons for number of bedrooms-->
                 <div id="bed-input" class="hidden">
@@ -376,7 +373,6 @@
                     </div>
                 </div>
                 <small id="bedroomMsg"></small>
-                <small></small>
 
                 <!--Radio buttons for number of sides-->
                 <div id="sides-input" class="hidden">
@@ -401,7 +397,6 @@
                     </div>
                 </div>
                 <small id="sidesMsg"></small>
-                <small></small>
 
                 <!--Checkbox for additional house details - applies to window cleaning-->
                 <div id="additions-input" class="hidden">
@@ -704,7 +699,7 @@
             }
             return valid;
         }
-
+        
         // Check email using regular expression
         const isEmailValid = (emailAddress) => {
             const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -803,7 +798,7 @@
                 delete selections[e.target.id];
             }
 
-            // Handle radio buttons: unchecks other radio buttons with the same name
+            // This adds up the values of radio boxes in the 'selections' array
             if (e.target.type === 'radio') {
                 const radioButtons = document.querySelectorAll(`input[name="${e.target.name}"]`);
                 const yesRadio = document.getElementById("yes");
@@ -837,10 +832,10 @@
                     yesRadio.disabled = true;
 
                     // Disable form fields - inspired by Tim Down
-                    var form = document.getElementById("quoteform");
-                    var elements = form.elements;
+                    const form = document.getElementById("quoteform");
+                    const elements = form.elements;
 
-                    for (var x = 0, len = elements.length; x < len; x++){
+                    for (let x = 0, len = elements.length; x < len; x++){
                         elements[x].readOnly = true;
                     }
 
@@ -850,7 +845,7 @@
                     serviceArea.style.display = 'block';
                     yesRadio.disabled = false;
                 }
-            }
+            };
 
             // Calculations for various services
             var result = [];
