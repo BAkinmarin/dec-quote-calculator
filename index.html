@@ -756,7 +756,7 @@
             // Disable all dropdown options
             var dropdowns = document.querySelectorAll("select");
             dropdowns.forEach(dropdown => {
-                dropdown.disabled = true;
+                //dropdown.disabled = true;
             });
 
             // Enable specific dropdowns and display form elements based on user selection
@@ -765,12 +765,27 @@
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
             } else if (menu.value === 'gutter') {
+                houseInput.style.display = 'none';
+                bedInput.style.display = 'none';
+                additionsInput.style.display = 'none';
                 sidesInput.style.display = 'block';
                 gutterAdditionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
+                houseInput.style.display = 'none';
+                bedInput.style.display = 'none';
+                sidesInput.style.display = 'none';
+                additionsInput.style.display = 'none';
+                gutterAdditionsInput.style.display = 'none';
                 pressureInput.style.display = 'block';
                 pressureServicesInput.style.display = 'block';
             } else if (menu.value === 'roof') {
+                houseInput.style.display = 'none';
+                bedInput.style.display = 'none';
+                sidesInput.style.display = 'none';
+                additionsInput.style.display = 'none';
+                gutterAdditionsInput.style.display = 'none';
+                pressureInput.style.display = 'none';
+                pressureServicesInput.style.display = 'none';
                 roofInput.style.display = 'block';
                 roofServicesInput.style.display = 'block';
             }
@@ -885,18 +900,18 @@
 
             if (isFormValid && menu.value === 'window') {
                 windowDisplay.style.display = 'block';
-                quoteButton.style.display = 'none'
+                //quoteButton.style.display = 'none'
             } else if (isFormValid && menu.value === 'gutter') {
                 gutterDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
+                //quoteButton.style.display = 'none';
             } else if (isFormValid && menu.value === 'pressure') {
                 pressureDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
+                //quoteButton.style.display = 'none';
             } else if (isFormValid && menu.value === 'roof') {
                 roofDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
+                //quoteButton.style.display = 'none';
             }
-            return false;
+            //return false;
         });
 
         // Provide instant feedback to user
