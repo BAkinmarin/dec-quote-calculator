@@ -267,23 +267,20 @@
         
         <!--Input fields for basic user information-->
         <div class="form-container">
-            <form action="" method="" id="quote-form" name="quote_form">
+            <form action="" method="" id="quoteform" name="quoteform">
                 <div class="form-field">
                     <label for="fullname" class="required label-text">Name</label>
                     <input type="text" name="fullname" id="fullname" placeholder="Full Name" class="text-input">
-                    <small id="nameFeedback"></small>
                     <small></small>
                 </div>
                 <div class="form-field">
                     <label for="emailaddress" class="required label-text">Email</label>
                     <input type="email" name="emailaddress" id="emailaddress" placeholder="Email Address" class="text-input">
-                    <small id="emailFeedback"></small>
                     <small></small>
                 </div>
                 <div class="form-field">
                     <label for="phonenumber" class="required label-text">Phone</label>
                     <input type="text" name="phonenumber" id="phonenumber" placeholder="Mobile Number" class="text-input">
-                    <small id="phoneFeedback"></small>
                     <small></small>
                 </div>
 
@@ -291,7 +288,6 @@
                 <div class="form-field">
                     <label for="houseaddress" class="required label-text">Address</label>
                     <input type="text" name="houseaddress" id="houseaddress" placeholder="Property Address" class="text-input">
-                    <small id="addressFeedback"></small>
                     <small></small>
                 </div>
 
@@ -607,7 +603,7 @@
         */
         /*function validate() {
             // Validate user name input
-            var fullName = document.forms["quote-form"]["fullname"].value;
+            var fullName = document.forms["quoteform"]["fullname"].value;
             var nameMsg = document.getElementById("nameFeedback");
             if (fullName === "" || fullName.length < 2) {
                 nameMsg.innerHTML = "Please enter a valid name";
@@ -617,7 +613,7 @@
             }
 
             // Vaidate user email input
-            var emailAddress = document.forms["quote-form"]["emailaddress"].value;
+            var emailAddress = document.forms["quoteform"]["emailaddress"].value;
             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             var emailMsg = document.getElementById("emailFeedback");
             if (emailAddress === "" || !emailPattern.test(emailAddress)) {
@@ -628,7 +624,7 @@
             }
 
             // Validate user phone input
-            var phoneNumber = document.forms["quote-form"]["phonenumber"].value;
+            var phoneNumber = document.forms["quoteform"]["phonenumber"].value;
             const phonePattern = /^\+?[1-9]\d{1,14}$/;
             var phoneMsg = document.getElementById("phoneFeedback");
             if (phoneNumber === "" || !phonePattern.test(phoneNumber)) {
@@ -639,7 +635,7 @@
             }
 
             // Validate user address input
-            var houseAddress = document.forms["quote-form"]["houseaddress"].value;
+            var houseAddress = document.forms["quoteform"]["houseaddress"].value;
             var addressMsg = document.getElementById("addressFeedback");
             if (houseAddress === "") {
                 addressMsg.innerHTML = "Please enter a valid UK address";
@@ -677,10 +673,10 @@
         }*/
 
         // Client-side Valdiation - inspired by Tutorial on javascripttutorial.net
-        /*var fullName = document.forms["quote-form"]["fullname"].value;
-        var emailAddress = document.forms["quote-form"]["emailaddress"].value;
-        var phoneNumber = document.forms["quote-form"]["phonenumber"].value;
-        var houseAddress = document.forms["quote-form"]["houseaddress"].value;*/
+        /*var fullName = document.forms["quoteform"]["fullname"].value;
+        var emailAddress = document.forms["quoteform"]["emailaddress"].value;
+        var phoneNumber = document.forms["quoteform"]["phonenumber"].value;
+        var houseAddress = document.forms["quoteform"]["houseaddress"].value;*/
 
         const fullName = document.querySelector('#fullname');
         const emailAddress = document.querySelector('#emailaddress');
@@ -734,7 +730,7 @@
             } else if (!isBetween(phone.length, min)) {
                 showError(phoneNumber, `Please enter a valid UK number`);
             } else if (!isPhoneValid(phone)) {
-                showError(phoneNumber, 'Please enter a valid UK number');
+                showError(phoneNumber, 'Enter UK mobile number only');
             } else {
                 showSuccess(phoneNumber);
                 valid = true;
@@ -872,7 +868,7 @@
                     yesRadio.disabled = true;
 
                     // Disable form fields - inspired by Tim Down
-                    var form = document.getElementById("quote-form");
+                    var form = document.getElementById("quoteform");
                     var elements = form.elements;
 
                     for (var x = 0, len = elements.length; x < len; x++){
@@ -892,8 +888,8 @@
             var total = 0;
 
             // Retrieve user input for size
-            var size = document.forms["quote-form"]["pressure-sqm"].value;
-            var roofSize = document.forms["quote-form"]["roof-sqm"].value;
+            var size = document.forms["quoteform"]["pressure-sqm"].value;
+            var roofSize = document.forms["quoteform"]["roof-sqm"].value;
 
             for (var key in selections) {
                 var listItem = selections[key].value;
@@ -934,7 +930,7 @@
             let isFormValid = isNameValid && isEmailValid && isPhoneValid && isAddressValid;
 
             // Check at least one radio in each group is checked
-            var radioGroups = ['access', 'house', 'bedroom', 'sides'];
+            /*var radioGroups = ['access', 'house', 'bedroom', 'sides'];
             var radioGroupsChecked = {};
             let radioChecked = false;
 
@@ -961,21 +957,22 @@
                     errorMsg.innerHTML = "";
                 }
                 return radioChecked;
-            }
+            }*/
 
-            if (isFormValid && radioChecked && menu.value === 'window') {
+            if (isFormValid && menu.value === 'window') {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none'
-            } else if (isFormValid && radioChecked && menu.value === 'gutter') {
+            } else if (isFormValid && menu.value === 'gutter') {
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (isFormValid && radioChecked && menu.value === 'pressure') {
+            } else if (isFormValid && menu.value === 'pressure') {
                 pressureDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (isFormValid && radioChecked && menu.value === 'roof') {
+            } else if (isFormValid && menu.value === 'roof') {
                 roofDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             }
+            return false;
 
             // Check menu options
             /*if (menu.value === 'window') {
