@@ -131,7 +131,7 @@
         #quote-button, 
         #clear-button {
             font-family: "Oswald", sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             padding: 5px;
             background-color: #2087C0;
@@ -263,7 +263,7 @@
     </header>
     <section id="quote">
         <h2>Get Estimate</h2>
-        <p class="form-msg">Fancy an instant estimate? Just fill in this form!</p>
+        <p class="form-msg">Fancy an instant estimate? Use our interactive form below!</p>
         
         <!--Input fields for basic user information-->
         <div class="form-container">
@@ -346,7 +346,7 @@
                     <div class="house-radio">
                         <label for="semi">Semi-detached</label>
                         <input type="radio" name="house" id="semi" value="£4">
-                    </div>
+                    </div>   
                 </div>
                 <small id="houseMsg"></small>
                 
@@ -479,7 +479,7 @@
                 </div>
 
                 <div>
-                    <button type="button" id="quote-button">Get Quote</button>
+                    <button type="button" id="quote-button">Get Estimate</button>
                     <button type="reset" id="clear-button">Start Over</button>
                 </div>
 
@@ -489,7 +489,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your estimate for Window Cleaning is: £<span id="window-quote-total">0</span> - £<span id="window-quote-range">0</span> depending on property size.
+                            Your quote for Window Cleaning is estimated at: £<span id="window-quote-total">0</span> - £<span id="window-quote-range">0</span> depending on property size.
                         </p>
                         <p class="submit-text">Click 'Submit Request' for a member of the team to contact you!</p>
                         <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
@@ -502,7 +502,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your estimate for Gutter Clearing is from: £<span id="gutter-quote-total">0</span> depending on property size.
+                            Your quote for Gutter Clearing is estimated to start from: £<span id="gutter-quote-total">0</span> depending on property size.
                         </p>
                         <p class="submit-text">Click 'Submit Request' for a member of the team to contact you!</p>
                         <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
@@ -515,7 +515,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your estimate for Pressure Washing is from: £<span id="pressure-quote-total">0</span> depending on property size.
+                            Your quote for Pressure Washing is estimated to start from: £<span id="pressure-quote-total">0</span> depending on property size.
                         </p>
                         <p class="submit-text">Click 'Request Call Back' for a member of the team to contact you!</p>
                         <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
@@ -528,7 +528,7 @@
                     <!--Content-->
                     <div class="modal-content" id="modal-display">
                         <p class="modal-text" id="accepted">
-                            Your estimate for Roof Cleaning is from: £<span id="roof-quote-total">0</span> - £<span id="roof-quote-range">0</span> depending on property size.
+                            Your quote for Roof Cleaning is estimated to start from: £<span id="roof-quote-total">0</span> - £<span id="roof-quote-range">0</span> depending on property size.
                         </p>
                         <p class="submit-text">Click 'Request Call Back' for a member of the team to contact you!</p>
                         <p class="submit-text-small">(Our Response Time is typically within 24 hours)</p>
@@ -596,35 +596,6 @@
          * This function checks user input fields ensuring personal details have been provided
          * before displaying the estimate to the user. This helps with lead generation.
         */
-        /*function validate() {
-            // Check at least one radio in each group is checked
-            var radioGroups = ['access', 'house', 'bedroom', 'sides'];
-            var radioGroupsChecked = {};
-
-            // Initialise group check status
-            radioGroups.forEach (function(group) {
-                radioGroupsChecked[group] = false;
-            });
-
-            var radios = document.querySelectorAll("input[type='radio']");
-            radios.forEach(function(radio) {
-                var name = radio.name;
-                if (radioGroupsChecked.hasOwnProperty(name) && radio.checked) {
-                    radioGroupsChecked[name] = true;
-                }
-            });
-
-            for (var group in radioGroupsChecked) {
-                var errorMsg = document.getElementById(group + 'Msg');
-                if (!radioGroupsChecked[group]) {
-                    errorMsg.innerHTML = "Please select an option";
-                    return false;
-                } else {
-                    errorMsg.innerHTML = "";
-                }
-            }
-        }*/
-
         // Client-side Valdiation - inspired by Form Validation Tutorial on javascripttutorial.net
         const fullName = document.querySelector('#fullname');
         const emailAddress = document.querySelector('#emailaddress');
@@ -701,9 +672,25 @@
         }
 
         // Validate user radio selection
-        const isRadioGroupChecked = (groupName) => {
+        const checkRadio = (groupName) => {
             const radios = document.querySelectorAll(`input[name='${groupName}']`);
-            return Array.from(radios).some(radio => radio.checked);
+            //return Array.from(radios).some(radio => radio.checked);
+
+            // Revised code
+            const isChecked = Array.from(radios).some(radio => radio.checked);
+            const errorMsg = document.getElementById(`${groupName}Msg`);
+
+            if (!isChecked) {
+                if (errorMsg) {
+                    errorMsg.innerHTML = 'Please select an option';
+                }
+                return false;
+            } else {
+                if (errorMsg) {
+                    errorMsg.innerHTML = '';
+                }
+                return true;
+            }
         };
         
         // Check email using regular expression
@@ -766,27 +753,12 @@
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
             } else if (menu.value === 'gutter') {
-                //houseInput.style.display = 'none';
-                //bedInput.style.display = 'none';
-                //additionsInput.style.display = 'none';
                 sidesInput.style.display = 'block';
                 gutterAdditionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
-                //houseInput.style.display = 'none';
-                //bedInput.style.display = 'none';
-                //sidesInput.style.display = 'none';
-                //additionsInput.style.display = 'none';
-                //gutterAdditionsInput.style.display = 'none';
                 pressureInput.style.display = 'block';
                 pressureServicesInput.style.display = 'block';
             } else if (menu.value === 'roof') {
-                //houseInput.style.display = 'none';
-                //bedInput.style.display = 'none';
-                //sidesInput.style.display = 'none';
-                //additionsInput.style.display = 'none';
-                //gutterAdditionsInput.style.display = 'none';
-                //pressureInput.style.display = 'none';
-                //pressureServicesInput.style.display = 'none';
                 roofInput.style.display = 'block';
                 roofServicesInput.style.display = 'block';
             }
@@ -891,7 +863,7 @@
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
-            // Only display quote if form input validation is successful
+            // Only display quote if form input field validation is successful
             let isNameValid = checkName();
             let isEmailValid = checkEmail();
             let isPhoneValid = checkPhone();
@@ -899,28 +871,24 @@
 
             let isFormValid = isNameValid && isEmailValid && isPhoneValid && isAddressValid;
 
-            // Now check relevant radio is checked
-            const isChecked = isRadioGroupChecked('access');
-            const errorMsg = document.getElementById('accessMsg');
-            
-            if (!isChecked) {
-                //const errorMsg = document.getElementById('accessMsg');
-                errorMsg.innerHTML = 'Please select an option';
-            } else {
-                // Clear errorMsg
-                errorMsg.innerHTML = '';
-            }
+            // Now display quote if Radio validation is successful
+            let isAccessChecked = checkRadio('access');
+            let isHouseChecked = checkRadio('house');
+            let isBedroomChecked = checkRadio('bedroom');
+            let isSidesChecked = checkRadio('sides');
 
-            if (isFormValid && menu.value === 'window') {
+            let isRadiosValid = isHouseChecked && isBedroomChecked && isSidesChecked;
+
+            if (isFormValid && isAccessChecked && menu.value === 'window') {
                 windowDisplay.style.display = 'block';
                 quoteButton.style.display = 'none'
-            } else if (isFormValid && menu.value === 'gutter') {
+            } else if (isFormValid && isAccessChecked && menu.value === 'gutter') {
                 gutterDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (isFormValid && menu.value === 'pressure') {
+            } else if (isFormValid && isAccessChecked && menu.value === 'pressure') {
                 pressureDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
-            } else if (isFormValid && menu.value === 'roof') {
+            } else if (isFormValid && isAccessChecked && menu.value === 'roof') {
                 roofDisplay.style.display = 'block';
                 quoteButton.style.display = 'none';
             }
