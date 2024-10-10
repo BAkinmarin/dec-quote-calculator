@@ -602,48 +602,6 @@
          * before displaying the estimate to the user. This helps with lead generation.
         */
         /*function validate() {
-            // Validate user name input
-            var fullName = document.forms["quoteform"]["fullname"].value;
-            var nameMsg = document.getElementById("nameFeedback");
-            if (fullName === "" || fullName.length < 2) {
-                nameMsg.innerHTML = "Please enter a valid name";
-                return false;
-            } else {
-                nameMsg.innerHTML = "";
-            }
-
-            // Vaidate user email input
-            var emailAddress = document.forms["quoteform"]["emailaddress"].value;
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            var emailMsg = document.getElementById("emailFeedback");
-            if (emailAddress === "" || !emailPattern.test(emailAddress)) {
-                emailMsg.innerHTML = "Please enter a valid email address";
-                return false;
-            } else {
-                emailMsg.innerHTML = "";
-            }
-
-            // Validate user phone input
-            var phoneNumber = document.forms["quoteform"]["phonenumber"].value;
-            const phonePattern = /^\+?[1-9]\d{1,14}$/;
-            var phoneMsg = document.getElementById("phoneFeedback");
-            if (phoneNumber === "" || !phonePattern.test(phoneNumber)) {
-                phoneMsg.innerHTML = "Please enter a valid UK phone number";
-                return false;
-            } else {
-                phoneMsg.innerHTML = "";
-            }
-
-            // Validate user address input
-            var houseAddress = document.forms["quoteform"]["houseaddress"].value;
-            var addressMsg = document.getElementById("addressFeedback");
-            if (houseAddress === "") {
-                addressMsg.innerHTML = "Please enter a valid UK address";
-                return false;
-            } else {
-                addressMsg.innerHTML = "";
-            }
-
             // Check at least one radio in each group is checked
             var radioGroups = ['access', 'house', 'bedroom', 'sides'];
             var radioGroupsChecked = {};
@@ -672,12 +630,7 @@
             }
         }*/
 
-        // Client-side Valdiation - inspired by Tutorial on javascripttutorial.net
-        /*var fullName = document.forms["quoteform"]["fullname"].value;
-        var emailAddress = document.forms["quoteform"]["emailaddress"].value;
-        var phoneNumber = document.forms["quoteform"]["phonenumber"].value;
-        var houseAddress = document.forms["quoteform"]["houseaddress"].value;*/
-
+        // Client-side Valdiation - inspired by Form Validation Tutorial on javascripttutorial.net
         const fullName = document.querySelector('#fullname');
         const emailAddress = document.querySelector('#emailaddress');
         const phoneNumber = document.querySelector('#phonenumber');
@@ -781,6 +734,7 @@
             error.textContent = message;
         }
 
+        // This function removes error message if input fields are valid
         const showSuccess = (input, message) => {
             const formField = input.parentElement;
             formField.classList.remove('error');
@@ -921,43 +875,13 @@
 
         // Display relevant quote when 'Get Quote' button is clicked
         document.getElementById('quote-button').addEventListener("click", function() {
-            // Validate relevant form fields
+            // Only display quote if form input validation is successful
             let isNameValid = checkName();
             let isEmailValid = checkEmail();
             let isPhoneValid = checkPhone();
             let isAddressValid = checkAddress();
 
             let isFormValid = isNameValid && isEmailValid && isPhoneValid && isAddressValid;
-
-            // Check at least one radio in each group is checked
-            /*var radioGroups = ['access', 'house', 'bedroom', 'sides'];
-            var radioGroupsChecked = {};
-            let radioChecked = false;
-
-            // Initialise group check status
-            radioGroups.forEach (function(group) {
-                radioGroupsChecked[group] = false;
-            });
-
-            var radios = document.querySelectorAll("input[type='radio']");
-            radios.forEach(function(radio) {
-                var name = radio.name;
-                if (radioGroupsChecked.hasOwnProperty(name) && radio.checked) {
-                    radioGroupsChecked[name] = true;
-                    radioChecked = true;
-                }
-            });
-
-            for (var group in radioGroupsChecked) {
-                var errorMsg = document.getElementById(group + 'Msg');
-                if (!radioGroupsChecked[group]) {
-                    errorMsg.innerHTML = "Please select an option";
-                    radioChecked = false;
-                } else {
-                    errorMsg.innerHTML = "";
-                }
-                return radioChecked;
-            }*/
 
             if (isFormValid && menu.value === 'window') {
                 windowDisplay.style.display = 'block';
@@ -973,22 +897,6 @@
                 quoteButton.style.display = 'none';
             }
             return false;
-
-            // Check menu options
-            /*if (menu.value === 'window') {
-                windowDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            } else if (menu.value === 'gutter') {
-                gutterDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            } else if (menu.value === 'pressure') {
-                pressureDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            } else if (menu.value === 'roof') {
-                roofDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            }*/
-            //return false;
         });
 
         // Provide instant feedback to user
@@ -1023,25 +931,6 @@
                     break;
             }
         }));
-
-        // Display relevant quote when 'Get Quote' button is clicked
-        //document.getElementById('quote-button').addEventListener("click", function() {
-            // Check menu options
-            /*if (menu.value === 'window') {
-                windowDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            } else if (menu.value === 'gutter') {
-                gutterDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            } else if (menu.value === 'pressure') {
-                pressureDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            } else if (menu.value === 'roof') {
-                roofDisplay.style.display = 'block';
-                quoteButton.style.display = 'none';
-            }
-            //return false;
-        });*/
     });
 
 </script>
