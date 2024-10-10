@@ -333,7 +333,7 @@
                     </div>
                     <div class="house-radio">
                         <label for="terraced">Terraced</label>
-                        <input type="radio" name="house" id="terraced" value="£2" checked>
+                        <input type="radio" name="house" id="terraced" value="£2">
                     </div>
                     <div class="house-radio">
                         <label for="detached">Detached</label>
@@ -699,6 +699,12 @@
             }
             return valid;
         }
+
+        // Validate user radio selection
+        const isRadioGroupChecked = (groupName) => {
+            const radios = document.querySelectorAll(`input[name='${groupName}']`);
+            return Array.from(radios).some(radio => radio.checked);
+        };
         
         // Check email using regular expression
         const isEmailValid = (emailAddress) => {
@@ -749,10 +755,10 @@
 
         function generateData(event) {
             // Disable all dropdown options
-            /*var dropdowns = document.querySelectorAll("select");
+            var dropdowns = document.querySelectorAll("select");
             dropdowns.forEach(dropdown => {
-                //dropdown.disabled = true;
-            });*/
+                dropdown.disabled = true;
+            });
 
             // Enable specific dropdowns and display form elements based on user selection
             if (menu.value === 'window') {
@@ -760,27 +766,27 @@
                 bedInput.style.display = 'block';
                 additionsInput.style.display = 'block';
             } else if (menu.value === 'gutter') {
-                houseInput.style.display = 'none';
-                bedInput.style.display = 'none';
-                additionsInput.style.display = 'none';
+                //houseInput.style.display = 'none';
+                //bedInput.style.display = 'none';
+                //additionsInput.style.display = 'none';
                 sidesInput.style.display = 'block';
                 gutterAdditionsInput.style.display = 'block';
             } else if (menu.value === 'pressure') {
-                houseInput.style.display = 'none';
-                bedInput.style.display = 'none';
-                sidesInput.style.display = 'none';
-                additionsInput.style.display = 'none';
-                gutterAdditionsInput.style.display = 'none';
+                //houseInput.style.display = 'none';
+                //bedInput.style.display = 'none';
+                //sidesInput.style.display = 'none';
+                //additionsInput.style.display = 'none';
+                //gutterAdditionsInput.style.display = 'none';
                 pressureInput.style.display = 'block';
                 pressureServicesInput.style.display = 'block';
             } else if (menu.value === 'roof') {
-                houseInput.style.display = 'none';
-                bedInput.style.display = 'none';
-                sidesInput.style.display = 'none';
-                additionsInput.style.display = 'none';
-                gutterAdditionsInput.style.display = 'none';
-                pressureInput.style.display = 'none';
-                pressureServicesInput.style.display = 'none';
+                //houseInput.style.display = 'none';
+                //bedInput.style.display = 'none';
+                //sidesInput.style.display = 'none';
+                //additionsInput.style.display = 'none';
+                //gutterAdditionsInput.style.display = 'none';
+                //pressureInput.style.display = 'none';
+                //pressureServicesInput.style.display = 'none';
                 roofInput.style.display = 'block';
                 roofServicesInput.style.display = 'block';
             }
@@ -893,18 +899,30 @@
 
             let isFormValid = isNameValid && isEmailValid && isPhoneValid && isAddressValid;
 
+            // Now check relevant radio is checked
+            const isChecked = isRadioGroupChecked('access');
+            const errorMsg = document.getElementById('accessMsg');
+            
+            if (!isChecked) {
+                //const errorMsg = document.getElementById('accessMsg');
+                errorMsg.innerHTML = 'Please select an option';
+            } else {
+                // Clear errorMsg
+                errorMsg.innerHTML = '';
+            }
+
             if (isFormValid && menu.value === 'window') {
                 windowDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none'
+                quoteButton.style.display = 'none'
             } else if (isFormValid && menu.value === 'gutter') {
                 gutterDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none';
+                quoteButton.style.display = 'none';
             } else if (isFormValid && menu.value === 'pressure') {
                 pressureDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none';
+                quoteButton.style.display = 'none';
             } else if (isFormValid && menu.value === 'roof') {
                 roofDisplay.style.display = 'block';
-                //quoteButton.style.display = 'none';
+                quoteButton.style.display = 'none';
             }
             //return false;
         });
